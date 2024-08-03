@@ -1,20 +1,9 @@
-import Layout from "../component/layout";
-import HomePage from "../pages/homePage";
+import Layout from "../component/layout/Layout";
 
 export const ROUTE =[
     {
         path: "/",
-        element:<Layout/>,
-        children: [
-            {
-                path: "",
-                element:<HomePage/>
-            },
-            {
-                path: "homePage",
-                element: <HomePage></HomePage>
-            }
-        ]
+        element: <Layout/>,
     }
 
 

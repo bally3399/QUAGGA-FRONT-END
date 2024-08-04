@@ -21,8 +21,8 @@ const Navbar = () => {
                 <div className='hover:text-gray-600 cursor-pointer'>Contact us</div>
             </div>
             <div className='flex items-center space-x-4'>
-                <button className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'>Login</button>
-                <button className='bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600'>Signup</button>
+                <button className='bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-600'>Login</button>
+                <button className='bg-green-600 text-white px-4 py-2 rounded hover:bg-blue-600'>Signup</button>
 
                 <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                         onClick={() => setMenuOpen(!menuOpen)}/>

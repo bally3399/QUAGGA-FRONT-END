@@ -1,0 +1,359 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi";
+import { Button, Checkbox, FormControlLabel, TextField, MenuItem, Select, InputLabel, FormControl, FormHelperText } from "@mui/material";
+
+const RegisterSpecialistPage = () => {
+    const [form, setForm] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        address: '',
+        LGA: '',
+        state: '',
+        phoneNumber: '',
+        companyName: '',
+        companyRegNo: '',
+        category: '',
+        subCategory: '',
+        agree: false,
+    });
+    const navigate = useNavigate();
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setForm({
+            ...form,
+            [name]: type === 'checkbox' ? checked : value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // Validate form
+        let formErrors = {};
+
+        for (let key in form) {
+            if (form[key] === '') {
+                formErrors[key] = 'This field is required';
+            }
+        }
+
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+        } else {
+            setErrors({});
+            // Handle form submission
+            navigate('/login');
+        }
+    };
+
+    const roundedStyle = {
+        '& .MuiOutlinedInput-root': {
+            borderRadius: '9999px', // TailwindCSS rounded-full
+        },
+    };
+
+    return (
+        <div className="flex justify-center items-center min-h-screen bg-gray-100 relative">
+            <div className="absolute top-4 left-4">
+                <button
+                    onClick={() => navigate('/signUp')}
+                    className="flex items-center text-green-600 hover:text-green-400"
+                >
+                    <HiArrowLeft className="mr-2" /> Back
+                </button>
+            </div>
+            <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
+                <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="mb-4">
+                        <TextField
+                            label="First Name"
+                            variant="outlined"
+                            fullWidth
+                            name="firstname"
+                            value={form.firstname}
+                            onChange={handleChange}
+                            error={!!errors.firstname}
+                            helperText={errors.firstname}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Last Name"
+                            variant="outlined"
+                            fullWidth
+                            name="lastname"
+                            value={form.lastname}
+                            onChange={handleChange}
+                            error={!!errors.lastname}
+                            helperText={errors.lastname}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Email"
+                            variant="outlined"
+                            fullWidth
+                            type="email"
+                            name="email"
+                            value={form.email}
+                            onChange={handleChange}
+                            error={!!errors.email}
+                            helperText={errors.email}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Password"
+                            variant="outlined"
+                            fullWidth
+                            type="password"
+                            name="password"
+                            value={form.password}
+                            onChange={handleChange}
+                            error={!!errors.password}
+                            helperText={errors.password}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Confirm Password"
+                            variant="outlined"
+                            fullWidth
+                            type="password"
+                            name="confirmPassword"
+                            value={form.confirmPassword}
+                            onChange={handleChange}
+                            error={!!errors.confirmPassword}
+                            helperText={errors.confirmPassword}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Address"
+                            variant="outlined"
+                            fullWidth
+                            name="address"
+                            value={form.address}
+                            onChange={handleChange}
+                            error={!!errors.address}
+                            helperText={errors.address}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="LGA"
+                            variant="outlined"
+                            fullWidth
+                            name="LGA"
+                            value={form.LGA}
+                            onChange={handleChange}
+                            error={!!errors.LGA}
+                            helperText={errors.LGA}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="State"
+                            variant="outlined"
+                            fullWidth
+                            name="state"
+                            value={form.state}
+                            onChange={handleChange}
+                            error={!!errors.state}
+                            helperText={errors.state}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Phone Number"
+                            variant="outlined"
+                            fullWidth
+                            name="phoneNumber"
+                            value={form.phoneNumber}
+                            onChange={handleChange}
+                            error={!!errors.phoneNumber}
+                            helperText={errors.phoneNumber}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Company Name"
+                            variant="outlined"
+                            fullWidth
+                            name="companyName"
+                            value={form.companyName}
+                            onChange={handleChange}
+                            error={!!errors.companyName}
+                            helperText={errors.companyName}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <TextField
+                            label="Company RegNo"
+                            variant="outlined"
+                            fullWidth
+                            name="companyRegNo"
+                            value={form.companyRegNo}
+                            onChange={handleChange}
+                            error={!!errors.companyRegNo}
+                            helperText={errors.companyRegNo}
+                            sx={roundedStyle}
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <FormControl fullWidth variant="outlined" sx={roundedStyle} error={!!errors.category}>
+                            <InputLabel>Category</InputLabel>
+                            <Select
+                                name="category"
+                                value={form.category}
+                                onChange={handleChange}
+                                label="Category"
+                            >
+                                <MenuItem value=""><em>None</em></MenuItem>
+                                <MenuItem value="category1">STRUCTURAL</MenuItem>
+                                <MenuItem value="category2">MECHANICAL</MenuItem>
+                                <MenuItem value="category3">ELECTRICAL</MenuItem>
+                                <MenuItem value="category4">FINISHING</MenuItem>
+                                <MenuItem value="category5">EXTERIOR</MenuItem>
+                                <MenuItem value="category6">SITE_WORK</MenuItem>
+                                <MenuItem value="category7">SPECIALIZED</MenuItem>
+                                <MenuItem value="category8">INTERIOR</MenuItem>
+                                <MenuItem value="category9">ENVIRONMENTAL_SYSTEMS</MenuItem>
+                                <MenuItem value="category10">RENOVATION</MenuItem>
+                                <MenuItem value="category11">MARINE</MenuItem>
+                                <MenuItem value="category12">HEAVY_CONSTRUCTION</MenuItem>
+                                <MenuItem value="category13">SPECIALTY_CONTRACTORS</MenuItem>
+                                <MenuItem value="category14">LOGISTICS_AND_SUPPORT</MenuItem>
+                                <MenuItem value="category15">FABRICATION</MenuItem>
+                                <MenuItem value="category16">AGRICULTURAL_CONSTRUCTION</MenuItem>
+                                <MenuItem value="category17">ENTERTAINMENT</MenuItem>
+                                <MenuItem value="category18">MAINTENANCE</MenuItem>
+                                <MenuItem value="category19">RENEWABLE_ENERGY</MenuItem>
+                                <MenuItem value="category20">SPECIALTY_FLOORING</MenuItem>
+                                <MenuItem value="category21">SECURITY_AND_SAFETY</MenuItem>
+                                <MenuItem value="category22">FINISHES_AND_DECORATIONS</MenuItem>
+                                <MenuItem value="category23">LOW_VOLTAGE_SYSTEMS</MenuItem>
+                                <MenuItem value="category24">LIGHTING</MenuItem>
+                                <MenuItem value="category25">MISCELLANEOUS</MenuItem>
+                            </Select>
+                            <FormHelperText>{errors.category}</FormHelperText>
+                        </FormControl>
+                    </div>
+                    <div className="mb-4">
+                        <FormControl fullWidth variant="outlined" sx={roundedStyle} error={!!errors.subCategory}>
+                            <InputLabel>Sub Category</InputLabel>
+                            <Select
+                                name="subCategory"
+                                value={form.subCategory}
+                                onChange={handleChange}
+                                label="Sub Category"
+                            >
+                                <MenuItem value=""><em>None</em></MenuItem>
+                                <MenuItem value="subCategory1">WOODWORKING</MenuItem>
+                                <MenuItem value="subCategory2">PAINTING</MenuItem>
+                                <MenuItem value="subCategory3">DEMOLITION</MenuItem>
+                                <MenuItem value="subCategory4">GLASSWORK</MenuItem>
+                                <MenuItem value="subCategory5">LANDSCAPING</MenuItem>
+                                <MenuItem value="subCategory6">CONCRETE</MenuItem>
+                                <MenuItem value="subCategory7">PAVING</MenuItem>
+                                <MenuItem value="subCategory8">PLUMBING</MenuItem>
+                                <MenuItem value="subCategory9">HVAC</MenuItem>
+                                <MenuItem value="subCategory10">ROOFING</MenuItem>
+                                <MenuItem value="subCategory11">CARPENTRY</MenuItem>
+                                <MenuItem value="subCategory12">MASONRY</MenuItem>
+                                <MenuItem value="subCategory13">WATER_PROOFING</MenuItem>
+                                <MenuItem value="subCategory14">INSULATION</MenuItem>
+                                <MenuItem value="subCategory15">TILING</MenuItem>
+                                <MenuItem value="subCategory16">ELECTRICAL_INSTALLATION</MenuItem>
+                                <MenuItem value="subCategory17">STEELWORK</MenuItem>
+                                <MenuItem value="subCategory18">FIRE_PROTECTION</MenuItem>
+                                <MenuItem value="subCategory19">SECURITY_SYSTEMS</MenuItem>
+                                <MenuItem value="subCategory20">INTERIOR_FINISHING</MenuItem>
+                                <MenuItem value="subCategory21">EXTERIOR_FINISHING</MenuItem>
+                                <MenuItem value="subCategory22">WINDOWS_AND_DOORS</MenuItem>
+                                <MenuItem value="subCategory23">SIGNAGE</MenuItem>
+                                <MenuItem value="subCategory24">COMMUNICATION_SYSTEMS</MenuItem>
+                                <MenuItem value="subCategory25">POWER_GENERATION</MenuItem>
+                                <MenuItem value="subCategory26">ELEVATORS_AND_ESCALATORS</MenuItem>
+                                <MenuItem value="subCategory27">FABRICATION</MenuItem>
+                                <MenuItem value="subCategory28">CLEANING</MenuItem>
+                                <MenuItem value="subCategory29">PEST_CONTROL</MenuItem>
+                                <MenuItem value="subCategory30">WASTE_MANAGEMENT</MenuItem>
+                                <MenuItem value="subCategory31">SOLAR_INSTALLATION</MenuItem>
+                                <MenuItem value="subCategory32">EV_CHARGING_STATIONS</MenuItem>
+                                <MenuItem value="subCategory33">ENERGY_EFFICIENT_LIGHTING</MenuItem>
+                                <MenuItem value="subCategory34">RAINWATER_HARVESTING</MenuItem>
+                                <MenuItem value="subCategory35">ECO_FRIENDLY_MATERIALS</MenuItem>
+                                <MenuItem value="subCategory36">GREEN_ROOFING</MenuItem>
+                                <MenuItem value="subCategory37">LANDSCAPE_DESIGN</MenuItem>
+                                <MenuItem value="subCategory38">HARDSCAPING</MenuItem>
+                                <MenuItem value="subCategory39">IRRIGATION_SYSTEMS</MenuItem>
+                                <MenuItem value="subCategory40">DRAINAGE_SOLUTIONS</MenuItem>
+                                <MenuItem value="subCategory41">LAND_CLEARING</MenuItem>
+                                <MenuItem value="subCategory42">TREE_CARE</MenuItem>
+                                <MenuItem value="subCategory43">FENCING</MenuItem>
+                                <MenuItem value="subCategory44">WALL_CONSTRUCTION</MenuItem>
+                                <MenuItem value="subCategory45">EARTHWORK</MenuItem>
+                                <MenuItem value="subCategory46">FLOORING</MenuItem>
+                                <MenuItem value="subCategory47">CEILING_WORK</MenuItem>
+                                <MenuItem value="subCategory48">PARTITIONING</MenuItem>
+                                <MenuItem value="subCategory49">CABINETRY</MenuItem>
+                                <MenuItem value="subCategory50">INTERIOR_DECORATION</MenuItem>
+                                <MenuItem value="subCategory51">EXTERIOR_DECORATION</MenuItem>
+                                <MenuItem value="subCategory52">LIGHTING_INSTALLATION</MenuItem>
+                                <MenuItem value="subCategory53">CURTAIN_WALLING</MenuItem>
+                                <MenuItem value="subCategory54">EXTERIOR_CLADDING</MenuItem>
+                                <MenuItem value="subCategory55">INSULATION</MenuItem>
+                            </Select>
+                            <FormHelperText>{errors.subCategory}</FormHelperText>
+                        </FormControl>
+                    </div>
+                    <div className="mb-4">
+                        <FormControlLabel
+                            control={
+                                <Checkbox
+                                    name="agree"
+                                    checked={form.agree}
+                                    onChange={handleChange}
+                                    color="primary"
+                                    error={!!errors.agree}
+                                />
+                            }
+                            label="I agree to the terms and conditions"
+                        />
+                        {errors.agree && <FormHelperText error>{errors.agree}</FormHelperText>}
+                    </div>
+                    <div className="text-center">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            className="bg-green-600 w-full py-2 px-4 rounded-full hover:bg-green-500"
+                        >
+                            Register
+                        </Button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default RegisterSpecialistPage;

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-// import { ArrowRightIcon } from '@heroicons/react/outline';
-
+import React from "react";
+import { useNavigate } from 'react-router-dom';
 import logo from "../../asset/searching-talent@1x.png";
 import Navbar from "../../component/navbar/Navbar";
 
 const HeroPage = () => {
+    const navigate = useNavigate();
+
+    const handleGetStarted = () => {
+        navigate('/signUp');
+    };
 
     return (
         <div className="overflow-x-hidden">
@@ -21,10 +25,9 @@ const HeroPage = () => {
                             className="ml-16 rounded-3xl bg-[#108a00] text-[white] font-bold py-2 px-8 flex items-center"
                             aria-label="Get started"
                             title="Get Started"
-
+                            onClick={handleGetStarted}
                         >
                             Get Started
-                            {/*<ArrowRightIcon className="w-5 h-5 ml-2" />*/}
                         </button>
                     </div>
                 </div>

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { HiMenu } from "react-icons/hi";
+import { styled } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
-import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
+import { HiMenu } from "react-icons/hi";
+
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -22,22 +22,13 @@ const SearchField = styled(TextField)({
     },
 });
 
-const Navbar = () => {
-    const navigate = useNavigate();
+const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-
-    const handleLoginClick = () => {
-        navigate('/login');
-    };
-
-    const handleSignupClick = () => {
-        navigate('/signUp');
-    };
 
     return (
         <div className='flex justify-between items-center p-4 shadow-md bg-[#01ace3]'>
             <div className='flex items-center mb-4'>
-                <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
+                <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                 <p className='text-lg font-bold'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
@@ -58,19 +49,12 @@ const Navbar = () => {
             <div className='flex items-center space-x-4'>
                 <button
                     className='bg-[#093c5e] text-white px-4 py-2 rounded-3xl hover:bg-[#093c5e]'
-                    onClick={handleLoginClick}
                 >
-                    Login
-                </button>
-                <button
-                    className='bg-[#093c5e] text-white px-4 py-2 rounded-3xl hover:bg-[#093c5e]'
-                    onClick={handleSignupClick}
-                >
-                    Signup
+                    Logout
                 </button>
 
                 <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                        onClick={() => setMenuOpen(!menuOpen)}/>
+                    onClick={() => setMenuOpen(!menuOpen)} />
             </div>
             {menuOpen && (
                 <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
@@ -83,7 +67,7 @@ const Navbar = () => {
                 </ul>
             )}
         </div>
-    );
-}
+    )
 
-export default Navbar;
+}
+export default DashBoard;

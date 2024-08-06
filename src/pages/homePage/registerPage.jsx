@@ -10,10 +10,10 @@ const RegisterPage = () => {
         email: '',
         password: '',
         confirmPassword: '',
-        address: '',
-        LGA: '',
-        state: '',
-        phoneNumber: '',
+        // address: '',
+        // LGA: '',
+        // state: '',
+        // phoneNumber: '',
         agree: false,
     });
 
@@ -60,13 +60,13 @@ const RegisterPage = () => {
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/')}
-                    className="flex items-center text-green-600 hover:text-green-400"
+                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
                 >
                     <HiArrowLeft className="mr-2" /> Back
                 </button>
             </div>
             <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
-                <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
+                <h2 className="text-2xl font-semibold text-center mb-6">Sign up as a Client or Professional</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <TextField
@@ -136,58 +136,58 @@ const RegisterPage = () => {
                             sx={roundedStyle}
                         />
                     </div>
-                    <div className="mb-4">
-                        <TextField
-                            label="Address"
-                            variant="outlined"
-                            fullWidth
-                            name="address"
-                            value={form.address}
-                            onChange={handleChange}
-                            error={!!errors.address}
-                            helperText={errors.address}
-                            sx={roundedStyle}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <TextField
-                            label="LGA"
-                            variant="outlined"
-                            fullWidth
-                            name="LGA"
-                            value={form.LGA}
-                            onChange={handleChange}
-                            error={!!errors.LGA}
-                            helperText={errors.LGA}
-                            sx={roundedStyle}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <TextField
-                            label="State"
-                            variant="outlined"
-                            fullWidth
-                            name="state"
-                            value={form.state}
-                            onChange={handleChange}
-                            sx={roundedStyle}
-                            error={!!errors.state}
-                            helperText={errors.state}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <TextField
-                            label="Phone Number"
-                            variant="outlined"
-                            fullWidth
-                            name="phoneNumber"
-                            value={form.phoneNumber}
-                            onChange={handleChange}
-                            error={!!errors.phoneNumber}
-                            helperText={errors.phoneNumber}
-                            sx={roundedStyle}
-                        />
-                    </div>
+                    {/*<div className="mb-4">*/}
+                    {/*    <TextField*/}
+                    {/*        label="Address"*/}
+                    {/*        variant="outlined"*/}
+                    {/*        fullWidth*/}
+                    {/*        name="address"*/}
+                    {/*        value={form.address}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        error={!!errors.address}*/}
+                    {/*        helperText={errors.address}*/}
+                    {/*        sx={roundedStyle}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                    {/*<div className="mb-4">*/}
+                    {/*    <TextField*/}
+                    {/*        label="LGA"*/}
+                    {/*        variant="outlined"*/}
+                    {/*        fullWidth*/}
+                    {/*        name="LGA"*/}
+                    {/*        value={form.LGA}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        error={!!errors.LGA}*/}
+                    {/*        helperText={errors.LGA}*/}
+                    {/*        sx={roundedStyle}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                    {/*<div className="mb-4">*/}
+                    {/*    <TextField*/}
+                    {/*        label="State"*/}
+                    {/*        variant="outlined"*/}
+                    {/*        fullWidth*/}
+                    {/*        name="state"*/}
+                    {/*        value={form.state}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        sx={roundedStyle}*/}
+                    {/*        error={!!errors.state}*/}
+                    {/*        helperText={errors.state}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
+                    {/*<div className="mb-4">*/}
+                    {/*    <TextField*/}
+                    {/*        label="Phone Number"*/}
+                    {/*        variant="outlined"*/}
+                    {/*        fullWidth*/}
+                    {/*        name="phoneNumber"*/}
+                    {/*        value={form.phoneNumber}*/}
+                    {/*        onChange={handleChange}*/}
+                    {/*        error={!!errors.phoneNumber}*/}
+                    {/*        helperText={errors.phoneNumber}*/}
+                    {/*        sx={roundedStyle}*/}
+                    {/*    />*/}
+                    {/*</div>*/}
                     <div className="mb-4">
                         <FormControlLabel
                             control={
@@ -208,12 +208,12 @@ const RegisterPage = () => {
                             variant="contained"
                             fullWidth
                             sx={{
-                                backgroundColor: 'green',
+                                backgroundColor: '#093c5e',
                                 color: 'white',
                                 paddingY: 2,
                                 borderRadius: '9999px',
                                 '&:hover': {
-                                    backgroundColor: 'darkgreen',
+                                    backgroundColor: '#093c5e',
                                 },
                             }}
                         >

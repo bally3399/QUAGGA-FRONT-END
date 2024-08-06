@@ -4,6 +4,7 @@ import SignUpPage from "../pages/homePage/signupPage";
 import RegisterSpecialistPage from "../pages/homePage/registerSpecialistPage";
 import RegisterSupplierPage from "../pages/homePage/registerSupplierPage";
 import LoginPage from "../pages/homePage/LoginPage";
+import DashBoard from "../pages/homePage/dashBoard";
 
 export const ROUTE =[
     {
@@ -30,6 +31,10 @@ export const ROUTE =[
     {
         path: "/login",
         element: <LoginPage/>,
+    },
+    {
+        path: "/dashBoard",
+        element: <DashBoard/>,
     },
 
 

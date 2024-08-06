@@ -32,8 +32,6 @@ const DashBoard = () => {
                 <p className='text-lg font-bold'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
-                <div className='hover:text-gray-600 cursor-pointer'>Home</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Features</div>
                 <div>
                     <SearchField
                         variant="outlined"
@@ -41,10 +39,11 @@ const DashBoard = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-gray-600 cursor-pointer'>Community</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Blog</div>
-                <div className='hover:text-gray-600 cursor-pointer'>About us</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Contact us</div>
+                <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
+                <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
+                <div className='hover:text-gray-600 cursor-pointer'>Client</div>
+                <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
+
             </div>
             <div className='flex items-center space-x-4'>
                 <button
@@ -58,12 +57,10 @@ const DashBoard = () => {
             </div>
             {menuOpen && (
                 <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Home</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Features</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Community</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Blog</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>About us</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Contact us</div>
+                    <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
+                    <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
+                    <div className='hover:text-gray-600 cursor-pointer'>Client</div>
+                    <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
                 </ul>
             )}
         </div>

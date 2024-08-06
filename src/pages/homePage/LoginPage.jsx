@@ -20,7 +20,7 @@ const LoginPage = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        navigate("/dashBoard");
     };
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
@@ -80,6 +80,7 @@ const LoginPage = () => {
                                     backgroundColor: 'darkgreen',
                                 },
                             }}
+                            onClick={handleSubmit}
                         >
                            Log in
                         </Button>

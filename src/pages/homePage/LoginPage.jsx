@@ -34,7 +34,7 @@ const LoginPage = () => {
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/signUp')}
-                    className="flex items-center text-green-600 hover:text-green-400"
+                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
                 >
                     <HiArrowLeft className="mr-2" /> Back
                 </button>
@@ -75,9 +75,9 @@ const LoginPage = () => {
                                 backgroundColor: 'green',
                                 color: 'white',
                                 paddingY: 2,
-                                borderRadius: '9999px',
+                                borderRadius: '#093c5e',
                                 '&:hover': {
-                                    backgroundColor: 'darkgreen',
+                                    backgroundColor: '#093c5e',
                                 },
                             }}
                             onClick={handleSubmit}

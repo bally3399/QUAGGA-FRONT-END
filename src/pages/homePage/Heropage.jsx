@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from "../../asset/quagga.jpg";
 import pics from "../../asset/download.jpg"
 import Navbar from "../../component/navbar/Navbar";
+import Footer from "../../component/footer/Footer";
 
 const HeroPage = () => {
     const navigate = useNavigate();
@@ -38,6 +39,7 @@ const HeroPage = () => {
                     </div>
                 </div>
             </section>
+            <Footer/>
         </div>
     );
 };

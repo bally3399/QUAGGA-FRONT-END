@@ -35,13 +35,13 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between items-center p-4 shadow-md bg-[#01ace3]'>
+        <div className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                 <p className='text-lg font-bold'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
-                <div className='hover:text-gray-600 cursor-pointer'>Home</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Home</div>
                 <div className='hover:text-gray-600 cursor-pointer'>Features</div>
                 <div>
                     <SearchField
@@ -57,13 +57,13 @@ const Navbar = () => {
             </div>
             <div className='flex items-center space-x-4'>
                 <button
-                    className='bg-[#093c5e] text-white px-4 py-2 rounded-3xl hover:bg-[#093c5e]'
+                    className='bg-[#01ace3] text-white px-4 py-2 rounded-3xl hover:bg-[#01ace3]'
                     onClick={handleLoginClick}
                 >
                     Login
                 </button>
                 <button
-                    className='bg-[#093c5e] text-white px-4 py-2 rounded-3xl hover:bg-[#093c5e]'
+                    className='bg-[#01ace3] text-white px-4 py-2 rounded-3xl hover:bg-[#01ace3]'
                     onClick={handleSignupClick}
                 >
                     Signup

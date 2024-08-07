@@ -3,6 +3,10 @@ import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
 import { HiMenu } from "react-icons/hi";
+import Footer from "../../component/footer/Footer";
+import { FaUser } from "react-icons/fa";
+import Sidebar from "../../component/sidebar/Sidebar";
+import {IoIosNotifications} from "react-icons/io";
 
 
 const SearchField = styled(TextField)({
@@ -26,7 +30,8 @@ const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
     return (
-        <div className='flex justify-between items-center p-4 shadow-md bg-[#01ace3]'>
+        <div>
+        <section className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                 <p className='text-lg font-bold'>Quagga</p>
@@ -46,14 +51,13 @@ const DashBoard = () => {
 
             </div>
             <div className='flex items-center space-x-4'>
-                <button
-                    className='bg-[#093c5e] text-white px-4 py-2 rounded-3xl hover:bg-[#093c5e]'
-                >
-                    Logout
-                </button>
+                <div>
+                    <FaUser/>
+                </div>
+                <IoIosNotifications/>
 
                 <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                    onClick={() => setMenuOpen(!menuOpen)} />
+                        onClick={() => setMenuOpen(!menuOpen)}/>
             </div>
             {menuOpen && (
                 <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
@@ -63,6 +67,11 @@ const DashBoard = () => {
                     <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
                 </ul>
             )}
+        </section>
+            <div>
+                <Sidebar/>
+            </div>
+            <Footer/>
         </div>
     )
 

@@ -38,11 +38,11 @@ const Navbar = () => {
         <div className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
-                <p className='text-lg font-bold'>Quagga</p>
+                <p className='text-lg font-bold text-white'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
                 <div className='hover:text-gray-600 cursor-pointer text-white'>Home</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Features</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Features</div>
                 <div>
                     <SearchField
                         variant="outlined"
@@ -50,10 +50,10 @@ const Navbar = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-gray-600 cursor-pointer'>Community</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Blog</div>
-                <div className='hover:text-gray-600 cursor-pointer'>About us</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Contact us</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Community</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Blog</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>About us</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Contact us</div>
             </div>
             <div className='flex items-center space-x-4'>
                 <button
@@ -74,12 +74,12 @@ const Navbar = () => {
             </div>
             {menuOpen && (
                 <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Home</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Features</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Community</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Blog</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>About us</div>
-                    <div className='hover:text-gray-600 cursor-pointer p-4'>Contact us</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>Home</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>Features</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>Community</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>Blog</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>About us</div>
+                    <div className='hover:text-gray-600 cursor-pointer p-4 text-white'>Contact us</div>
                 </ul>
             )}
         </div>

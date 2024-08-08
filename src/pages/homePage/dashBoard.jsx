@@ -34,7 +34,7 @@ const DashBoard = () => {
         <section className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
-                <p className='text-lg font-bold'>Quagga</p>
+                <p className='text-lg font-bold text-white'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
                 <div>
@@ -44,10 +44,10 @@ const DashBoard = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Client</div>
-                <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Client</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Supplier</div>
 
             </div>
             <div className='flex items-center space-x-4'>

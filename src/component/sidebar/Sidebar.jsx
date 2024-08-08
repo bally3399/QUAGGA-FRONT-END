@@ -12,23 +12,29 @@ const Sidebar = () => {
     const handleProfileClick = () => {
         navigate('/profile');
     };
+    const handleReviewsClick = () => {
+        navigate('/profile');
+    };
+    const handleLogoutClick = () => {
+        navigate('/');
+    };
     return (
         <div className="bg-white w-64 min-h-screen p-4 shadow-md">
             <h2 className="text-xl font-bold mb-8">Quagga</h2>
             <nav className="flex flex-col space-y-4">
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
+                <a onClick={handleDashBoardClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaTachometerAlt /> <span>Dashboard</span>
                 </a>
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
+                <a onClick={handleProfileClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUser /> <span>Profile</span>
                 </a>
                 <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUsers /> <span>Users</span>
                 </a>
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
+                <a onClick={handleReviewsClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaChartPie /> <span>Reviews</span>
                 </a>
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
+                <a onClick={handleLogoutClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaSignOutAlt /> <span>Logout</span>
                 </a>
             </nav>

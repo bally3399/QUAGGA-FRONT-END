@@ -5,6 +5,7 @@ import RegisterSpecialistPage from "../pages/homePage/registerSpecialistPage";
 import RegisterSupplierPage from "../pages/homePage/registerSupplierPage";
 import LoginPage from "../pages/homePage/LoginPage";
 import DashBoard from "../pages/homePage/dashBoard";
+import Profile from "../pages/homePage/profile";
 
 export const ROUTE =[
     {
@@ -35,6 +36,10 @@ export const ROUTE =[
     {
         path: "/dashBoard",
         element: <DashBoard/>,
+    },
+    {
+        path: "/profile",
+        element: <Profile/>,
     },
 
 

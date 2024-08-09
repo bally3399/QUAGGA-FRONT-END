@@ -4,6 +4,7 @@ import logo from "../../asset/quagga.jpg";
 import pics from "../../asset/download.jpg"
 import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
+import ServicesSection from "./pages";
 
 const HeroPage = () => {
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ const HeroPage = () => {
                     </div>
                 </div>
             </section>
+            <ServicesSection/>
             <Footer/>
         </div>
     );

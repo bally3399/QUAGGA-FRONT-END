@@ -17,7 +17,7 @@ const SignUpPage = () => {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-[#eeffff]">
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/')}

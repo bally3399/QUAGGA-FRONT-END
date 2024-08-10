@@ -30,7 +30,7 @@ const LoginPage = () => {
 
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 relative">
+        <div className="bg-[#eeffff] flex justify-center items-center min-h-screen  relative">
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/signUp')}
@@ -72,12 +72,12 @@ const LoginPage = () => {
                             variant="contained"
                             fullWidth
                             sx={{
-                                backgroundColor: 'green',
-                                color: 'white',
+                                backgroundColor: '#007e82',
+                                color: 'black',
                                 paddingY: 2,
                                 borderRadius: '#093c5e',
                                 '&:hover': {
-                                    backgroundColor: '#093c5e',
+                                    backgroundColor: '#007e82',
                                 },
                             }}
                             onClick={handleSubmit}

@@ -12,7 +12,7 @@ const ServiceCard = ({ icon, title, description }) => {
 
 const ServicesSection = () => {
     return (
-        <div className="flex justify-center space-x-8 bg-gray-100 py-12">
+        <div className="bg-[#eeffff] flex justify-center space-x-8  py-12">
             <ServiceCard
                 icon={<icon className="fas fa-toolbox"></icon>}
                 title="Find help"

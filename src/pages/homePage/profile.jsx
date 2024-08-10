@@ -3,7 +3,7 @@ import {FaUser} from "react-icons/fa";
 const Profile =()=>{
     return (
         <>
-            <div>
+            <div className='bg-[#eeffff]'>
                 <FaUser/>
             </div>
         </>

@@ -44,19 +44,18 @@ const RegisterPage = () => {
             setErrors(formErrors);
         } else {
             setErrors({});
-            // Handle form submission
             navigate('/login');
         }
     };
 
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
-            borderRadius: '9999px', // TailwindCSS rounded-full
+            borderRadius: '9999px',
         },
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100 relative">
+        <div className="flex justify-center items-center min-h-screen bg-[#eeffff] relative">
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/')}
@@ -65,7 +64,7 @@ const RegisterPage = () => {
                     <HiArrowLeft className="mr-2" /> Back
                 </button>
             </div>
-            <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
+            <div className="bg-[#eeffff] w-full max-w-md p-8  shadow-md rounded-lg">
                 <h2 className="text-2xl font-semibold text-center mb-6">Sign up as a Client or Professional</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">

@@ -66,7 +66,7 @@ const SignUpPage = () => {
                 </div>
             </div>
             <button
-                className={`px-6 py-3 rounded-lg font-medium ${selectedRole ? 'bg-[#007e82] text-black hover:bg-[#007e82]' : 'bg-[#007e82] text-gray-500 cursor-not-allowed'}`}
+                className={`px-6 py-3 rounded-lg font-medium ${selectedRole ? 'bg-[#06324e] text-white hover:bg-[#06324e]' : 'bg-[#007e82] text-gray-500 cursor-not-allowed'}`}
                 onClick={handleCreateAccount}
                 disabled={!selectedRole}
             >
@@ -74,7 +74,7 @@ const SignUpPage = () => {
             </button>
             <p className="mt-4">
                 Already have an account?{' '}
-                <a href="/login" className="text-[#007e82] hover:underline">
+                <a href="/login" className="text-[#06324e] hover:underline">
                     Log In
                 </a>
             </p>

@@ -24,7 +24,7 @@ const HeroPage = () => {
                     </p>
                     <div className=''>
                         <button
-                            className="ml-16 rounded-3xl bg-[#007e82] text-[black] font-bold py-2 px-8 flex items-center"
+                            className="ml-16 rounded-3xl bg-[#06324e] text-[white] font-bold py-2 px-8 flex items-center"
                             aria-label="Get started"
                             title="Get Started"
                             onClick={handleGetStarted}

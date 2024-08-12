@@ -35,14 +35,14 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between items-center p-4 shadow-md bg-[#007e82]'>
+        <div className='flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
-                <p className='text-lg font-bold text-black'>Quagga</p>
+                <p className='text-lg font-bold text-white'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>Home</div>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>Features</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Home</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Features</div>
                 <div>
                     <SearchField
                         variant="outlined"
@@ -50,20 +50,20 @@ const Navbar = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>Community</div>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>Blog</div>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>About us</div>
-                <div className='hover:text-gray-600 cursor-pointer text-black'>Contact us</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Community</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Blog</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>About us</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'>Contact us</div>
             </div>
             <div className='flex items-center space-x-4'>
                 <button
-                    className='bg-[#cdfffa] text-black px-4 py-2 rounded-3xl hover:bg-[#0fffe6]'
+                    className='bg-[#00ade2] text-white px-4 py-2 rounded-3xl hover:bg-[#0fffe6]'
                     onClick={handleLoginClick}
                 >
                     Login
                 </button>
                 <button
-                    className='bg-[#cdfffa] text-black px-4 py-2 rounded-3xl hover:bg-[#0fffe6]'
+                    className='bg-[#00ade2] text-white px-4 py-2 rounded-3xl hover:bg-[#0fffe6]'
                     onClick={handleSignupClick}
                 >
                     Signup

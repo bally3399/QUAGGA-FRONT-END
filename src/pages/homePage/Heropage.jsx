@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import logo from "../../asset/quagga.jpg";
-import pics from "../../asset/download.jpg"
 import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";

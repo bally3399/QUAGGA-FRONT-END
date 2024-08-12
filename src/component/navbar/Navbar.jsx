@@ -68,7 +68,6 @@ const Navbar = () => {
                 >
                     Signup
                 </button>
-
                 <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                         onClick={() => setMenuOpen(!menuOpen)}/>
             </div>

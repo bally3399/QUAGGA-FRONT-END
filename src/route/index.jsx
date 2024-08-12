@@ -6,6 +6,7 @@ import RegisterSupplierPage from "../pages/homePage/registerSupplierPage";
 import LoginPage from "../pages/homePage/LoginPage";
 import DashBoard from "../pages/homePage/dashBoard";
 import Profile from "../pages/homePage/profile";
+import AboutPage from "../pages/homePage/AboutPage";
 
 export const ROUTE =[
     {
@@ -42,6 +43,9 @@ export const ROUTE =[
         element: <Profile/>,
     },
 
-
+    {
+        path: "/about",
+        element: <AboutPage/>,
+    }
 
 ]

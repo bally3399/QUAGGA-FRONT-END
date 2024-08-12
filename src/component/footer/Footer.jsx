@@ -1,13 +1,19 @@
 import React from 'react';
 import { FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import {useNavigate} from "react-router-dom";
 
 const Footer = () => {
+    const navigate = useNavigate();
+    const handleAboutClick =() =>{
+        navigate('/about')
+    }
     return (
         <footer className="bg-[#093c5e] text-white py-8">
             <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/3 mb-6">
                         <h2 className="text-lg font-semibold mb-2">About Us</h2>
+                        <div onClick={handleAboutClick} className='text-gray-400 hover:text-white'>About us</div>
                         <p className="text-gray-400">
                             Quagga developers building great software.
                         </p>

@@ -4,6 +4,7 @@ import { HiArrowLeft } from "react-icons/hi";
 import {
     Button, Checkbox, FormControlLabel, TextField, MenuItem, Select, InputLabel, FormControl
 } from "@mui/material";
+import axios from "axios";
 
 const RegisterSupplierPage = () => {
     const [form, setForm] = useState({
@@ -32,22 +33,23 @@ const RegisterSupplierPage = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
 
-        let formErrors = {};
-
-        for (let key in form) {
-            if (form[key] === '') {
-                formErrors[key] = 'This field is required';
             }
-        }
+        };
 
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-        } else {
-            setErrors({});
-            navigate('/login');
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/register', form, config);
+            console.log("Response --> ", response);
+            if (response.data.success) {
+                console.log(response.data, 'Registration successful');
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
         }
     };
 
@@ -271,6 +273,7 @@ const RegisterSupplierPage = () => {
                                     backgroundColor: '#007e82',
                                 },
                             }}
+                            onClick={}
                         >
                             Sign Up
                         </Button>

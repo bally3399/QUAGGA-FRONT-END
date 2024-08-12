@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi";
 import { Button, Checkbox, FormControlLabel, TextField, MenuItem, Select, InputLabel, FormControl, FormHelperText } from "@mui/material";
+import axios from "axios";
 
 const RegisterSpecialistPage = () => {
     const [form, setForm] = useState({
@@ -30,23 +31,28 @@ const RegisterSpecialistPage = () => {
             [name]: type === 'checkbox' ? checked : value
         });
     };
+      const handleRegister = () => {
+        navigate('/login');
+    };
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
 
-        let formErrors = {};
-
-        for (let key in form) {
-            if (form[key] === '') {
-                formErrors[key] = 'This field is required';
             }
-        }
+        };
 
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-        } else {
-            setErrors({});
-            navigate('/login');
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/register', form, config);
+            console.log("Response --> ", response);
+            if (response.data.success) {
+                console.log(response.data, 'Registration successful');
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
         }
     };
 
@@ -352,6 +358,7 @@ const RegisterSpecialistPage = () => {
                                     backgroundColor: '#007e82'
                                 },
                             }}
+                            onClick={handleRegister}
                         >
                             Sign Up
                         </Button>

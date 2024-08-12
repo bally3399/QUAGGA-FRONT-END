@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { TextField, Checkbox, FormControlLabel, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { HiArrowLeft } from 'react-icons/hi';
+import axios from 'axios';
+// import {content} from "../../../tailwind.config";
 
 const RegisterPage = () => {
     const [form, setForm] = useState({
@@ -27,26 +29,32 @@ const RegisterPage = () => {
             [name]: type === 'checkbox' ? checked : value
         });
     };
+    const handleRegister = () => {
+        navigate('/login');
+    };
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Validate form
-        let formErrors = {};
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
 
-        for (let key in form) {
-            if (form[key] === '') {
-                formErrors[key] = 'This field is required';
             }
-        }
+        };
 
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-        } else {
-            setErrors({});
-            navigate('/login');
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/register', form, config);
+            console.log("Response --> ", response);
+            if (response.data.success) {
+                console.log(response.data, 'Registration successful');
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
         }
     };
+
 
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
@@ -65,7 +73,7 @@ const RegisterPage = () => {
                 </button>
             </div>
             <div className="bg-[#eeffff] w-full max-w-md p-8  shadow-md rounded-lg">
-                <h2 className="text-2xl font-semibold text-center mb-6">Sign up as a Client or Professional</h2>
+                <h2 className="text-2xl font-semibold text-center mb-6">Sign up</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <TextField
@@ -215,6 +223,7 @@ const RegisterPage = () => {
                                     backgroundColor: '#093c5e',
                                 },
                             }}
+                            onClick={handleRegister}
                         >
                             Sign Up
                         </Button>

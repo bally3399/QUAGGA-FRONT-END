@@ -32,6 +32,10 @@ const RegisterSupplierPage = () => {
             [name]: type === 'checkbox' ? checked : value
         });
     };
+    const handleRegister = () => {
+        navigate('/login');
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -273,7 +277,7 @@ const RegisterSupplierPage = () => {
                                     backgroundColor: '#007e82',
                                 },
                             }}
-                            onClick={}
+                            onClick={handleRegister}
                         >
                             Sign Up
                         </Button>

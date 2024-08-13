@@ -1,6 +1,6 @@
 import Layout from "../component/layout/Layout";
 import RegisterPage from "../pages/homePage/registerPage";
-import SignUpPage from "../pages/homePage/signupPage";
+import RolePage from "../pages/homePage/rolePage";
 import RegisterSpecialistPage from "../pages/homePage/registerSpecialistPage";
 import RegisterSupplierPage from "../pages/homePage/registerSupplierPage";
 import LoginPage from "../pages/homePage/LoginPage";
@@ -15,12 +15,12 @@ export const ROUTE =[
     },
 
     {
-        path: "/registerClient/prof",
+        path: "/registerClient",
         element: <RegisterPage/>,
     },
     {
         path: "/signUp",
-        element: <SignUpPage/>,
+        element: <RolePage/>,
     },
     {
         path: "/registerSpecialist",

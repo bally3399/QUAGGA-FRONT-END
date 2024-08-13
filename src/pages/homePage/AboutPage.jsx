@@ -24,7 +24,7 @@ const AboutPage = () => {
             </button>
             <div className="mt-4 p-4 bg-gray-100 border border-gray-300 rounded">
                 <p className="text-gray-700">
-                    Quagga, was developed to serve as a middlemen between specialist construction service providers and clients basically in Nigeria. <br/>We are a team of passionate
+                    Quagga was developed to serve as a middlemen between specialist construction service providers and clients basically in Nigeria. <br/>We are a team of passionate
                     individuals
                     committed to bridging the gap between specialist construction service providers and clients.
                     <p><br/> There might be some situation where you need a service of a specialist constructor, of which they are not readily accessible and even if you happen to come across one, there is a big chance that they might not be capable, qualified and reliable at the point of need. Moreso, there is no assurance of quality materials and a job well done to your satisfaction
@@ -35,31 +35,27 @@ const AboutPage = () => {
                         a reliable tool to manage your projects, coordinate with subcontractors, and deliver
                         outstanding results to your clients.</p>
 
-                    <p><br/>We envision a world where respectable clients can connect with specialist constructor in
-                        respect to whatever services
-                        we are providing to ease the stress and pressure of getting a reliable service provider.</p>
+                    <p><br/>We envision a world where respectable clients can connect with specialist constructor
+                        in respect to whatever services we are providing to ease the stress
+                        and pressure of getting a reliable service provider.</p>
 
                     <br/> At Quagga, we strive to provide a user-friendly platform that helps anyone looking for
                     services in respect to construction.
                     <img className="flex justify-center items-center max-h-50 ml-60" src={image} alt=""/>
 
                     <p><br/> We believe in constantly evolving and integrating the latest technology to meet our
-                        users
-                        satisfaction.
+                        users satisfaction.
                         Our users are at the heart of everything we do. we are focused on creating intuitive and
-                        easy-to-use features
-                        that helps meet our users' needs.</p>
+                        easy-to-use features that helps meet our users' needs.</p>
 
                     <p><br/>Quagga was born out of a desire to ease the stress of anyone who needs
-                        the service of a specialist
-                        construction worker, to avoid any form of delay regarding construction and to ensure that
-                        they
-                        get quality services.</p>
+                        the service of a specialist construction worker,
+                        to avoid any form of delay regarding construction and to ensure that they get quality services.</p>
                     <img className="flex justify-center items-center w-60 h-40 object-cover ml-60" src={image2} alt=""/>
 
 
-                    <p><br/>Thank you for being part of our journey. Together, we are shaping a better service in respect to construction with
-                        Quagga.</p>
+                    <p><br/>Thank you for being part of our journey.
+                        Together, we are shaping a better service in respect to construction with Quagga.</p>
                     <img className="flex justify-center items-center w-60 h-40 object-cover ml-60" src={shake} alt=""/>
 
                 </p>

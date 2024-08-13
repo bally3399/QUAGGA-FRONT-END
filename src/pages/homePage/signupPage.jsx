@@ -11,7 +11,11 @@ const SignUpPage = () => {
     };
 
     const handleCreateAccount = () => {
-        if (selectedRole === 'client' || selectedRole === 'Professional') navigate('/registerClient/prof')
+        if (selectedRole === 'client' || selectedRole === 'Professional'){
+            const capitalizedRole = selectedRole.toUpperCase();
+            localStorage.setItem('role', capitalizedRole);
+            navigate('/registerClient/prof')
+        }
         else if (selectedRole === 'Specialist') navigate('/registerSpecialist')
         else if(selectedRole === 'Supplier') navigate('/registerSupplier')
     };

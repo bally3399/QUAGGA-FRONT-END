@@ -281,10 +281,11 @@ import 'react-toastify/dist/ReactToastify.css'; // Ensure this line is present
 
 const RegisterPage = () => {
     const [form, setForm] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
+        role: localStorage.getItem("role"),
         confirmPassword: '',
         agree: false,
     });
@@ -343,8 +344,8 @@ const RegisterPage = () => {
                 });
 
                 setForm({
-                    firstname: '',
-                    lastname: '',
+                    firstName: '',
+                    lastName: '',
                     email: '',
                     password: '',
                     confirmPassword: '',
@@ -415,12 +416,12 @@ const RegisterPage = () => {
                             label="First Name"
                             variant="outlined"
                             fullWidth
-                            name="firstname"
-                            value={form.firstname}
+                            name="firstName"
+                            value={form.firstName}
                             onChange={handleChange}
                             sx={roundedStyle}
-                            error={!!errors.firstname}
-                            helperText={errors.firstname}
+                            error={!!errors.firstName}
+                            helperText={errors.firstName}
                         />
                     </div>
                     <div className="mb-4">
@@ -428,12 +429,12 @@ const RegisterPage = () => {
                             label="Last Name"
                             variant="outlined"
                             fullWidth
-                            name="lastname"
-                            value={form.lastname}
+                            name="lastName"
+                            value={form.lastName}
                             onChange={handleChange}
                             sx={roundedStyle}
-                            error={!!errors.lastname}
-                            helperText={errors.lastname}
+                            error={!!errors.lastName}
+                            helperText={errors.lastName}
                         />
                     </div>
                     <div className="mb-4">

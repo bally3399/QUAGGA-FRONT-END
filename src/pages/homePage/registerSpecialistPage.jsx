@@ -8,11 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const RegisterSpecialistPage = () => {
     const [form, setForm] = useState({
-        firstname: '',
-        lastname: '',
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
         confirmPassword: '',
+        role: localStorage.getItem("role"),
         agree: false,
     });
 
@@ -59,7 +60,7 @@ const RegisterSpecialistPage = () => {
             const response = await axios.post('http://localhost:8080/api/v1/quagga/specialist/register', form, config);
 
             if (response.data.successful) {
-                toast.success(`Welcome ${form.firstname}, you have signed up successfully!`, {
+                toast.success(`Welcome ${form.firstName}, you have signed up successfully!`, {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -70,8 +71,8 @@ const RegisterSpecialistPage = () => {
                 });
 
                 setForm({
-                    firstname: '',
-                    lastname: '',
+                    firstName: '',
+                    lastName: '',
                     email: '',
                     password: '',
                     confirmPassword: '',
@@ -142,12 +143,12 @@ const RegisterSpecialistPage = () => {
                             label="First Name"
                             variant="outlined"
                             fullWidth
-                            name="firstname"
-                            value={form.firstname}
+                            name="firstName"
+                            value={form.firstName}
                             onChange={handleChange}
                             sx={roundedStyle}
-                            error={!!errors.firstname}
-                            helperText={errors.firstname}
+                            error={!!errors.firstName}
+                            helperText={errors.firstName}
                         />
                     </div>
                     <div className="mb-4">
@@ -155,12 +156,12 @@ const RegisterSpecialistPage = () => {
                             label="Last Name"
                             variant="outlined"
                             fullWidth
-                            name="lastname"
-                            value={form.lastname}
+                            name="lastName"
+                            value={form.lastName}
                             onChange={handleChange}
                             sx={roundedStyle}
-                            error={!!errors.lastname}
-                            helperText={errors.lastname}
+                            error={!!errors.lastName}
+                            helperText={errors.lastName}
                         />
                     </div>
                     <div className="mb-4">

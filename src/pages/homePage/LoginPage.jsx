@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {HiArrowLeft} from "react-icons/hi";
+import {HiArrowLeft, HiExclamationCircle} from "react-icons/hi";
 import {Button, TextField} from "@mui/material";
+import axios from "axios";
+import {toast} from "react-toastify";
 
 const LoginPage = () => {
     const [form, setForm] = useState({
@@ -9,7 +11,10 @@ const LoginPage = () => {
         password: '',
     });
 
+
     const navigate = useNavigate();
+    const [errors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -19,15 +24,85 @@ const LoginPage = () => {
         });
     };
 
-    const handleSubmit = (e) => {
-        navigate("/dashBoard");
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        setIsLoading(true);
+
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/login', form, config);
+
+            if (response.data.successful) {
+                toast.success(`Welcome ${form.firstName}, you have logged in successfully!`, {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+
+                setForm({
+                    firstName: '',
+                    lastName: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                    agree: false,
+                });
+
+                setTimeout(() => {
+                    navigate("/dashBoard");
+                }, 3000);
+            } else {
+                toast.error('Sign up failed. Please try again.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: {
+                        fontSize: '14px',
+                    },
+                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>, // Custom icon with reduced size
+                });
+
+            }
+        }catch (error) {
+            console.error('Error during sign up:', error);
+            toast.error('Sign up failed. Please try again.', {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                style: {
+                    fontSize: '14px',
+                },
+                icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
+            });
+
+        } finally {
+            setIsLoading(false);
+        }
     };
+
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
             borderRadius: '9999px',
         },
     };
-
 
     return (
         <div className="bg-[#eeffff] flex justify-center items-center min-h-screen  relative">
@@ -51,6 +126,8 @@ const LoginPage = () => {
                             name="email"
                             value={form.email}
                             onChange={handleChange}
+                            error={!!errors.email}
+                            helperText={errors.email}
                             sx={roundedStyle}
                         />
                     </div>
@@ -63,6 +140,8 @@ const LoginPage = () => {
                             name="password"
                             value={form.password}
                             onChange={handleChange}
+                            error={!!errors.password}
+                            helperText={errors.password}
                             sx={roundedStyle}
                         />
                     </div>
@@ -71,18 +150,18 @@ const LoginPage = () => {
                             type="submit"
                             variant="contained"
                             fullWidth
+                            disabled={isLoading}
                             sx={{
-                                backgroundColor: '#007e82',
-                                color: 'black',
+                                backgroundColor: '#093c5e',
+                                color: 'white',
                                 paddingY: 2,
-                                borderRadius: '#093c5e',
+                                borderRadius: '9999px',
                                 '&:hover': {
-                                    backgroundColor: '#007e82',
+                                    backgroundColor: '#093c5e',
                                 },
                             }}
-                            onClick={handleSubmit}
                         >
-                           Log in
+                            {isLoading ? 'Logging in...' : 'Login'}
                         </Button>
                     </div>
                 </form>

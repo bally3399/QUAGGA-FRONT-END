@@ -6,6 +6,7 @@ import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";
 import HeroSlider from "../../component/heroslider/HeroSlider";
+import Carousel from "../../component/carousel/Carousel";
 
 const HeroPage = () => {
     const navigate = useNavigate();
@@ -17,6 +18,7 @@ const HeroPage = () => {
     return (
         <div className="overflow-x-hidden">
             <Navbar />
+            <Carousel />
 
             {/* The following section is commented out and can be re-enabled if needed */}
             {/*<section className="bg-[#eeffff] mb-4 flex flex-col items-center md:flex-row md:items-center min-h-screen">*/}

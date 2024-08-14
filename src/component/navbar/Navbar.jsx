@@ -35,7 +35,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
+        <div className='mb-16 flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                 <p className='text-lg font-bold text-white'>Quagga</p>

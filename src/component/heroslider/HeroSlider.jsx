@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 const slides = [
     {
         image: Img1,
-        text: 'Explore the Beauty of Nature',
+        text: 'Quality You Can Trust, Excellence You Can See',
     },
     {
         image: Img2,
-        text: 'Innovate with Cutting-Edge Technology',
+        text: 'Where Expertise Meets Cutting-Edge Technology',
     },
     {
         image: Img3,
-        text: 'Stay Trendy with the Latest Fashion',
+        text: 'Premium Materials, Exceptional Results',
     },
 ];
 
@@ -36,7 +36,7 @@ const HeroSlider = () => {
 
     return (
         <section className="w-full h-screen relative overflow-hidden">
-            {/* Background Image Section */}
+
             {slides.map((slide, index) => (
                 <div
                     key={index}
@@ -48,7 +48,7 @@ const HeroSlider = () => {
                 />
             ))}
 
-            {/* Text Overlay Section */}
+
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div className="text-center text-white p-8">
                     <h1 className="text-4xl md:text-6xl font-bold">

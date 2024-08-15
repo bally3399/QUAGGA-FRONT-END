@@ -12,19 +12,19 @@ const ServiceCard = ({ icon, title, description }) => {
 
 const ServicesSection = () => {
     return (
-        <div className="bg-[#eeffff] flex justify-center space-x-8  py-12">
+        <div className="bg-[#eeffff] flex flex-col sm:flex-row justify-center sm:space-x-8 space-y-6 sm:space-y-0 py-12">
             <ServiceCard
-                icon={<icon className="fas fa-toolbox"></icon>}
+                icon={<i className="fas fa-toolbox"></i>}
                 title="Find help"
                 description="Find professionals for your domestic needs quickly, and without hassles."
             />
             <ServiceCard
-                icon={<icon className="fas fa-users"></icon>}
+                icon={<i className="fas fa-users"></i>}
                 title="Find customers"
                 description="Have a skill? Provide services and expand your customer base."
             />
             <ServiceCard
-                icon={<icon className="fas fa-calendar-alt"></icon>}
+                icon={<i className="fas fa-calendar-alt"></i>}
                 title="Set your schedule"
                 description="Get your essential needs provided immediately or on a scheduled date."
             />

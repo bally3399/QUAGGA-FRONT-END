@@ -21,19 +21,18 @@ const slides = [
 
 const HeroSlider = () => {
     const navigate = useNavigate();
-
-    const handleGetStarted = () => {
-        navigate('/signUp');
-    };
-
     const [currentSlide, setCurrentSlide] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000); // Change slide every 5 seconds
+        }, 5000);
         return () => clearInterval(interval);
     }, []);
+
+    const handleGetStarted = () => {
+        navigate('/signUp');
+    };
 
     return (
         <section className="w-full h-screen relative overflow-hidden">

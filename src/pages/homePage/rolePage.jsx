@@ -53,8 +53,10 @@ const RolePage = () => {
                     <HiArrowLeft className="mr-2"/> Back
                 </button>
             </div>
-            <h1 className="text-3xl font-semibold mb-6 text-[#093c5e]">Join as a Client, Professional, Specialist or Supplier</h1>
-            <div className="flex space-x-4 mb-6">
+            <h1 className="text-3xl font-semibold mb-6 text-[#093c5e] hidden sm:block">
+                Join as a Client, Professional, Specialist or Supplier
+            </h1>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6 p-5">
                 <RoleCard
                     role="client"
                     icon={<HiBriefcase className="text-3xl mb-2" />}

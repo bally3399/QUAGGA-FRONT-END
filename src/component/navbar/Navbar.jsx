@@ -39,7 +39,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className='flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
+        <div className='mb-16 flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
             <div className='flex items-center mb-4'>
                 <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                 <p className='text-lg font-bold text-white'>Quagga</p>
@@ -78,7 +78,7 @@ const Navbar = () => {
                         onClick={() => setMenuOpen(!menuOpen)}/>
             </div>
             {menuOpen && (
-                <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
+                <ul className='md:hidden absolute z-10 top-16 left-0 w-full bg-white shadow-md text-lg'>
                     <div className='hover:text-gray-600 cursor-pointer p-4 text-black'>Home</div>
                     <div className='hover:text-gray-600 cursor-pointer p-4 text-black'>Features</div>
                     <div className='hover:text-gray-600 cursor-pointer p-4 text-black'>Community</div>

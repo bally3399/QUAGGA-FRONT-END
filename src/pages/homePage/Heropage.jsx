@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< HEAD
 
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> f085dff6cd86a62433042a553af4ffb22e8cc6a8
 import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";
@@ -40,8 +44,41 @@ const HeroPage = () => {
             {/*</section>*/}
 
             <HeroSlider />
+<<<<<<< HEAD
             <AnimatedCards />
             <Carousel/>
+=======
+            <section className="min-h-min mb-16 flex items-center justify-center bg-cover bg-center"
+                     style={{backgroundImage: "url('https://source.unsplash.com/random/1600x900')"}}>
+                <div className="container mx-auto flex flex-col md:flex-row items-center">
+                    {/* Image Section */}
+                    <div className="w-full md:w-1/2 hidden md:block">
+                        <img
+                            src="https://source.unsplash.com/random/800x600"
+                            alt="Random Unsplash"
+                            className="w-full h-auto object-cover"
+                        />
+                    </div>
+
+                    {/* Text Section */}
+                    <div className="w-full md:w-1/2 text-center md:text-left">
+                        <h1 className="text-4xl md:text-6xl font-bold slide-in-halfway">
+                            Welcome to Our Shop
+                        </h1>
+                        <p className="mt-4 text-lg md:text-2xl slide-in-halfway" style={{animationDelay: "0.5s"}}>
+                            Discover the best deals and trends.
+                        </p>
+                        <a href="#learn-more"
+                           className="mt-8 inline-block bg-blue-600 text-white px-6 py-3 rounded-lg slide-in-halfway"
+                           style={{animationDelay: "1s"}}
+                           onClick={handleGetStarted}>
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+            </section>
+>>>>>>> f085dff6cd86a62433042a553af4ffb22e8cc6a8
+
 
             <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                 <div className="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">

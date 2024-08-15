@@ -36,7 +36,7 @@ const HeroSlider = () => {
 
     return (
         <section className="w-full h-screen relative overflow-hidden">
-            {/* Background Image Section */}
+
             {slides.map((slide, index) => (
                 <div
                     key={index}
@@ -48,7 +48,7 @@ const HeroSlider = () => {
                 />
             ))}
 
-            {/* Text Overlay Section */}
+
             <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
                 <div className="text-center text-white p-8">
                     <h1 className="text-4xl md:text-6xl font-bold">

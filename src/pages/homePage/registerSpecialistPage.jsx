@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { TextField, Checkbox, FormControlLabel, Button } from '@mui/material';
+import {TextField, Checkbox, FormControlLabel, Button, InputAdornment, IconButton} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { HiArrowLeft, HiExclamationCircle } from 'react-icons/hi';
+import {HiArrowLeft, HiExclamationCircle, HiEye, HiEyeOff} from 'react-icons/hi';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,9 @@ const RegisterSpecialistPage = () => {
         role: localStorage.getItem("role"),
         agree: false,
     });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
@@ -40,6 +43,14 @@ const RegisterSpecialistPage = () => {
         setErrors(formErrors);
         return Object.keys(formErrors).length === 0;
     };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
+    };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -183,13 +194,22 @@ const RegisterSpecialistPage = () => {
                             label="Password"
                             variant="outlined"
                             fullWidth
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             name="password"
                             value={form.password}
                             onChange={handleChange}
                             error={!!errors.password}
                             helperText={errors.password}
                             sx={roundedStyle}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={togglePasswordVisibility}>
+                                            {showPassword ? <HiEyeOff/> : <HiEye/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </div>
                     <div className="mb-4">
@@ -197,13 +217,22 @@ const RegisterSpecialistPage = () => {
                             label="Confirm Password"
                             variant="outlined"
                             fullWidth
-                            type="password"
+                            type={showConfirmPassword ? 'text' : 'password'}
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
                             error={!!errors.confirmPassword}
                             helperText={errors.confirmPassword}
                             sx={roundedStyle}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={toggleConfirmPasswordVisibility}>
+                                            {showConfirmPassword ? <HiEyeOff/> : <HiEye/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </div>
                     <div className="mb-4">
@@ -240,7 +269,7 @@ const RegisterSpecialistPage = () => {
                         </Button>
                     </div>
                 </form>
-                <ToastContainer position="top-right" autoClose={3000} />
+                <ToastContainer position="top-right" autoClose={3000}/>
             </div>
         </div>
     );

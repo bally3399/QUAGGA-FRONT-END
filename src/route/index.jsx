@@ -7,6 +7,8 @@ import LoginPage from "../pages/homePage/LoginPage";
 import DashBoard from "../pages/homePage/dashBoard";
 import Profile from "../pages/homePage/profile";
 import AboutPage from "../pages/homePage/AboutPage";
+import ContactUs from "../pages/homePage/ContactUs";
+import ProfileForm from "../pages/homePage/Profileform";
 
 export const ROUTE =[
     {
@@ -46,6 +48,16 @@ export const ROUTE =[
     {
         path: "/about",
         element: <AboutPage/>,
+    },
+
+    {
+        path: "/profile-form",
+        element: <ProfileForm/>,
+    },
+
+    {
+        path: "/contact",
+        element: <ContactUs/>,
     }
 
 ]

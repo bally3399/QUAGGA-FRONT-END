@@ -1,100 +1,93 @@
-import React, { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import React from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const slides = [
-    {
-        image: {
-            large: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg1_2000x.jpg?v=1613765728',
-            small: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg1-small_767x.jpg?v=1613765751',
-        },
-        heading: 'Stylish & Affordable',
-        text: 'Making a trend in Design',
-        buttonLink: '#',
-    },
-    {
-        image: {
-            large: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg2_2000x.jpg?v=1613765728',
-            small: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg2-small_767x.jpg?v=1613765751',
-        },
-        heading: 'Furniture & Beyond',
-        text: 'Live in Nature’s Love',
-        buttonLink: '#',
-    },
-    {
-        image: {
-            large: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg3_2000x.jpg?v=1613765728',
-            small: '//zinga-demo.myshopify.com/cdn/shop/files/slider-bg3-small_767x.jpg?v=1613765751',
-        },
-        heading: 'Comfy Fluffy Sofas',
-        text: '@ affordable Price',
-        buttonLink: '#',
-    },
-];
-
 const Carousel = () => {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        fade: true,
-        autoplay: true,
-        autoplaySpeed: 5000,
-    };
-
-    const [animationDirection, setAnimationDirection] = useState(0);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setAnimationDirection((prev) => (prev + 1) % slides.length);
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
-
     return (
-        <div className="relative">
-            <Slider {...settings} className="home-slideshow">
-                {slides.map((slide, index) => (
-                    <div key={index} className="relative">
-                        <img
-                            src={slide.image.large}
-                            alt={`Slide ${index + 1}`}
-                            className="w-full h-auto hidden md:block"
-                        />
-                        <img
-                            src={slide.image.small}
-                            alt={`Slide ${index + 1}`}
-                            className="w-full h-auto md:hidden"
-                        />
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black bg-opacity-50">
-                            <h2
-                                className={`text-4xl md:text-5xl text-white mb-4 transition-all duration-700 transform ${
-                                    animationDirection === index ? 'translate-x-0' : (animationDirection === (index - 1 + slides.length) % slides.length ? '-translate-x-100' : 'translate-x-100')
-                                }`}
-                            >
-                                {slide.heading}
-                            </h2>
-                            <h5
-                                className={`text-2xl md:text-3xl text-white mb-4 transition-all duration-700 transform ${
-                                    animationDirection === index ? 'translate-x-0' : (animationDirection === (index - 1 + slides.length) % slides.length ? '-translate-x-100' : 'translate-x-100')
-                                }`}
-                            >
-                                {slide.text}
-                            </h5>
-                            <a
-                                href={slide.buttonLink}
-                                className="bg-[#4d5763] text-white py-2 px-6 rounded hover:bg-[#60b1ab] transition-colors duration-300"
-                            >
-                                View Collection
-                            </a>
-                        </div>
+        <div className="p-1 flex flex-wrap items-center justify-center">
+            <div className="flex-shrink-0 m-6 relative overflow-hidden bg-orange-500 rounded-lg max-w-xs shadow-lg">
+                <svg className="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                     style={{ transform: 'scale(1.5)', opacity: 0.1 }}>
+                    <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+                    <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+                </svg>
+                <div className="relative pt-10 px-10 flex items-center justify-center">
+                    <div className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                         style={{ background: 'radial-gradient(black, transparent 60%)', transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)', opacity: 0.2 }}>
                     </div>
-                ))}
-            </Slider>
+                    <img className="relative w-40" src="https://user-images.githubusercontent.com/2805249/64069899-8bdaa180-cc97-11e9-9b19-1a9e1a254c18.png" alt="Peace Lily" />
+                </div>
+                <div className="relative text-white px-6 pb-6 mt-6">
+                    <span className="block opacity-75 -mb-1">Indoor</span>
+                    <div className="flex justify-between">
+                        <span className="block font-semibold text-xl">Peace Lily</span>
+                        <span className="block bg-white rounded-full text-orange-500 text-xs font-bold px-3 py-2 leading-none flex items-center">$36.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex-shrink-0 m-6 relative overflow-hidden bg-teal-500 rounded-lg max-w-xs shadow-lg">
+                <svg className="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                     style={{ transform: 'scale(1.5)', opacity: 0.1 }}>
+                    <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+                    <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+                </svg>
+                <div className="relative pt-10 px-10 flex items-center justify-center">
+                    <div className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                         style={{ background: 'radial-gradient(black, transparent 60%)', transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)', opacity: 0.2 }}>
+                    </div>
+                    <img className="relative w-40" src="https://user-images.githubusercontent.com/2805249/64069998-305de300-cc9a-11e9-8ae7-5a0fe00299f2.png" alt="Monstera" />
+                </div>
+                <div className="relative text-white px-6 pb-6 mt-6">
+                    <span className="block opacity-75 -mb-1">Outdoor</span>
+                    <div className="flex justify-between">
+                        <span className="block font-semibold text-xl">Monstera</span>
+                        <span className="block bg-white rounded-full text-teal-500 text-xs font-bold px-3 py-2 leading-none flex items-center">$45.00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex-shrink-0 m-6 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg">
+                <svg className="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                     style={{ transform: 'scale(1.5)', opacity: 0.1 }}>
+                    <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+                    <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+                </svg>
+                <div className="relative pt-10 px-10 flex items-center justify-center">
+                    <div className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                         style={{ background: 'radial-gradient(black, transparent 60%)', transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)', opacity: 0.2 }}>
+                    </div>
+                    <img className="relative w-40" src="https://user-images.githubusercontent.com/2805249/64069899-8bdaa180-cc97-11e9-9b19-1a9e1a254c18.png" alt="Oak Tree" />
+                </div>
+                <div className="relative text-white px-6 pb-6 mt-6">
+                    <span className="block opacity-75 -mb-1">Outdoor</span>
+                    <div className="flex justify-between">
+                        <span className="block font-semibold text-xl">Oak Tree</span>
+                        <span className="block bg-white rounded-full text-purple-500 text-xs font-bold px-3 py-2 leading-none flex items-center">$68.50</span>
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex-shrink-0 m-6 relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg">
+                <svg className="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+                     style={{ transform: 'scale(1.5)', opacity: 0.1 }}>
+                    <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+                    <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+                </svg>
+                <div className="relative pt-10 px-10 flex items-center justify-center">
+                    <div className="block absolute w-48 h-48 bottom-0 left-0 -mb-24 ml-3"
+                         style={{ background: 'radial-gradient(black, transparent 60%)', transform: 'rotate3d(0, 0, 1, 20deg) scale3d(1, 0.6, 1)', opacity: 0.2 }}>
+                    </div>
+                    <img className="relative w-40" src="https://user-images.githubusercontent.com/2805249/64069899-8bdaa180-cc97-11e9-9b19-1a9e1a254c18.png" alt="Oak Tree" />
+                </div>
+                <div className="relative text-white px-6 pb-6 mt-6">
+                    <span className="block opacity-75 -mb-1">Outdoor</span>
+                    <div className="flex justify-between">
+                        <span className="block font-semibold text-xl">Oak Tree</span>
+                        <span className="block bg-white rounded-full text-purple-500 text-xs font-bold px-3 py-2 leading-none flex items-center">$68.50</span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

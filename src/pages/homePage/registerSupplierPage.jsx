@@ -126,7 +126,7 @@ const RegisterSupplierPage = () => {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen  bg-[#eeffff] relative">
+        <div className="flex justify-center items-center min-h-screen  bg-[#ffffff] relative">
             <div className="absolute top-4 left-4">
                 <button
                     onClick={() => navigate('/')}
@@ -135,7 +135,7 @@ const RegisterSupplierPage = () => {
                     <HiArrowLeft className="mr-2" /> Back
                 </button>
             </div>
-            <div className="bg-[#eeffff] w-full max-w-md p-8 shadow-md rounded-lg">
+            <div className="bg-[#ffffff] w-full max-w-md p-8 shadow-md rounded-lg">
                 <h2 className="text-2xl font-semibold text-center mb-6">Sign up</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">

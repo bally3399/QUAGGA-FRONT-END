@@ -30,6 +30,10 @@ const Navbar = () => {
         navigate('/login');
     };
 
+    const handleContactUsClick = () => {
+        navigate('/contact')
+    }
+
     const handleSignupClick = () => {
         navigate('/signUp');
     };
@@ -53,7 +57,9 @@ const Navbar = () => {
                 <div className='hover:text-gray-600 cursor-pointer text-white'>Community</div>
                 <div className='hover:text-gray-600 cursor-pointer text-white'>Blog</div>
                 <div className='hover:text-gray-600 cursor-pointer text-white'>About us</div>
-                <div className='hover:text-gray-600 cursor-pointer text-white'>Contact us</div>
+                <div className='hover:text-gray-600 cursor-pointer text-white'
+                     onClick={handleContactUsClick}
+                >Contact us</div>
             </div>
             <div className='flex items-center space-x-4'>
                 <button

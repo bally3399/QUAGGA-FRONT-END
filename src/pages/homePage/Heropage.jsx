@@ -4,8 +4,10 @@ import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";
 import HeroSlider from "../../component/heroslider/HeroSlider";
 import Carousel from "../../component/carousel/Carousel";
-
-
+import Img1 from '../../asset/Downloader-La-383338.jpg';
+import Img2 from '../../asset/Downloader-La-720311.jpg';
+import Img3 from '../../asset/Downloader-La-816134.jpg';
+import Img4 from '../../asset/Downloader-La-731933.jpg';
 const HeroPage = () => {
 
     return (
@@ -61,8 +63,7 @@ const HeroPage = () => {
                         <div
                             className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                 src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                 alt=""/>
+                             src={Img1} alt="calender Image"/>
                             <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                 <p className="text-sm font-medium tracking-wide text-white">
                                     Sed ut perspiciatis unde omnis iste natus error
@@ -74,8 +75,7 @@ const HeroPage = () => {
                         <div
                             className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                 src="https://images.pexels.com/photos/3182750/pexels-photo-3182750.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                 alt=""/>
+                                 src={Img2} alt="calender Image"/>
                             <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                 <p className="text-sm font-medium tracking-wide text-white">
                                     Leverage agile frameworks to provide a robust synopsis
@@ -87,8 +87,7 @@ const HeroPage = () => {
                         <div
                             className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                 src="https://images.pexels.com/photos/3182746/pexels-photo-3182746.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                 alt=""/>
+                                 src={Img3} alt="calender Image"/>
                             <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                 <p className="text-sm font-medium tracking-wide text-white">
                                     Dingy I'm tellin' you rhubaahb Bangah Jo-Jeezly
@@ -100,8 +99,7 @@ const HeroPage = () => {
                         <div
                             className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                 src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;h=750&amp;w=1260"
-                                 alt=""/>
+                                 src={Img4} alt="calender Image"/>
                             <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                 <p className="text-sm font-medium tracking-wide text-white">
                                     Rough pomfret lemon shark plownose chimaera

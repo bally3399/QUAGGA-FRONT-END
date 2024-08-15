@@ -1,10 +1,11 @@
 import React from 'react';
+import { FaHandsHelping, FaUserTie, FaCalendarCheck } from 'react-icons/fa';
 
 const ServiceCard = ({ icon, title, description }) => {
     return (
-        <div className="flex flex-col items-center p-6 bg-white shadow-md rounded-lg">
-            <div className="text-4xl mb-4">{icon}</div>
-            <h3 className="text-xl font-semibold mb-2">{title}</h3>
+        <div className="flex flex-col items-center p-8 bg-white shadow-lg rounded-lg transform transition duration-500 hover:scale-105">
+            <div className="text-5xl mb-6 text-blue-950">{icon}</div>
+            <h3 className="text-2xl font-semibold mb-4 text-gray-800">{title}</h3>
             <p className="text-gray-600 text-center">{description}</p>
         </div>
     );
@@ -12,21 +13,21 @@ const ServiceCard = ({ icon, title, description }) => {
 
 const ServicesSection = () => {
     return (
-        <div className="bg-[#eeffff] flex flex-col sm:flex-row justify-center sm:space-x-8 space-y-6 sm:space-y-0 py-12">
+        <div className="bg-[#eeffff] flex flex-col sm:flex-row justify-center sm:space-x-8 space-y-8 sm:space-y-0 py-16 px-4">
             <ServiceCard
-                icon={<i className="fas fa-toolbox"></i>}
-                title="Find help"
-                description="Find professionals for your domestic needs quickly, and without hassles."
+                icon={<FaHandsHelping />}
+                title="Find Help"
+                description="Quickly find professionals for your domestic needs, without any hassles."
             />
             <ServiceCard
-                icon={<i className="fas fa-users"></i>}
-                title="Find customers"
+                icon={<FaUserTie />}
+                title="Find Customers"
                 description="Have a skill? Provide services and expand your customer base."
             />
             <ServiceCard
-                icon={<i className="fas fa-calendar-alt"></i>}
-                title="Set your schedule"
-                description="Get your essential needs provided immediately or on a scheduled date."
+                icon={<FaCalendarCheck />}
+                title="Set Your Schedule"
+                description="Get your essential needs met immediately or on a scheduled date."
             />
         </div>
     );

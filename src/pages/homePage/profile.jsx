@@ -1,8 +1,10 @@
 import {FaUser} from "react-icons/fa";
+import Navbar from "../../component/navbar/Navbar";
 
 const Profile =()=>{
     return (
         <>
+            <Navbar />
             <div className='bg-[#eeffff]'>
                 <div className="bg-gray-100">
                     <div className="container mx-auto py-8">

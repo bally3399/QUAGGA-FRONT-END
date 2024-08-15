@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { TextField, Checkbox, FormControlLabel, Button } from '@mui/material';
+import { TextField, Checkbox, FormControlLabel, Button, IconButton, InputAdornment } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { HiArrowLeft, HiExclamationCircle } from 'react-icons/hi';
+import { HiArrowLeft, HiExclamationCircle, HiEye, HiEyeOff } from 'react-icons/hi';
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
+
 const RegisterPage = () => {
     const [form, setForm] = useState({
         firstName: '',
@@ -15,6 +16,9 @@ const RegisterPage = () => {
         confirmPassword: '',
         agree: false,
     });
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const navigate = useNavigate();
     const [errors, setErrors] = useState({});
@@ -56,7 +60,7 @@ const RegisterPage = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/register', form, config);
+            const response = await axios.post('https://quagga.onrender.com/api/v1/quagga/client/register', form, config);
 
             if (response.data.successful) {
                 toast.success(`Welcome ${form.firstName}, you have signed up successfully!`, {
@@ -93,11 +97,10 @@ const RegisterPage = () => {
                     style: {
                         fontSize: '14px',
                     },
-                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>, // Custom icon with reduced size
+                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
                 });
-
             }
-        }catch (error) {
+        } catch (error) {
             console.error('Error during sign up:', error);
             toast.error('Sign up failed. Please try again.', {
                 position: 'top-right',
@@ -110,12 +113,20 @@ const RegisterPage = () => {
                 style: {
                     fontSize: '14px',
                 },
-                icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>, // Custom icon with reduced size
+                icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
             });
 
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
     };
 
     const roundedStyle = {
@@ -182,13 +193,22 @@ const RegisterPage = () => {
                             label="Password"
                             variant="outlined"
                             fullWidth
-                            type="password"
+                            type={showPassword ? 'text' : 'password'}
                             name="password"
                             value={form.password}
                             onChange={handleChange}
                             error={!!errors.password}
                             helperText={errors.password}
                             sx={roundedStyle}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={togglePasswordVisibility}>
+                                            {showPassword ? <HiEyeOff /> : <HiEye />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </div>
                     <div className="mb-4">
@@ -196,13 +216,22 @@ const RegisterPage = () => {
                             label="Confirm Password"
                             variant="outlined"
                             fullWidth
-                            type="password"
+                            type={showConfirmPassword ? 'text' : 'password'}
                             name="confirmPassword"
                             value={form.confirmPassword}
                             onChange={handleChange}
                             error={!!errors.confirmPassword}
                             helperText={errors.confirmPassword}
                             sx={roundedStyle}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={toggleConfirmPasswordVisibility}>
+                                            {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </div>
                     <div className="mb-4">

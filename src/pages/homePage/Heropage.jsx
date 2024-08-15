@@ -12,7 +12,7 @@ const HeroPage = () => {
 
     return (
         <div className="overflow-x-hidden">
-            <Navbar/>
+                <Navbar />
 
             {/* The following section is commented out and can be re-enabled if needed */}
             {/*<section className="bg-[#eeffff] mb-4 flex flex-col items-center md:flex-row md:items-center min-h-screen">*/}

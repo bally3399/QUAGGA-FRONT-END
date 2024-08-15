@@ -1,0 +1,7 @@
+.slide-in-one-third {
+    transition: transform 0.5s ease-in-out;
+}
+
+.text-center {
+    z-index: 10;
+}

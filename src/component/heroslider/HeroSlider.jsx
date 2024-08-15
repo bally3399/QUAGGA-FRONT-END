@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 const slides = [
     {
         image: Img1,
-        text: 'Explore the Beauty of Nature',
+        text: 'Quality You Can Trust, Excellence You Can See',
     },
     {
         image: Img2,
-        text: 'Innovate with Cutting-Edge Technology',
+        text: 'Where Expertise Meets Cutting-Edge Technology',
     },
     {
         image: Img3,
-        text: 'Stay Trendy with the Latest Fashion',
+        text: 'Premium Materials, Exceptional Results',
     },
 ];
 

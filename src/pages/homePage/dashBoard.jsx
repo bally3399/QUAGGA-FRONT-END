@@ -7,6 +7,13 @@ import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import {IoIosNotifications} from "react-icons/io";
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Button from '@mui/material/Button';
+
+
 
 
 const SearchField = styled(TextField)({
@@ -26,9 +33,23 @@ const SearchField = styled(TextField)({
     },
 });
 
+
 const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
+
+    const handleDialogOpen = (category) => {
+        setSelectedCategory(category);
+        setDialogOpen(true);
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+        setSelectedCategory('');
+    };
 
 
     return (
@@ -46,10 +67,19 @@ const DashBoard = () => {
                             size="medium"
                         />
                     </div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Client</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Supplier</div>
+                    <div onClick={() => handleDialogOpen('Specialist')}
+                         className='hover:text-gray-600 cursor-pointer text-white'>Specialist
+                    </div>
+                    <div onClick={() => handleDialogOpen('Professional')}
+                         className='hover:text-gray-600 cursor-pointer text-white'>Professional
+                    </div>
+                    <div onClick={() => handleDialogOpen('Client')}
+                         className='hover:text-gray-600 cursor-pointer text-white'>Client
+                    </div>
+                    <div onClick={() => handleDialogOpen('Supplier')}
+                         className='hover:text-gray-600 cursor-pointer text-white'>Supplier
+                    </div>
+
 
                 </div>
                 <div className="flex items-center space-x-4">
@@ -62,10 +92,10 @@ const DashBoard = () => {
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
-                        <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Client</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
+                        <div onClick={() => handleDialogOpen('Specialist')} className='hover:text-blue-600 cursor-pointer'>Specialist</div>
+                        <div onClick={() => handleDialogOpen('Professional')} className='hover:text-blue-600 cursor-pointer'>Professional</div>
+                        <div onClick={() => handleDialogOpen('Client')} className='hover:text-gray-600 cursor-pointer'>Client</div>
+                        <div onClick={() => handleDialogOpen('Supplier')} className='hover:text-gray-600 cursor-pointer'>Supplier</div>
                     </ul>
                 )}
             </section>
@@ -274,6 +304,16 @@ const DashBoard = () => {
                             </section>
                         </section>
                     </section>
+                    <Dialog open={dialogOpen} onClose={handleDialogClose}>
+                        <DialogTitle>{selectedCategory}</DialogTitle>
+                        <DialogContent>
+                            <p>Details for {selectedCategory} category...</p>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleDialogClose} color="primary">Close</Button>
+                        </DialogActions>
+                    </Dialog>
+
                 </div>
             </div>
             <Footer/>

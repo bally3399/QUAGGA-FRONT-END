@@ -36,7 +36,7 @@ const LoginPage = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/quagga/client/login', form, config);
+            const response = await axios.post('https://quagga.onrender.com/api/v1/quagga/client/login', form, config);
 
             if (response.data.successful) {
                 toast.success(`Welcome ${form.firstName}, you have logged in successfully!`, {

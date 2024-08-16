@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
+import {HiArrowLeft} from "react-icons/hi";
 
 const ProfileForm = ()=> {
     const [isAvailableToHire, setIsAvailableToHire] = useState(true);
     const [isAccountPrivate, setIsAccountPrivate] = useState(false);
+    const navigate = useNavigate();
     return (
         <div className="min-h-screen bg-gray-100">
+            <div className='p-4'>
+                <button
+                    onClick={() => navigate('/profile')}
+                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
+                >
+
+                    <HiArrowLeft className="mr-2"/> Back
+                </button>
+            </div>
             <main className="py-10">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">

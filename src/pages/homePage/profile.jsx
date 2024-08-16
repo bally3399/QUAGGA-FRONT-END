@@ -1,11 +1,23 @@
 
 import Navbar from "../../component/navbar/Navbar";
+import {useNavigate} from "react-router-dom";
+import {HiArrowLeft} from "react-icons/hi";
 import React from "react";
 
-const Profile = () => {
+const Profile =()=>{
+    const navigate = useNavigate();
     return (
-        <>
-            <Navbar />
+        <div className="min-h-screen bg-gray-100">
+            <div className='p-4'>
+                <button
+                    onClick={() => navigate('/profile')}
+                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
+                >
+
+                    <HiArrowLeft className="mr-2"/> Back
+                </button>
+            </div>
+                <Navbar />
             <div className='bg-[#eeffff] pt-16'>
                 <div className="bg-gray-100">
                     <div className="container mx-auto py-8">
@@ -67,8 +79,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-
-        </>
-    )
+        </div>
+    );
 }
-export default Profile
+export default Profile;

@@ -130,8 +130,7 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Soft Plushy Cushion Chair</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
+                                <p className="mb-5">Sink into bliss with our ultra-soft plush cushion chair where comfort meets coziness.</p>
                                 <h2 className="font-semibold mb-5">$29.99</h2>
                                 <button className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">Add
                                     To Cart
@@ -179,8 +178,7 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Comfortable Wooden Chair</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
+                                <p className="mb-5">Elegance meets comfort in our wooden chair crafted for moments of relaxation and style.</p>
                                 <h2 className="font-semibold mb-5">$39.99</h2>
                                 <button className="p-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600">Add
                                     To Cart
@@ -228,8 +226,7 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Multipurpose Wooden Trolly</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
+                                <p className="mb-5">Versatile and stylish, our multipurpose wooden trolley keeps everything you need within reach perfect for any occasion.</p>
                                 <h2 className="font-semibold mb-5">$19.99</h2>
                                 <button className="p-2 px-6 bg-red-500 text-white rounded-md hover:bg-red-600">Add To
                                     Cart
@@ -277,8 +274,7 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Multipurpose Wooden Tool</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
+                                <p className="mb-5">Crafted for versatility and built to last our multipurpose wooden tool is your ultimate companion for any task.</p>
                                 <h2 className="font-semibold mb-5">$34.99</h2>
                                 <button className="p-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600">Add To
                                     Cart

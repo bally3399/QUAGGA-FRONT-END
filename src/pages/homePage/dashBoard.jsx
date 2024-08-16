@@ -2,11 +2,12 @@ import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
-import { HiMenu } from "react-icons/hi";
+import {HiArrowLeft, HiMenu} from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import {IoIosNotifications} from "react-icons/io";
+import {useNavigate} from "react-router-dom";
 
 
 const SearchField = styled(TextField)({
@@ -29,11 +30,24 @@ const SearchField = styled(TextField)({
 const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const navigate = useNavigate();
+
 
 
     return (
         <div>
             <section className=' fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
+        <div className='p-4'>
+            <button
+                onClick={() => navigate('/')}
+                className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
+            >
+
+                <HiArrowLeft className="mr-2"/> Back
+            </button>
+
+            <div>
+            <section className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                     <p className='text-lg font-bold text-white'>Quagga</p>
@@ -276,7 +290,7 @@ const DashBoard = () => {
                 </div>
             </div>
             <Footer/>
-
+            </div>
         </div>
     )
 

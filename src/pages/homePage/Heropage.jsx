@@ -41,7 +41,7 @@ const HeroPage = () => {
                                      src={Img1} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        Sed ut perspiciatis unde omnis iste natus error
+                                        An Outdoor patio area with a modern pergola, featuring a sleek, metallic frame.
                                     </p>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const HeroPage = () => {
                                      src={Img2} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        Leverage agile frameworks to provide a robust synopsis
+                                        A lush indoor garden setup, featuring vertical greenery that decorates the walls and hangs from the ceiling.
                                     </p>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ const HeroPage = () => {
                                      src={Img3} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        Dingy I'm tellin' you rhubaahb Bangah Jo-Jeezly
+                                        The space is minimalistic, with neutral colors and a focus on open design, allowing light and nature to fill the area.
                                     </p>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@ const HeroPage = () => {
                                      src={Img4} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        Rough pomfret lemon shark plownose chimaera
+                                        A dining area with a strong emphasis on natural elements.
                                     </p>
                                 </div>
                             </div>

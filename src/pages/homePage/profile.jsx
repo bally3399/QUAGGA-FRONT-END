@@ -1,11 +1,11 @@
-import {FaUser} from "react-icons/fa";
+
 import Navbar from "../../component/navbar/Navbar";
 
 const Profile =()=>{
     return (
         <>
             <Navbar />
-            <div className='bg-[#eeffff]'>
+            <div className='bg-[#eeffff] pt-16'>
                 <div className="bg-gray-100">
                     <div className="container mx-auto py-8">
                         <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
@@ -20,7 +20,7 @@ const Profile =()=>{
                                         <div className="mt-6 flex flex-wrap gap-4 justify-center">
                                             <a href="#"
                                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                                            <a href="#"
+                                            <a href="/profile-form"
                                                className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit Profile</a>
                                         </div>
                                     </div>

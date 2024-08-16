@@ -2,20 +2,11 @@ import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
-import {HiArrowLeft, HiMenu} from "react-icons/hi";
+import { HiMenu } from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import {IoIosNotifications} from "react-icons/io";
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
-import {List, ListItem, ListItemText} from "@mui/material";
-
-
-import {useNavigate} from "react-router-dom";
 
 
 const SearchField = styled(TextField)({
@@ -35,155 +26,31 @@ const SearchField = styled(TextField)({
     },
 });
 
-
 const DashBoard = () => {
-    const categories = [
-        { value: 'category1', label: 'STRUCTURAL' },
-        { value: 'category2', label: 'MECHANICAL' },
-        { value: 'category3', label: 'ELECTRICAL' },
-        { value: 'category4', label: 'FINISHING' },
-        { value: 'category5', label: 'EXTERIOR' },
-        { value: 'category6', label: 'SITE_WORK' },
-        { value: 'category7', label: 'SPECIALIZED' },
-        { value: 'category8', label: 'INTERIOR' },
-        { value: 'category9', label: 'ENVIRONMENTAL_SYSTEMS' },
-        { value: 'category10', label: 'RENOVATION' },
-        { value: 'category11', label: 'MARINE' },
-        { value: 'category12', label: 'HEAVY_CONSTRUCTION' },
-        { value: 'category13', label: 'SPECIALTY_CONTRACTORS' },
-        { value: 'category14', label: 'LOGISTICS_AND_SUPPORT' },
-        { value: 'category15', label: 'FABRICATION' },
-        { value: 'category16', label: 'AGRICULTURAL_CONSTRUCTION' },
-        { value: 'category17', label: 'ENTERTAINMENT' },
-        { value: 'category18', label: 'MAINTENANCE' },
-        { value: 'category19', label: 'RENEWABLE_ENERGY' },
-        { value: 'category20', label: 'SPECIALTY_FLOORING' },
-        { value: 'category21', label: 'SECURITY_AND_SAFETY' },
-        { value: 'category22', label: 'FINISHES_AND_DECORATIONS' },
-        { value: 'category23', label: 'LOW_VOLTAGE_SYSTEMS' },
-        { value: 'category24', label: 'LIGHTING' },
-        { value: 'category25', label: 'MISCELLANEOUS' },
-    ];
-
-
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const navigate = useNavigate();
-
-
-    const [dialogOpen, setDialogOpen] = useState(false);
-    const [selectedCategory, setSelectedCategory] = useState('');
-
-    const handleDialogOpen = (category) => {
-        setSelectedCategory(category);
-        setDialogOpen(true);
-    };
-
-    const handleDialogClose = () => {
-        setDialogOpen(false);
-        setSelectedCategory('');
-    };
 
 
     return (
         <div>
             <section className=' fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
-        <div className='p-4'>
-            <button
-                onClick={() => navigate('/')}
-                className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
-            >
-
-                <HiArrowLeft className="mr-2"/> Back
-            </button>
-
-            <div>
-            <section className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                     <p className='text-lg font-bold text-white'>Quagga</p>
                 </div>
                 <div className='hidden md:flex space-x-6 text-lg'>
-                    <SearchField
-                        variant="outlined"
-                        placeholder="Search"
-                        size="medium"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleDialogOpen('Specialist')}
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                        sx={{
-                            backgroundColor: "#093c5e"
+                    <div>
+                        <SearchField
+                            variant="outlined"
+                            placeholder="Search"
+                            size="medium"
+                        />
+                    </div>
+                    <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
+                    <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
+                    <div className='hover:text-gray-600 cursor-pointer text-white'>Client</div>
+                    <div className='hover:text-gray-600 cursor-pointer text-white'>Supplier</div>
 
-                        }}
-                    >
-                        Specialist
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        backgroundcolor="06324e"
-                        onClick={() => handleDialogOpen('Professional')}
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                        sx={{
-                            backgroundColor: "#093c5e"
-
-                        }}
-                    >
-                        Professional
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleDialogOpen('Client')}
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                        sx={{
-                            backgroundColor: "#093c5e"
-
-                        }}
-                    >
-                        Client
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleDialogOpen('Supplier')}
-                        className="bg-blue-500 text-white px-4 py-2 rounded"
-                        sx={{
-                            backgroundColor: "#093c5e"
-
-                        }}
-                    >
-                        Supplier
-                    </Button>
-
-                    <Dialog open={dialogOpen} onClose={handleDialogClose}>
-                        <DialogTitle>Select a Category</DialogTitle>
-                        <DialogContent>
-                            <List>
-                                {categories.map(category => (
-                                    <ListItem
-                                        button
-                                        key={category.value}
-                                        onClick={() => {
-                                            setSelectedCategory(category.label);
-                                            handleDialogClose();
-                                        }}
-                                        className="hover:bg-gray-100"
-                                    >
-                                        <ListItemText primary={category.label}/>
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleDialogClose} color="primary">
-                                Cancel
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
                 </div>
                 <div className="flex items-center space-x-4">
                     <FaUser className="hidden md:block text-white"/>
@@ -195,10 +62,10 @@ const DashBoard = () => {
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
-                        <div onClick={() => handleDialogOpen('Specialist')} className='hover:text-blue-600 cursor-pointer'>Specialist</div>
-                        <div onClick={() => handleDialogOpen('Professional')} className='hover:text-blue-600 cursor-pointer'>Professional</div>
-                        <div onClick={() => handleDialogOpen('Client')} className='hover:text-gray-600 cursor-pointer'>Client</div>
-                        <div onClick={() => handleDialogOpen('Supplier')} className='hover:text-gray-600 cursor-pointer'>Supplier</div>
+                        <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
+                        <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
+                        <div className='hover:text-gray-600 cursor-pointer'>Client</div>
+                        <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
                     </ul>
                 )}
             </section>
@@ -291,7 +158,7 @@ const DashBoard = () => {
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                          xmlns="http://www.w3.org/2000/svg"
+                                         xmlns="http://www.w3.org/2000/svg"
                                          viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
@@ -406,11 +273,10 @@ const DashBoard = () => {
                             </section>
                         </section>
                     </section>
-
                 </div>
             </div>
             <Footer/>
-            </div>
+
         </div>
     )
 

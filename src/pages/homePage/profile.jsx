@@ -1,14 +1,24 @@
-import {FaUser} from "react-icons/fa";
+
 import Navbar from "../../component/navbar/Navbar";
+import {useNavigate} from "react-router-dom";
+import {HiArrowLeft} from "react-icons/hi";
 import React from "react";
 
 const Profile =()=>{
+    const navigate = useNavigate();
     return (
+        <div className="min-h-screen bg-gray-100">
+            <div className='p-4'>
+                <button
+                    onClick={() => navigate('/profile')}
+                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
+                >
 
-        <>
-            <Navbar />
-
-            <div className='bg-[#eeffff]'>
+                    <HiArrowLeft className="mr-2"/> Back
+                </button>
+            </div>
+                <Navbar />
+            <div className='bg-[#eeffff] pt-16'>
                 <div className="bg-gray-100">
                     <div className="container mx-auto py-8">
                         <div className="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
@@ -23,9 +33,8 @@ const Profile =()=>{
                                         <div className="mt-6 flex flex-wrap gap-4 justify-center">
                                             <a href="#"
                                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                                            <a href="#"
-                                               className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
-                                                Profile</a>
+                                            <a href="/profile-form"
+                                               className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit Profile</a>
                                         </div>
                                     </div>
                                     <hr className="my-6 border-t border-gray-300"/>
@@ -171,7 +180,8 @@ const Profile =()=>{
                 </div>
 
             </div>
-        </>
+        </div>
     )
+          ;
 }
 export default Profile

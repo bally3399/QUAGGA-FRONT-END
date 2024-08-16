@@ -33,7 +33,7 @@ const DashBoard = () => {
 
     return (
         <div>
-            <section className='flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
+            <section className=' fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
                     <p className='text-lg font-bold text-white'>Quagga</p>
@@ -69,12 +69,12 @@ const DashBoard = () => {
                     </ul>
                 )}
             </section>
-            <div className='flex'>
+            <div className='flex pt-16'>
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} md:w-auto w-full`}>
                     <Sidebar/>
                 </div>
                 <div className='flex-1'>
-                    <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
+                    <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0 ">
                         <section
                             className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start ">
                             <section
@@ -118,9 +118,8 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Soft Plushy Cushion Chair</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
-                                <h2 className="font-semibold mb-5">$29.99</h2>
+                                <p className="mb-5">Transform your living space with our Soft Plushy Cushion Chair, where luxury meets comfort. Designed for those who appreciate the finer things in life, this chair features ultra-soft fabric that cradles your body in cloud-like comfort.!</p>
+                                <h2 className="font-semibold mb-5">₦200,000</h2>
                                 <button className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">Add
                                     To Cart
                                 </button>
@@ -167,9 +166,8 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Comfortable Wooden Chair</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
-                                <h2 className="font-semibold mb-5">$39.99</h2>
+                                <p className="mb-5">Enhance your space with the timeless charm of our Comfortable Wooden Chair. Combining sturdy craftsmanship with ergonomic design, this chair offers both style and support. Perfect for dining rooms, offices, or cozy reading nooks, it provides comfort without compromising on elegance.</p>
+                                <h2 className="font-semibold mb-5">₦100,000</h2>
                                 <button className="p-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600">Add
                                     To Cart
                                 </button>
@@ -216,9 +214,10 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Multipurpose Wooden Trolly</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
-                                <h2 className="font-semibold mb-5">$19.99</h2>
+                                <p className="mb-5">Maximize your storage and organization with our Multipurpose Wooden Trolley.
+                                    Designed for versatility, this stylish trolley features multiple shelves and smooth-rolling wheels,
+                                    making it ideal for kitchens, offices, or living spaces. Crafted from durable wood, it combines practicality with a touch of rustic charm.!</p>
+                                <h2 className="font-semibold mb-5">₦155,000</h2>
                                 <button className="p-2 px-6 bg-red-500 text-white rounded-md hover:bg-red-600">Add To
                                     Cart
                                 </button>
@@ -265,9 +264,9 @@ const DashBoard = () => {
                                     </svg>
                                 </div>
                                 <h1 className="text-3xl my-5">Multipurpose Wooden Tool</h1>
-                                <p className="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio,
-                                    incidunt!</p>
-                                <h2 className="font-semibold mb-5">$34.99</h2>
+                                <p className="mb-5">Experience the versatility of our Multipurpose Wooden Tool, expertly crafted for durability and ease of use. This essential tool is perfect for various tasks, from DIY projects to everyday household needs. Its ergonomic design ensures a comfortable grip,
+                                    while the natural wood finish adds a touch of elegance to your toolkit.!</p>
+                                <h2 className="font-semibold mb-5">₦155,000</h2>
                                 <button className="p-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600">Add To
                                     Cart
                                 </button>

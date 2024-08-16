@@ -9,6 +9,10 @@ const Sidebar = () => {
         navigate('/dashBoard');
     };
 
+    const handleProfileFormClick = () => {
+        navigate('/profile-form');
+    };
+
     const handleProfileClick = () => {
         navigate('/profile');
     };
@@ -19,7 +23,7 @@ const Sidebar = () => {
         navigate('/');
     };
     return (
-        <div className="bg-white w-64 min-h-screen p-4 shadow-md md:10" >
+        <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >
             {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
 
             <div className="flex flex-col items-center mb-8">
@@ -29,9 +33,9 @@ const Sidebar = () => {
                 <h1 className="text-xl font-bold">John Doe</h1>
                 <p className="text-gray-700">Software Developer</p>
                 <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                    <a href="#"
+                    <a onClick={handleProfileFormClick}
                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                    <a href="#"
+                    <a onClick={handleProfileFormClick}
                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit Profile</a>
                 </div>
             </div>

@@ -12,6 +12,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import {List, ListItem, ListItemText} from "@mui/material";
 
 
 
@@ -35,6 +36,35 @@ const SearchField = styled(TextField)({
 
 
 const DashBoard = () => {
+    const categories = [
+        { value: 'category1', label: 'STRUCTURAL' },
+        { value: 'category2', label: 'MECHANICAL' },
+        { value: 'category3', label: 'ELECTRICAL' },
+        { value: 'category4', label: 'FINISHING' },
+        { value: 'category5', label: 'EXTERIOR' },
+        { value: 'category6', label: 'SITE_WORK' },
+        { value: 'category7', label: 'SPECIALIZED' },
+        { value: 'category8', label: 'INTERIOR' },
+        { value: 'category9', label: 'ENVIRONMENTAL_SYSTEMS' },
+        { value: 'category10', label: 'RENOVATION' },
+        { value: 'category11', label: 'MARINE' },
+        { value: 'category12', label: 'HEAVY_CONSTRUCTION' },
+        { value: 'category13', label: 'SPECIALTY_CONTRACTORS' },
+        { value: 'category14', label: 'LOGISTICS_AND_SUPPORT' },
+        { value: 'category15', label: 'FABRICATION' },
+        { value: 'category16', label: 'AGRICULTURAL_CONSTRUCTION' },
+        { value: 'category17', label: 'ENTERTAINMENT' },
+        { value: 'category18', label: 'MAINTENANCE' },
+        { value: 'category19', label: 'RENEWABLE_ENERGY' },
+        { value: 'category20', label: 'SPECIALTY_FLOORING' },
+        { value: 'category21', label: 'SECURITY_AND_SAFETY' },
+        { value: 'category22', label: 'FINISHES_AND_DECORATIONS' },
+        { value: 'category23', label: 'LOW_VOLTAGE_SYSTEMS' },
+        { value: 'category24', label: 'LIGHTING' },
+        { value: 'category25', label: 'MISCELLANEOUS' },
+    ];
+
+
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -60,27 +90,86 @@ const DashBoard = () => {
                     <p className='text-lg font-bold text-white'>Quagga</p>
                 </div>
                 <div className='hidden md:flex space-x-6 text-lg'>
-                    <div>
-                        <SearchField
-                            variant="outlined"
-                            placeholder="Search"
-                            size="medium"
-                        />
-                    </div>
-                    <div onClick={() => handleDialogOpen('Specialist')}
-                         className='hover:text-gray-600 cursor-pointer text-white'>Specialist
-                    </div>
-                    <div onClick={() => handleDialogOpen('Professional')}
-                         className='hover:text-gray-600 cursor-pointer text-white'>Professional
-                    </div>
-                    <div onClick={() => handleDialogOpen('Client')}
-                         className='hover:text-gray-600 cursor-pointer text-white'>Client
-                    </div>
-                    <div onClick={() => handleDialogOpen('Supplier')}
-                         className='hover:text-gray-600 cursor-pointer text-white'>Supplier
-                    </div>
+                    <SearchField
+                        variant="outlined"
+                        placeholder="Search"
+                        size="medium"
+                    />
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleDialogOpen('Specialist')}
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        sx={{
+                            backgroundColor: "#093c5e"
 
+                        }}
+                    >
+                        Specialist
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        backgroundcolor="06324e"
+                        onClick={() => handleDialogOpen('Professional')}
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        sx={{
+                            backgroundColor: "#093c5e"
 
+                        }}
+                    >
+                        Professional
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleDialogOpen('Client')}
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        sx={{
+                            backgroundColor: "#093c5e"
+
+                        }}
+                    >
+                        Client
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleDialogOpen('Supplier')}
+                        className="bg-blue-500 text-white px-4 py-2 rounded"
+                        sx={{
+                            backgroundColor: "#093c5e"
+
+                        }}
+                    >
+                        Supplier
+                    </Button>
+
+                    <Dialog open={dialogOpen} onClose={handleDialogClose}>
+                        <DialogTitle>Select a Category</DialogTitle>
+                        <DialogContent>
+                            <List>
+                                {categories.map(category => (
+                                    <ListItem
+                                        button
+                                        key={category.value}
+                                        onClick={() => {
+                                            setSelectedCategory(category.label);
+                                            handleDialogClose();
+                                        }}
+                                        className="hover:bg-gray-100"
+                                    >
+                                        <ListItemText primary={category.label}/>
+                                    </ListItem>
+                                ))}
+                            </List>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={handleDialogClose} color="primary">
+                                Cancel
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </div>
                 <div className="flex items-center space-x-4">
                     <FaUser className="hidden md:block text-white"/>
@@ -304,15 +393,6 @@ const DashBoard = () => {
                             </section>
                         </section>
                     </section>
-                    <Dialog open={dialogOpen} onClose={handleDialogClose}>
-                        <DialogTitle>{selectedCategory}</DialogTitle>
-                        <DialogContent>
-                            <p>Details for {selectedCategory} category...</p>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleDialogClose} color="primary">Close</Button>
-                        </DialogActions>
-                    </Dialog>
 
                 </div>
             </div>

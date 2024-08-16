@@ -15,8 +15,6 @@ const HeroPage = () => {
     return (
         <div className="overflow-x-hidden">
             <Navbar />
-
-
             <div className="pt-16">
                 <HeroSlider />
                 <Carousel />

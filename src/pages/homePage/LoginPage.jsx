@@ -240,7 +240,7 @@ const LoginPage = () => {
                 setTimeout(() => {
                     navigate("/dashBoard");
                 }, 3000);
-            } else if (response.data.message === "Email or password does not exist") {
+            } else if (response.data.message === "Invalid username or password") {
                 toast.error('Email does not exists. Please try and sign up.', {
                     position: 'top-right',
                     autoClose: 3000,

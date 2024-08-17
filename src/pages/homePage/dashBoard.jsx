@@ -6,7 +6,7 @@ import { HiMenu } from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
-import {IoIosNotifications} from "react-icons/io";
+import { IoIosNotifications } from "react-icons/io";
 
 
 const SearchField = styled(TextField)({
@@ -35,7 +35,7 @@ const DashBoard = () => {
         <div>
             <section className=' fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
-                    <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2'/>
+                    <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                     <p className='text-lg font-bold text-white'>Quagga</p>
                 </div>
                 <div className='hidden md:flex space-x-6 text-lg'>
@@ -52,12 +52,12 @@ const DashBoard = () => {
 
                 </div>
                 <div className="flex items-center space-x-4">
-                    <FaUser className="hidden md:block text-white"/>
-                    <IoIosNotifications className="hidden md:block text-white"/>
+                    <FaUser className="hidden md:block text-white" />
+                    <IoIosNotifications className="hidden md:block text-white" />
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                            onClick={() => setMenuOpen(!menuOpen)}/>
+                        onClick={() => setMenuOpen(!menuOpen)} />
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"
-                            onClick={() => setSidebarOpen(!sidebarOpen)}/>
+                        onClick={() => setSidebarOpen(!sidebarOpen)} />
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
@@ -70,7 +70,7 @@ const DashBoard = () => {
             </section>
             <div className='flex pt-16'>
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} md:w-auto w-full`}>
-                    <Sidebar/>
+                    <Sidebar />
                 </div>
                 <div className='flex-1'>
                     <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0 ">
@@ -78,39 +78,39 @@ const DashBoard = () => {
                             className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start ">
                             <section
                                 className="p-5 py-10 bg-purple-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1" alt=""/>
+                                <img src="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1" alt="" />
                                 <div className="space-x-1 flex justify-center mt-10">
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
@@ -126,39 +126,39 @@ const DashBoard = () => {
 
                             <section
                                 className="p-5 py-10 bg-green-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/8ymeus1n9k9bhpd/y16625.png?dl=1" alt=""/>
+                                <img src="https://www.dropbox.com/s/8ymeus1n9k9bhpd/y16625.png?dl=1" alt="" />
                                 <div className="space-x-1 flex justify-center mt-10">
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
@@ -174,39 +174,39 @@ const DashBoard = () => {
 
                             <section
                                 className="p-5 py-10 bg-red-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1" alt=""/>
+                                <img src="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1" alt="" />
                                 <div className="space-x-1 flex justify-center mt-10">
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
@@ -224,39 +224,39 @@ const DashBoard = () => {
 
                             <section
                                 className="p-5 py-10 bg-blue-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1" alt=""/>
+                                <img src="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1" alt="" />
                                 <div className="space-x-1 flex justify-center mt-10">
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
                                     </svg>
                                     <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                         xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 14 14">
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 14 14">
                                         <path
                                             d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
                                         </path>
@@ -274,7 +274,7 @@ const DashBoard = () => {
                     </section>
                 </div>
             </div>
-            <Footer/>
+            <Footer />
 
         </div>
     )

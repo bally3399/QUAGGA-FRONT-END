@@ -87,7 +87,7 @@ const RolePage = () => {
                 />
             </div>
             <button
-                className={`px-6 py-3 rounded-lg font-medium ${selectedRole ? 'bg-[#06324e] text-white hover:bg-[#06324e]' : 'bg-[#007e82] text-neutral-500 cursor-not-allowed'}`}
+                className={`px-6 py-3 rounded-lg font-medium ${selectedRole ? 'bg-[#06324e] text-white hover:bg-[#06324e]' : 'bg-[#007e82] text-yellow-400 cursor-not-allowed'}`}
                 onClick={handleCreateAccount}
                 disabled={!selectedRole}
             >

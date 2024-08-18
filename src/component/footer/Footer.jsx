@@ -8,7 +8,7 @@ const Footer = () => {
         navigate('/about')
     }
     return (
-        <footer className="bg-[#06324e] text-white py-8">
+        <footer className="z-30 bg-[#06324e] text-white py-8">
             <div className="container mx-auto px-4">
                 <div className="flex flex-wrap justify-between">
                     <div className="w-full md:w-1/3 mb-6">

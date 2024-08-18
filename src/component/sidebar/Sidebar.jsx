@@ -23,10 +23,9 @@ const Sidebar = () => {
         navigate('/');
     };
     return (
-        <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >
-            {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
+        <div className="fixed top-0 left-0 mt-14 z-10 pt-16 bg-white w-64 min-h-min p-4 shadow-md md:10" >
 
-            <div className="flex flex-col items-center mb-8">
+            <div className="flex flex-col items-center">
                 <div
                     className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
                 </div>
@@ -39,8 +38,6 @@ const Sidebar = () => {
                        className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit Profile</a>
                 </div>
             </div>
-
-
             <nav className="flex flex-col space-y-4">
                 <a onClick={handleDashBoardClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
@@ -49,9 +46,6 @@ const Sidebar = () => {
                 <a onClick={handleProfileClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUser/> <span>Profile</span>
-                </a>
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
-                    <FaUsers/> <span>Users</span>
                 </a>
                 <a onClick={handleReviewsClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">

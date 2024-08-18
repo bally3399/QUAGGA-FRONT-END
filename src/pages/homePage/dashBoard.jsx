@@ -48,7 +48,6 @@ const DashBoard = () => {
                     </div>
                     <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
                     <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Client</div>
                     <div className='hover:text-gray-600 cursor-pointer text-white'>Supplier</div>
 
                 </div>

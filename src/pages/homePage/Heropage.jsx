@@ -16,27 +16,22 @@ const HeroPage = () => {
         <div className="overflow-x-hidden">
             <Navbar />
             <div className="pt-16">
-                <HeroSlider />
-                <Carousel />
-                <KeywordsSection />
+                <HeroSlider/>
+                <Carousel/>
+                <KeywordsSection/>
 
-                <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-                    <div className="flex flex-col mb-6 lg:justify-between lg:flex-row md:mb-8">
-                        <h2 className="max-w-lg mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none md:mb-6 group">
-                            <span className="inline-block mb-1 sm:mb-4">
-                                Quality you can trust
-                                <br className="hidden md:block"/>
-                               ...at your fingertips
-                            </span>
-                            <div className="h-1 ml-auto duration-300 origin-left transform bg-deep-purple-accent-400 scale-x-30 group-hover:scale-x-100"/>
-                        </h2>
-                    </div>
+                <div className="h-40 bg-gray-800 text-white text-center py-10">
+                    <h1 className="text-4xl font-bold">RENOWNED SPECIALISTS FOR YOU!</h1>
+                </div>
+
+                <div
+                    className=" px-4 py-12 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                     <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
                         <a href="/" aria-label="View Item">
                             <div
                                 className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                 <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                     src={Img1} alt="calender Image"/>
+                                     src={Img1} alt="calender"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
                                         An Outdoor patio area with a modern pergola, featuring a sleek, metallic frame.
@@ -51,7 +46,8 @@ const HeroPage = () => {
                                      src={Img2} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        A lush indoor garden setup, featuring vertical greenery that decorates the walls and hangs from the ceiling.
+                                        A lush indoor garden setup, featuring vertical greenery that decorates the walls
+                                        and hangs from the ceiling.
                                     </p>
                                 </div>
                             </div>
@@ -63,7 +59,8 @@ const HeroPage = () => {
                                      src={Img3} alt="calender Image"/>
                                 <div className="absolute inset-x-0 bottom-0 px-6 py-4 bg-black bg-opacity-75">
                                     <p className="text-sm font-medium tracking-wide text-white">
-                                        The space is minimalistic, with neutral colors and a focus on open design, allowing light and nature to fill the area.
+                                        The space is minimalistic, with neutral colors and a focus on open design,
+                                        allowing light and nature to fill the area.
                                     </p>
                                 </div>
                             </div>

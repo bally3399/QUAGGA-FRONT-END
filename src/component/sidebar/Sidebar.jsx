@@ -27,8 +27,27 @@ const Sidebar = () => {
             {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
 
             <div className="flex flex-col items-center mb-8">
-                <div
-                    className="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
+                <div className="relative hidden overflow-hidden rounded-full lg:block">
+
+                    <div className="relative mt-6 hidden overflow-hidden rounded-full lg:block">
+                        <img
+                            className="relative h-40 w-40 rounded-full"
+                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
+                            alt=""
+                        />
+                        <label
+                            htmlFor="desktop-user-photo"
+                            className="absolute inset-0 flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black bg-opacity-75 text-sm font-medium text-white opacity-0 hover:opacity-100 focus-within:opacity-100"
+                        >
+                            <span>Change</span>
+                            <input
+                                type="file"
+                                id="desktop-user-photo"
+                                name="user-photo"
+                                className="absolute inset-0 h-full w-full cursor-pointer rounded-full border-gray-300 opacity-0"
+                            />
+                        </label>
+                    </div>
                 </div>
                 <h1 className="text-xl font-bold">John Doe</h1>
                 <p className="text-gray-700">Software Developer</p>

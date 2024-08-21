@@ -9,6 +9,8 @@ import Profile from "../pages/homePage/profile";
 import AboutPage from "../pages/homePage/AboutPage";
 import ContactUs from "../pages/homePage/ContactUs";
 import ProfileForm from "../pages/homePage/Profileform";
+import supplierDashBoard from "../pages/homePage/SupplierDashBoard";
+import SupplierDashBoard from "../pages/homePage/SupplierDashBoard";
 
 export const ROUTE =[
     {
@@ -58,6 +60,11 @@ export const ROUTE =[
     {
         path: "/contact",
         element: <ContactUs/>,
+    },
+
+    {
+        path: "/supplierDashBoard",
+        element: <SupplierDashBoard/>
     }
 
 ]

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {FaTachometerAlt, FaUsers, FaChartPie, FaSignOutAlt, FaUser} from 'react-icons/fa';
 import {useNavigate} from "react-router-dom";
+import Footer from "../footer/Footer";
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Sidebar = () => {
         navigate('/');
     };
     return (
-        <div className="fixed top-0 left-0 mt-14 z-10 pt-16 bg-white w-64 min-h-min p-4 shadow-md md:10" >
+        <div className="mt-14 pt-16 bg-white w-64 min-h-min p-4 shadow-md md:10">
 
             <div className="flex flex-col items-center">
                 <div

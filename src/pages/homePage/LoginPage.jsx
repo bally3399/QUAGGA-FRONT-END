@@ -105,7 +105,7 @@ const LoginPage = () => {
             setIsLoading(false);
         }
     };
-``
+
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
             borderRadius: '9999px',

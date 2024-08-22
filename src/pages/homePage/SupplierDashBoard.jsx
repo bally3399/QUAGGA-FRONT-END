@@ -8,7 +8,6 @@ import Sidebar from "../../component/sidebar/Sidebar";
 import { IoIosNotifications } from "react-icons/io";
 import ThemeToggle from "../../component/toggle/ThemeToggle";
 import Charts from "../../component/Charts/Charts";
-import DataTable from "../../component/Charts/DataTable";
 import OrderTable from "../../component/Charts/OrderTable";
 import InventoryManagement from "../../component/Charts/InventoryManagement";
 import {Analytics} from "@mui/icons-material";

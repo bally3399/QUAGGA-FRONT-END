@@ -1,13 +1,14 @@
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
 import { HiMenu } from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
+import ProductCard from "../../component/productCard/productCard";
 import { IoIosNotifications } from "react-icons/io";
-
+import axios from "axios";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -29,11 +30,80 @@ const SearchField = styled(TextField)({
 const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('');
+    const [data, setData] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [noDataStatus, setNoDataStatus] = useState({
+        Specialist: false,
+        Professional: false,
+        Supplier: false,
+    });
+    const noDataTimeoutRef = useRef(null);
 
+    const handleClick = async (option) => {
+        setSelectedOption(option);
+        setShowDropdown(false);
+
+        setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+
+        let endpoint = '';
+
+        switch (option) {
+            case 'Specialist':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/specialist/findAll';
+                break;
+            case 'Professional':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/professional/findAll';
+                break;
+            case 'Supplier':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/supplier/findAll';
+                break;
+            default:
+                return;
+        }
+
+        try {
+            const response = await axios.get(endpoint);
+            const data = response.data?.data || [];
+
+            setData(data);
+
+            if (data.length === 0) {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+                if (noDataTimeoutRef.current) {
+                    clearTimeout(noDataTimeoutRef.current);
+                }
+                noDataTimeoutRef.current = setTimeout(() => {
+                    setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+                }, 3000);
+            }
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setData([]);
+            setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
+            }
+            noDataTimeoutRef.current = setTimeout(() => {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+            }, 3000);
+        } finally {
+            setShowDropdown(true);
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
+            }
+        };
+    }, []);
 
     return (
         <div>
-            <section className=' fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
+            <section className='fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                     <p className='text-lg font-bold text-white'>Quagga</p>
@@ -43,241 +113,125 @@ const DashBoard = () => {
                         <SearchField
                             variant="outlined"
                             placeholder="Search"
-                            size="medium"
+                            size="small"
                         />
                     </div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Supplier</div>
-
+                    <div className="hidden md:flex space-x-6 text-lg">
+                        {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                            <div className='relative' key={option}>
+                                <div
+                                    className='hover:text-gray-600 cursor-pointer text-white'
+                                    onClick={() => handleClick(option)}
+                                >
+                                    {option}
+                                </div>
+                                {showDropdown && selectedOption === option && (
+                                    <div className='absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10'>
+                                        {data.length > 0 ? (
+                                            <ul>
+                                                {data.map((item, index) => (
+                                                    <li key={index} className='p-2 hover:bg-gray-100'>{item.name}</li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            noDataStatus[option] && (
+                                                <div className='p-2 text-center'>
+                                                    <p>No data available</p>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <FaUser className="hidden md:block text-white" />
-                    <IoIosNotifications className="hidden md:block text-white" />
+                    <FaUser className="hidden md:block text-white"/>
+                    <IoIosNotifications className="hidden md:block text-white"/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                        onClick={() => setMenuOpen(!menuOpen)} />
+                            onClick={() => setMenuOpen(!menuOpen)}/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"
-                        onClick={() => setSidebarOpen(!sidebarOpen)} />
+                            onClick={() => setSidebarOpen(!sidebarOpen)}/>
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
-                        <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Client</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Supplier</div>
+                        <div>
+                            {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                                <div
+                                    className='hover:text-gray-600 cursor-pointer text-white'
+                                    onClick={() => handleClick(option)}
+                                    key={option}
+                                >
+                                    {option}
+                                </div>
+                            ))}
+                            {showDropdown && (
+                                <div className='dropdown'>
+                                    {data.length > 0 ? (
+                                        <ul>
+                                            {data.map((item, index) => (
+                                                <li key={index}>{item.name}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        noDataStatus[selectedOption] && (
+                                            <div className='empty-state'>
+                                                <p>No data available</p>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </ul>
                 )}
             </section>
             <div className='flex pt-16'>
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} md:w-auto w-full`}>
-                    <Sidebar />
+                    <Sidebar/>
                 </div>
-                <div className='flex-1'>
-                    <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0 ">
-                        <section
-                            className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start ">
-                            <section
-                                className="p-5 py-10 bg-purple-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1" alt="" />
-                                <div className="space-x-1 flex justify-center mt-10">
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h1 className="text-3xl my-5">Soft Plushy Cushion Chair</h1>
-                                <p className="mb-5">Transform your living space with our Soft Plushy Cushion Chair, where luxury meets comfort. Designed for those who appreciate the finer things in life, this chair features ultra-soft fabric that cradles your body in cloud-like comfort.!</p>
-                                <h2 className="font-semibold mb-5">₦200,000</h2>
-                                <button className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">Add
-                                    To Cart
-                                </button>
-                            </section>
-
-                            <section
-                                className="p-5 py-10 bg-green-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/8ymeus1n9k9bhpd/y16625.png?dl=1" alt="" />
-                                <div className="space-x-1 flex justify-center mt-10">
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h1 className="text-3xl my-5">Comfortable Wooden Chair</h1>
-                                <p className="mb-5">Enhance your space with the timeless charm of our Comfortable Wooden Chair. Combining sturdy craftsmanship with ergonomic design, this chair offers both style and support. Perfect for dining rooms, offices, or cozy reading nooks, it provides comfort without compromising on elegance.</p>
-                                <h2 className="font-semibold mb-5">₦100,000</h2>
-                                <button className="p-2 px-6 bg-green-500 text-white rounded-md hover:bg-green-600">Add
-                                    To Cart
-                                </button>
-                            </section>
-
-                            <section
-                                className="p-5 py-10 bg-red-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1" alt="" />
-                                <div className="space-x-1 flex justify-center mt-10">
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h1 className="text-3xl my-5">Multipurpose Wooden Trolly</h1>
-                                <p className="mb-5">Maximize your storage and organization with our Multipurpose Wooden Trolley.
-                                    Designed for versatility, this stylish trolley features multiple shelves and smooth-rolling wheels,
-                                    making it ideal for kitchens, offices, or living spaces. Crafted from durable wood, it combines practicality with a touch of rustic charm.!</p>
-                                <h2 className="font-semibold mb-5">₦155,000</h2>
-                                <button className="p-2 px-6 bg-red-500 text-white rounded-md hover:bg-red-600">Add To
-                                    Cart
-                                </button>
-                            </section>
-
-                            <section
-                                className="p-5 py-10 bg-blue-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1" alt="" />
-                                <div className="space-x-1 flex justify-center mt-10">
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-orange-600"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                    <svg className="w-4 h-4 mx-px fill-current text-gray-300"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 14 14">
-                                        <path
-                                            d="M6.43 12l-2.36 1.64a1 1 0 0 1-1.53-1.11l.83-2.75a1 1 0 0 0-.35-1.09L.73 6.96a1 1 0 0 1 .59-1.8l2.87-.06a1 1 0 0 0 .92-.67l.95-2.71a1 1 0 0 1 1.88 0l.95 2.71c.13.4.5.66.92.67l2.87.06a1 1 0 0 1 .59 1.8l-2.3 1.73a1 1 0 0 0-.34 1.09l.83 2.75a1 1 0 0 1-1.53 1.1L7.57 12a1 1 0 0 0-1.14 0z">
-                                        </path>
-                                    </svg>
-                                </div>
-                                <h1 className="text-3xl my-5">Multipurpose Wooden Tool</h1>
-                                <p className="mb-5">Experience the versatility of our Multipurpose Wooden Tool, expertly crafted for durability and ease of use. This essential tool is perfect for various tasks, from DIY projects to everyday household needs. Its ergonomic design ensures a comfortable grip,
-                                    while the natural wood finish adds a touch of elegance to your toolkit.!</p>
-                                <h2 className="font-semibold mb-5">₦155,000</h2>
-                                <button className="p-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600">Add To
-                                    Cart
-                                </button>
-                            </section>
+                <div className='flex-1 p-4'>
+                    <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
+                        <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
+                            <ProductCard
+                                bgColor="bg-purple-50"
+                                imgSrc="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1"
+                                title="Soft Plushy Cushion Chair"
+                                description="Transform your living space with our Soft Plushy Cushion Chair, where luxury meets comfort. Designed for those who appreciate the finer things in life, this chair features ultra-soft fabric that cradles your body in cloud-like comfort."
+                                price="₦200,000"
+                                buttonColor="bg-purple-500 hover:bg-purple-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-green-50"
+                                imgSrc="https://www.dropbox.com/s/8ymeus1n9k9bhpd/y16625.png?dl=1"
+                                title="Comfortable Wooden Chair"
+                                description="Introducing our Comfortable Wooden Chair, a perfect blend of style and functionality. Crafted from high-quality wood, this chair offers a sturdy yet elegant seating solution. Its ergonomic design ensures maximum comfort during long hours of use."
+                                price="₦150,000"
+                                buttonColor="bg-green-500 hover:bg-green-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-orange-50"
+                                imgSrc="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1"
+                                title="Ergonomic Office Chair"
+                                description="Experience the ultimate in ergonomic comfort with our Ergonomic Office Chair. This chair is designed to support your posture and reduce strain, making it ideal for long hours of work. Its adjustable features ensure a customized fit."
+                                price="₦75,000"
+                                buttonColor="bg-orange-500 hover:bg-orange-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-blue-50"
+                                imgSrc="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1"
+                                title="Classic Wooden Rocking Chair"
+                                description="Embrace the timeless charm of our Classic Wooden Rocking Chair. Perfect for relaxing after a long day, this chair features a smooth rocking motion and a sturdy wooden frame. Its traditional design adds a touch of elegance to any room."
+                                price="₦100,000"
+                                buttonColor="bg-blue-500 hover:bg-blue-600"
+                            />
                         </section>
                     </section>
                 </div>
             </div>
-            <Footer />
-
+            <Footer/>
         </div>
-    )
-
-}
-export default DashBoard;
+    );
+};
+export default DashBoard

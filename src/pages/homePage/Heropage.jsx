@@ -3,7 +3,7 @@ import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";
 import HeroSlider from "../../component/heroslider/HeroSlider";
-import Carousel from "../../component/carousel/Carousel";
+import SmallProductCard from "../../component/carousel/smallProductCard";
 import Img1 from '../../asset/Downloader-La-383338.jpg';
 import Img2 from '../../asset/Downloader-La-720311.jpg';
 import Img3 from '../../asset/Downloader-La-816134.jpg';
@@ -18,7 +18,7 @@ const HeroPage = () => {
             <Navbar />
             <div className="pt-16">
                 <HeroSlider/>
-                <Carousel/>
+                <SmallProductCard/>
                 <KeywordsSection/>
 
                 <div className="h-40 bg-gray-800 text-white text-center py-10">

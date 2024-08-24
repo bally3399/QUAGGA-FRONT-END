@@ -1,11 +1,13 @@
 
 import Navbar from "../../component/navbar/Navbar";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {HiArrowLeft} from "react-icons/hi";
 import React from "react";
 
 const Profile =()=>{
     const navigate = useNavigate();
+    const location = useLocation();
+    const user = location.state?.user;
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
@@ -49,18 +51,18 @@ const Profile =()=>{
                                                 </label>
                                             </div>
                                         </div>
-                                    <h1 className="text-xl font-bold">John Doe</h1>
-                                    <p className="text-gray-700">Software Developer</p>
-                                    <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                                        <a href="#"
-                                           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                                        <a href="/profile-form"
-                                           className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
-                                            Profile</a>
+                                        <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
+                                        <p className="text-gray-700">{user?.role}</p>
+                                        <div className="mt-6 flex flex-wrap gap-4 justify-center">
+                                            <a href="#"
+                                               className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
+                                            <a href="/profile-form"
+                                               className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
+                                                Profile</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <hr className="my-6 border-t border-gray-300"/>
-                                <div className="flex flex-col">
+                                    <hr className="my-6 border-t border-gray-300"/>
+                                    <div className="flex flex-col">
                                         <span
                                             className="text-gray-700 uppercase font-bold tracking-wider mb-2">Catagory</span>
                                     <ul>

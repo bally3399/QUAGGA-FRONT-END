@@ -9,6 +9,7 @@ import Sidebar from "../../component/sidebar/Sidebar";
 import ProductCard from "../../component/productCard/productCard";
 import { IoIosNotifications } from "react-icons/io";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -39,6 +40,7 @@ const DashBoard = () => {
         Supplier: false,
     });
     const noDataTimeoutRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleClick = async (option) => {
         setSelectedOption(option);
@@ -64,8 +66,7 @@ const DashBoard = () => {
 
         try {
             const response = await axios.get(endpoint);
-            const data = response.data?.data || [];
-
+            const data = response.data.userResponse || [];
             setData(data);
 
             if (data.length === 0) {
@@ -130,7 +131,13 @@ const DashBoard = () => {
                                         {data.length > 0 ? (
                                             <ul>
                                                 {data.map((item, index) => (
-                                                    <li key={index} className='p-2 hover:bg-gray-100'>{item.name}</li>
+                                                    <li
+                                                        key={index}
+                                                        className='p-2 hover:bg-gray-100 cursor-pointer'
+                                                        onClick={() => navigate('/profile', { state: { user: item.user } })}
+                                                    >
+                                                        {item.user.firstName} {item.user.lastName}
+                                                    </li>
                                                 ))}
                                             </ul>
                                         ) : (

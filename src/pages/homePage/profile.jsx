@@ -1,11 +1,13 @@
 
 import Navbar from "../../component/navbar/Navbar";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {HiArrowLeft} from "react-icons/hi";
 import React from "react";
 
 const Profile =()=>{
     const navigate = useNavigate();
+    const location = useLocation();
+    const user = location.state?.user;
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
@@ -42,8 +44,9 @@ const Profile =()=>{
                                                 </label>
                                             </div>
                                         </div>
-                                    <h1 className="text-xl font-bold">John Doe</h1>
-                                    <p className="text-gray-700">Software Developer</p>
+                                        <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
+                                        <p className="text-gray-700">{user?.role}</p>
+
                                         <div className="mt-6 flex flex-wrap gap-4 justify-center">
                                             <a href="#"
                                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>

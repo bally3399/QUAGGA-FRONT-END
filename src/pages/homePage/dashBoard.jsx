@@ -2,7 +2,7 @@ import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import React, { useEffect, useRef, useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
-import { HiMenu } from "react-icons/hi";
+import {HiArrowLeft, HiMenu} from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
@@ -160,6 +160,7 @@ const DashBoard = () => {
                             onClick={() => setMenuOpen(!menuOpen)}/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"
                             onClick={() => setSidebarOpen(!sidebarOpen)}/>
+
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>

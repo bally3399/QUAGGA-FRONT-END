@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {FaTachometerAlt, FaChartPie, FaSignOutAlt, FaUser} from 'react-icons/fa';
 import {useNavigate} from "react-router-dom";
+import {HiArrowLeft} from "react-icons/hi";
 
 const Sidebar = () => {
     const navigate = useNavigate();
@@ -24,6 +25,9 @@ const Sidebar = () => {
     const handleLogoutClick = () => {
         navigate('/');
     };
+    const handleBackClick = () => {
+        navigate('/login')
+    }
     return (
         <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >
             {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
@@ -78,6 +82,9 @@ const Sidebar = () => {
                 </a>
                 <a onClick={handleLogoutClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaSignOutAlt/> <span>Logout</span>
+                </a>
+                    <a onClick={handleBackClick} className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
+                        <HiArrowLeft/> <span>Back</span>
                 </a>
             </nav>
         </div>

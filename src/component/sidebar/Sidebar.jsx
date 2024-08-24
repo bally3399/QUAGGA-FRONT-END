@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {FaTachometerAlt, FaUsers, FaChartPie, FaSignOutAlt, FaUser} from 'react-icons/fa';
+import {FaTachometerAlt, FaChartPie, FaSignOutAlt, FaUser} from 'react-icons/fa';
 import {useNavigate} from "react-router-dom";
 
 const Sidebar = () => {
@@ -19,6 +19,8 @@ const Sidebar = () => {
     const handleReviewsClick = () => {
         navigate('/profile');
     };
+
+
     const handleLogoutClick = () => {
         navigate('/');
     };
@@ -69,9 +71,7 @@ const Sidebar = () => {
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUser/> <span>Profile</span>
                 </a>
-                <a href="#" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
-                    <FaUsers/> <span>Users</span>
-                </a>
+
                 <a onClick={handleReviewsClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaChartPie/> <span>Reviews</span>

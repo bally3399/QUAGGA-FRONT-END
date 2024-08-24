@@ -9,6 +9,11 @@ const data = [
     { name: 'May', orders: 600 },
     { name: 'Jun', orders: 700 },
     { name: 'Jul', orders: 800 },
+    { name: 'Aug', orders: 300 },
+    { name: 'Sep', orders: 200 },
+    { name: 'Oct', orders: 400 },
+    { name: 'Nov', orders: 500 },
+    { name: 'Dec', orders: 600 },
 ];
 
 const Charts = () => {

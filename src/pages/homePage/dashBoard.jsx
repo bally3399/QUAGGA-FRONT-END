@@ -188,10 +188,10 @@ const DashBoard = () => {
                 )}
             </section>
             <div className='flex pt-16'>
-                <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} md:w-auto w-full`}>
+                <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e]`}>
                     <Sidebar/>
                 </div>
-                <div className='flex-1 p-4'>
+                <div className='flex-1 container mx-auto p-6 ml-[250px]'>
                     <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
                         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
                             <ProductCard

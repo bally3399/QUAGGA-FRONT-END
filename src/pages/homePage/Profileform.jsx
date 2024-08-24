@@ -11,7 +11,7 @@ const ProfileForm = () => {
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
                 <button
-                    onClick={() => navigate('/profile')}
+                    onClick={() => navigate('/dashBoard')}
                     className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
                 >
                     <HiArrowLeft className="mr-2" /> Back

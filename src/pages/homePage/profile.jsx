@@ -9,13 +9,6 @@ const Profile =()=>{
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
-                <button
-                    onClick={() => navigate('/profile')}
-                    className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
-                >
-
-                    <HiArrowLeft className="mr-2"/> Back
-                </button>
             </div>
                 <Navbar />
             <div className='bg-[#eeffff] pt-16'>
@@ -51,16 +44,23 @@ const Profile =()=>{
                                         </div>
                                     <h1 className="text-xl font-bold">John Doe</h1>
                                     <p className="text-gray-700">Software Developer</p>
-                                    <div className="mt-6 flex flex-wrap gap-4 justify-center">
-                                        <a href="#"
-                                           className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
-                                        <a href="/profile-form"
-                                           className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
-                                            Profile</a>
+                                        <div className="mt-6 flex flex-wrap gap-4 justify-center">
+                                            <a href="#"
+                                               className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
+                                            <a href="/profile-form"
+                                               className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
+                                                Profile</a>
+                                            <button
+                                                onClick={() => navigate('/dashBoard')}
+                                                className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
+                                            >
+                                                <HiArrowLeft className="mr-2"/> Back
+                                            </button>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <hr className="my-6 border-t border-gray-300"/>
-                                <div className="flex flex-col">
+                                    <hr className="my-6 border-t border-gray-300"/>
+                                    <div className="flex flex-col">
                                         <span
                                             className="text-gray-700 uppercase font-bold tracking-wider mb-2">Catagory</span>
                                     <ul>

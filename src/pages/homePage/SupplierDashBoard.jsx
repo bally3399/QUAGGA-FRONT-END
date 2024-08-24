@@ -10,7 +10,8 @@ import ThemeToggle from "../../component/toggle/ThemeToggle";
 import Charts from "../../component/Charts/Charts";
 import OrderTable from "../../component/Charts/OrderTable";
 import InventoryManagement from "../../component/Charts/InventoryManagement";
-import {Analytics} from "@mui/icons-material";
+import { Analytics } from "@mui/icons-material";
+import ProductCard from "../../component/productCard/productCard";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -64,31 +65,53 @@ const SupplierDashBoard = () => {
                 )}
             </section>
             <div className='flex pt-16'>
-                <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} md:w-auto w-full`}>
+
+                <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e]`}>
                     <Sidebar />
                 </div>
 
 
-
-                <div className='flex-1 container mx-auto p-6'>
+                <div className='flex-1 container mx-auto p-6 ml-[250px]'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <Charts/>
-                    <OrderTable/>
-                    <InventoryManagement />
-                    <Analytics />
-                    {/*<DataTable/>*/}
+                        <Charts />
+                        <OrderTable />
+                        <InventoryManagement />
+                        <Analytics />
                     </div>
                     <section className="container mx-auto p-10 md:py-12 md:px-0">
                         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
-                            <section className="p-5 py-10 bg-purple-50 text-center transform duration-500 hover:-translate-y-2 cursor-pointer">
-                                <img src="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1" alt="" />
-                                <div className="space-x-1 flex justify-center mt-10">
-                                </div>
-                                <h1 className="text-3xl my-5">Soft Plushy Cushion Chair</h1>
-                                <p className="mb-5">Transform your living space with our Soft Plushy Cushion Chair...</p>
-                                <h2 className="font-semibold mb-5">₦200,000</h2>
-                                <button className="p-2 px-6 bg-purple-500 text-white rounded-md hover:bg-purple-600">Add To Cart</button>
-                            </section>
+                            <ProductCard
+                                bgColor="bg-purple-50"
+                                imgSrc="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1"
+                                title="Soft Plushy Cushion Chair"
+                                description="Transform your living space with our Soft Plushy Cushion Chair, where luxury meets comfort. Designed for those who appreciate the finer things in life, this chair features ultra-soft fabric that cradles your body in cloud-like comfort."
+                                price="₦200,000"
+                                buttonColor="bg-purple-500 hover:bg-purple-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-green-50"
+                                imgSrc="https://www.dropbox.com/s/8ymeus1n9k9bhpd/y16625.png?dl=1"
+                                title="Comfortable Wooden Chair"
+                                description="Introducing our Comfortable Wooden Chair, a perfect blend of style and functionality. Crafted from high-quality wood, this chair offers a sturdy yet elegant seating solution. Its ergonomic design ensures maximum comfort during long hours of use."
+                                price="₦150,000"
+                                buttonColor="bg-green-500 hover:bg-green-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-orange-50"
+                                imgSrc="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1"
+                                title="Ergonomic Office Chair"
+                                description="Experience the ultimate in ergonomic comfort with our Ergonomic Office Chair. This chair is designed to support your posture and reduce strain, making it ideal for long hours of work. Its adjustable features ensure a customized fit."
+                                price="₦75,000"
+                                buttonColor="bg-orange-500 hover:bg-orange-600"
+                            />
+                            <ProductCard
+                                bgColor="bg-blue-50"
+                                imgSrc="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1"
+                                title="Classic Wooden Rocking Chair"
+                                description="Embrace the timeless charm of our Classic Wooden Rocking Chair. Perfect for relaxing after a long day, this chair features a smooth rocking motion and a sturdy wooden frame. Its traditional design adds a touch of elegance to any room."
+                                price="₦100,000"
+                                buttonColor="bg-blue-500 hover:bg-blue-600"
+                            />
 
                         </section>
                     </section>

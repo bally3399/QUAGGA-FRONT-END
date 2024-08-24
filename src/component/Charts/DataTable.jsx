@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTable, useSortBy, useFilters } from 'react-table';
+import {useTable, useSortBy, useFilters } from 'react-table';
 
 const DataTable = ({ columns, data }) => {
     const {

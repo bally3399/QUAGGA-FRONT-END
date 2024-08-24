@@ -11,13 +11,12 @@ const LoginPage = () => {
         password: '',
     });
 
-
     const navigate = useNavigate();
     const [errors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        const {name, value, type, checked} = e.target;
         setForm({
             ...form,
             [name]: type === 'checkbox' ? checked : value
@@ -39,7 +38,7 @@ const LoginPage = () => {
             const response = await axios.post('https://quagga.onrender.com/api/v1/quagga/client/login', form, config);
 
             if (response.data.successful) {
-                toast.success(`Welcome ${form.firstName}, you have logged in successfully!`, {
+                toast.success(`Welcome ${form.email}, you have logged in successfully!`, {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -50,19 +49,15 @@ const LoginPage = () => {
                 });
 
                 setForm({
-                    firstName: '',
-                    lastName: '',
                     email: '',
                     password: '',
-                    confirmPassword: '',
-                    agree: false,
                 });
 
                 setTimeout(() => {
                     navigate("/dashBoard");
                 }, 3000);
-            } else {
-                toast.error('Sign up failed. Please try again.', {
+            } else if (response.data.message === "Invalid username or password") {
+                toast.error('Email does not exists. Please try and sign up.', {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -73,13 +68,26 @@ const LoginPage = () => {
                     style: {
                         fontSize: '14px',
                     },
-                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>, // Custom icon with reduced size
+                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
                 });
-
+            } else {
+                toast.error('Login failed. Please try again.', {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    style: {
+                        fontSize: '14px',
+                    },
+                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
+                });
             }
-        }catch (error) {
-            console.error('Error during sign up:', error);
-            toast.error('Sign up failed. Please try again.', {
+        } catch (error) {
+            console.error('Error during login:', error);
+            toast.error('Login failed. Please try again.', {
                 position: 'top-right',
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -117,7 +125,7 @@ const LoginPage = () => {
             </div>
             <section className="flex w-[30rem] flex-col space-y-10">
                 <div
-                    className=" mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white  relative">
+                    className=" mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white relative">
 
                     <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
                         <h2 className="text-2xl font-semibold text-center mb-6">Log in</h2>
@@ -176,52 +184,6 @@ const LoginPage = () => {
 
             </section>
         </main>
-
-        // <main className="mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white">
-        //     <section className="flex w-[30rem] flex-col space-y-10">
-        //         <div className="text-center text-4xl font-medium">Log In</div>
-        //
-        //         <div
-        //             className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
-        //             <input
-        //                 type="text"
-        //                 placeholder="Email or Username"
-        //                 className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
-        //             />
-        //         </div>
-        //
-        //         <div
-        //             className="w-full transform border-b-2 bg-transparent text-lg duration-300 focus-within:border-indigo-500">
-        //             <input
-        //                 type="password"
-        //                 placeholder="Password"
-        //                 className="w-full border-none bg-transparent outline-none placeholder:italic focus:outline-none"
-        //             />
-        //         </div>
-        //
-        //         <button className="transform rounded-sm bg-indigo-600 py-2 font-bold duration-300 hover:bg-indigo-400">
-        //             LOG IN
-        //         </button>
-        //
-        //         <a
-        //             href="#"
-        //             className="transform text-center font-semibold text-gray-500 duration-300 hover:text-gray-300"
-        //         >
-        //             FORGOT PASSWORD?
-        //         </a>
-        //
-        //         <p className="text-center text-lg">
-        //             No account?{' '}
-        //             <a
-        //                 href="#"
-        //                 className="font-medium text-indigo-500 underline-offset-4 hover:underline"
-        //             >
-        //                 Create One
-        //             </a>
-        //         </p>
-        //     </section>
-        // </main>
-
     );
 };
 

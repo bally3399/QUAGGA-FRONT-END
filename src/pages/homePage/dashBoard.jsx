@@ -191,8 +191,8 @@ const DashBoard = () => {
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e]`}>
                     <Sidebar/>
                 </div>
-                <div className='flex-1 container mx-auto p-6 ml-[250px]'>
-                    <section className="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
+                <div className='flex-1 flex flex-col container mx-auto p-6 ml-[250px]'>
+                    <section className="flex-1 container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
                         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
                             <ProductCard
                                 bgColor="bg-purple-50"
@@ -214,24 +214,25 @@ const DashBoard = () => {
                                 bgColor="bg-orange-50"
                                 imgSrc="https://www.dropbox.com/s/ykdro56f2qltxys/hh2774663-87776.png?dl=1"
                                 title="Ergonomic Office Chair"
-                                description="Experience the ultimate in ergonomic comfort with our Ergonomic Office Chair. This chair is designed to support your posture and reduce strain, making it ideal for long hours of work. Its adjustable features ensure a customized fit."
-                                price="₦75,000"
+                                description="Optimize your workspace with our Ergonomic Office Chair, designed to provide superior support during long hours at the desk. With adjustable features and breathable fabric, this chair promotes a healthy posture and ensures you stay comfortable and productive."
+                                price="₦120,000"
                                 buttonColor="bg-orange-500 hover:bg-orange-600"
                             />
                             <ProductCard
-                                bgColor="bg-blue-50"
+                                bgColor="bg-red-50"
                                 imgSrc="https://www.dropbox.com/s/1fav310i2eqkdz8/tool2.png?dl=1"
-                                title="Classic Wooden Rocking Chair"
-                                description="Embrace the timeless charm of our Classic Wooden Rocking Chair. Perfect for relaxing after a long day, this chair features a smooth rocking motion and a sturdy wooden frame. Its traditional design adds a touch of elegance to any room."
-                                price="₦100,000"
-                                buttonColor="bg-blue-500 hover:bg-blue-600"
+                                title="Modern Dining Chair Set"
+                                description="Elevate your dining experience with our Modern Dining Chair Set, featuring sleek lines and a contemporary design. Each chair is crafted for comfort and durability, making it an ideal addition to any dining room. Perfect for family meals and gatherings."
+                                price="₦180,000"
+                                buttonColor="bg-red-500 hover:bg-red-600"
                             />
                         </section>
                     </section>
+                    <Footer/>
                 </div>
             </div>
-            <Footer/>
         </div>
     );
 };
-export default DashBoard
+
+export default DashBoard;

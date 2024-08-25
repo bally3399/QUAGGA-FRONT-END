@@ -7,9 +7,9 @@ import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import { IoIosNotifications } from "react-icons/io";
 import ThemeToggle from "../../component/toggle/ThemeToggle";
-import Charts from "../../component/Charts/Charts";
-import OrderTable from "../../component/Charts/OrderTable";
-import InventoryManagement from "../../component/Charts/InventoryManagement";
+import Charts from "../../component/ChartsAndTables/Charts";
+import OrderTable from "../../component/ChartsAndTables/OrderTable";
+import InventoryManagement from "../../component/ChartsAndTables/InventoryManagement";
 import { Analytics } from "@mui/icons-material";
 import ProductCard from "../../component/productCard/productCard";
 

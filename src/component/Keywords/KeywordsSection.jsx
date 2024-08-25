@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import SupplierCard from "../supplierCard/supplierCard";
 import ProductCard from "../productCard/productCard";
 
@@ -50,6 +52,7 @@ const KeywordsSection = () => {
             }));
         } catch (error) {
             console.error('Error fetching data:', error);
+            toast.error('An error occurred while fetching data. Please try again.');
             setError('An error occurred while fetching data. Please try again.');
         } finally {
             setLoading(false);
@@ -74,7 +77,6 @@ const KeywordsSection = () => {
         setSupplierPage(nextPage);
         fetchProductsAndSuppliers(currentKeyword, nextPage);
     };
-
 
     return (
         <section className="py-6">
@@ -104,7 +106,6 @@ const KeywordsSection = () => {
                 )}
 
                 {loading && <p>Loading...</p>}
-                {error && <p className="text-red-500">{error}</p>}
 
                 <div className="mt-8">
                     {data.products.length > 0 && (
@@ -146,6 +147,8 @@ const KeywordsSection = () => {
                     )}
                 </div>
             </div>
+
+            <ToastContainer />
         </section>
     );
 };

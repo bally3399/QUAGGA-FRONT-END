@@ -22,7 +22,7 @@ const Sidebar = () => {
 
 
     const handleLogoutClick = () => {
-        navigate('/');
+        navigate('/logout');
     };
     return (
         <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >

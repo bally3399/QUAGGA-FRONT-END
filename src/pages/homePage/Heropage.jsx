@@ -9,6 +9,7 @@ import Img2 from '../../asset/Downloader-La-720311.jpg';
 import Img3 from '../../asset/Downloader-La-816134.jpg';
 import Img4 from '../../asset/Downloader-La-731933.jpg';
 import KeywordsSection from '../../component/Keywords/KeywordsSection'
+import ClientCarousel from "../../component/carousel/clientCarousel";
 
 
 const HeroPage = () => {
@@ -90,7 +91,7 @@ const HeroPage = () => {
                         </a>
                     </div>
                 </div>
-
+                <ClientCarousel/>
                 <ServicesSection/>
                 <Footer/>
             </div>

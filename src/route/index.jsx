@@ -10,6 +10,9 @@ import AboutPage from "../pages/homePage/AboutPage";
 import ContactUs from "../pages/homePage/ContactUs";
 import ProfileForm from "../pages/homePage/Profileform";
 import SupplierDashBoard from "../pages/homePage/SupplierDashBoard";
+import SupplierCard from "../component/supplierCard/supplierCard";
+import LogoutPage from "../pages/homePage/LogoutPage";
+import HeroPage from "../pages/homePage/Heropage";
 
 
 export const ROUTE =[
@@ -65,5 +68,21 @@ export const ROUTE =[
     {
         path: "/supplierDashBoard",
         element: <SupplierDashBoard/>
+    },
+
+    {
+        path: "/supplierCard",
+        element: <SupplierCard/>
+
+    },
+
+    {
+        path: "/logout",
+        element: <LogoutPage/>
+    },
+
+    {
+        path: "/hero-page",
+        element: <HeroPage/>
     }
 ]

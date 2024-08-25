@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { css } from "@emotion/react";
+import { PulseLoader } from "react-spinners";
 
 const axiosInstance = axios.create({
-    baseURL: 'https://quagga.onrender.com/api/v1/quagga', 
+    baseURL: 'https://quagga.onrender.com/api/v1/quagga',
     timeout: 10000,
     headers: { 'Content-Type': 'application/json' },
 });
@@ -13,7 +17,7 @@ const SupplierCard = ({ supplierId }) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        let isMounted = true; 
+        let isMounted = true;
 
         const fetchSupplierData = async () => {
             try {
@@ -24,6 +28,7 @@ const SupplierCard = ({ supplierId }) => {
             } catch (err) {
                 if (isMounted) {
                     setError('Failed to fetch supplier data');
+                    toast.error('Failed to fetch supplier data. Please try again later.');
                 }
                 console.error('Error fetching supplier data:', err);
             } finally {
@@ -40,14 +45,23 @@ const SupplierCard = ({ supplierId }) => {
         };
     }, [supplierId]);
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>{error}</div>;
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-32">
+                <PulseLoader color="#4A90E2" loading={loading} />
+            </div>
+        );
+    }
+
+    if (error) return null;
+
     if (!supplier) return <div>No supplier data available</div>;
 
     return (
-        <li className="bg-white shadow-md rounded-lg overflow-hidden mb-4">
-            <div className="flex p-4">
 
+        <li className="bg-white shadow-md rounded-lg overflow-hidden mb-4">
+            <ToastContainer />
+            <div className="flex p-4">
                 <a href={supplier.getProfileUrl} target="_blank" rel="noopener noreferrer" className="flex-shrink-0">
                     <img
                         src={supplier.getImageUrl}
@@ -55,8 +69,6 @@ const SupplierCard = ({ supplierId }) => {
                         className="w-10 h-10 rounded-full border border-gray-300"
                     />
                 </a>
-
-
                 <div className="ml-4 flex-1">
                     <a href={supplier.profileUrl} target="_blank" rel="noopener noreferrer" className="text-lg font-semibold text-black hover:underline">
                         {supplier.name}
@@ -64,8 +76,6 @@ const SupplierCard = ({ supplierId }) => {
                     <div className="text-sm text-gray-600">{supplier.rating}</div>
                     <div className="text-xs text-gray-500">{supplier.reviews} Reviews</div>
                 </div>
-
-
                 <div className="flex items-center">
                     <label htmlFor={`status-${supplier.id}`} className="mr-2 text-sm font-medium">Status</label>
                     <select
@@ -82,8 +92,6 @@ const SupplierCard = ({ supplierId }) => {
                     </select>
                 </div>
             </div>
-
-
             <div className="relative overflow-hidden">
                 <div className="flex space-x-2">
                     {supplier.images.map((image, index) => (
@@ -95,8 +103,6 @@ const SupplierCard = ({ supplierId }) => {
                         />
                     ))}
                 </div>
-
-
                 <button className="absolute top-1/2 left-2 transform -translate-y-1/2 text-white bg-gray-800 rounded-full p-2">
                     &#8249;
                 </button>
@@ -104,8 +110,6 @@ const SupplierCard = ({ supplierId }) => {
                     &#8250;
                 </button>
             </div>
-
-
             <div className="p-4">
                 <div className="w-full mt-2 p-2 border border-gray-300 rounded-lg">
                     {supplier.description}

@@ -13,6 +13,7 @@ import SupplierDashBoard from "../pages/homePage/SupplierDashBoard";
 import SupplierCard from "../component/supplierCard/supplierCard";
 import LogoutPage from "../pages/homePage/LogoutPage";
 import HeroPage from "../pages/homePage/Heropage";
+import SpecialistDashboard from "../pages/homePage/specialistDashBoard";
 
 
 export const ROUTE =[
@@ -84,5 +85,10 @@ export const ROUTE =[
     {
         path: "/hero-page",
         element: <HeroPage/>
+    },
+
+    {
+        path: "/specialistDashboard",
+        element: <SpecialistDashboard />
     }
 ]

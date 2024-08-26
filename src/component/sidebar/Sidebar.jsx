@@ -5,6 +5,11 @@ import {HiArrowLeft} from "react-icons/hi";
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const user = {
+        firstName: '',
+        lastName: '',
+        role: localStorage.getItem("role"),
+    };
 
     const handleDashBoardClick = () => {
         navigate('/dashBoard');
@@ -55,8 +60,8 @@ const Sidebar = () => {
                         </label>
                     </div>
                 </div>
-                <h1 className="text-xl font-bold">John Doe</h1>
-                <p className="text-gray-700">Software Developer</p>
+                <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
+                <p className="text-gray-700">{user?.role}</p>
                 <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a onClick={handleProfileFormClick}
                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>

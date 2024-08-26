@@ -1,7 +1,19 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SupplierCard from "../supplierCard/supplierCard";
+import ProductCard from "../productCard/productCard";
 
 const KeywordsSection = () => {
     const [showAll, setShowAll] = useState(false);
+    const [data, setData] = useState({ products: [], suppliers: [] });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [productPage, setProductPage] = useState(1);
+    const [supplierPage, setSupplierPage] = useState(1);
+    const [currentKeyword, setCurrentKeyword] = useState("");
+
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
@@ -26,6 +38,46 @@ const KeywordsSection = () => {
 
     const displayedKeywords = showAll ? keywords : keywords.slice(0, 40);
 
+    const fetchProductsAndSuppliers = async (keyword, page = 1) => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const productsResponse = await axios.get(`https://your-api-endpoint/products?keyword=${keyword}&page=${page}`);
+            const suppliersResponse = await axios.get(`https://your-api-endpoint/suppliers?keyword=${keyword}&page=${page}`);
+
+            setData((prevData) => ({
+                products: page === 1 ? productsResponse.data : [...prevData.products, ...productsResponse.data],
+                suppliers: page === 1 ? suppliersResponse.data : [...prevData.suppliers, ...suppliersResponse.data],
+            }));
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            toast.error('An error occurred while fetching data. Please try again.');
+            setError('An error occurred while fetching data. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleKeywordClick = (keyword) => {
+        setCurrentKeyword(keyword);
+        setProductPage(1);
+        setSupplierPage(1);
+        fetchProductsAndSuppliers(keyword);
+    };
+
+    const handleShowMoreProducts = () => {
+        const nextPage = productPage + 1;
+        setProductPage(nextPage);
+        fetchProductsAndSuppliers(currentKeyword, nextPage);
+    };
+
+    const handleShowMoreSuppliers = () => {
+        const nextPage = supplierPage + 1;
+        setSupplierPage(nextPage);
+        fetchProductsAndSuppliers(currentKeyword, nextPage);
+    };
+
     return (
         <section className="py-6">
             <div className="max-w-7xl mx-auto">
@@ -35,6 +87,7 @@ const KeywordsSection = () => {
                         <li key={index}>
                             <button
                                 className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm"
+                                onClick={() => handleKeywordClick(keyword)}
                             >
                                 {keyword}
                             </button>
@@ -51,7 +104,51 @@ const KeywordsSection = () => {
                         </button>
                     </div>
                 )}
+
+                {loading && <p>Loading...</p>}
+
+                <div className="mt-8">
+                    {data.products.length > 0 && (
+                        <>
+                            <h3 className="text-lg font-semibold mb-4">Top Rated Products</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {data.products.map((product, index) => (
+                                    <ProductCard key={index} product={product}/>
+                                ))}
+                            </div>
+                            <div className="mt-4">
+                                <button
+                                    className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm"
+                                    onClick={handleShowMoreProducts}
+                                >
+                                    Show More Products
+                                </button>
+                            </div>
+                        </>
+                    )}
+
+                    {data.suppliers.length > 0 && (
+                        <>
+                            <h3 className="text-lg font-semibold mt-8 mb-4">Top Rated Suppliers</h3>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {data.suppliers.map((supplier, index) => (
+                                    <SupplierCard key={index} supplier={supplier}/>
+                                ))}
+                            </div>
+                            <div className="mt-4">
+                                <button
+                                    className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm"
+                                    onClick={handleShowMoreSuppliers}
+                                >
+                                    Show More Suppliers
+                                </button>
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
+
+            <ToastContainer />
         </section>
     );
 };

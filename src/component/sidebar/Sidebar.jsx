@@ -28,7 +28,7 @@ const Sidebar = () => {
 
 
     const handleLogoutClick = () => {
-        navigate('/');
+        navigate('/logout');
     };
     const handleBackClick = () => {
         navigate('/login')

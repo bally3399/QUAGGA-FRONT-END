@@ -9,6 +9,7 @@ const LoginPage = () => {
     const [form, setForm] = useState({
         email: '',
         password: '',
+        role: localStorage.getItem("role"),
     });
 
     const navigate = useNavigate();
@@ -25,7 +26,6 @@ const LoginPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         setIsLoading(true);
 
         const config = {
@@ -36,7 +36,7 @@ const LoginPage = () => {
 
         try {
             const response = await axios.post('https://quagga.onrender.com/api/v1/quagga/client/login', form, config);
-
+            console.log(response)
             if (response.data.successful) {
                 toast.success(`Welcome ${form.email}, you have logged in successfully!`, {
                     position: 'top-right',
@@ -48,16 +48,36 @@ const LoginPage = () => {
                     progress: undefined,
                 });
 
+                 // localStorage.setItem("role", response.data.userResponse.role);
+
                 setForm({
                     email: '',
                     password: '',
                 });
 
-                setTimeout(() => {
-                    navigate("/dashBoard");
+                setTimeout(() =>{
+                    console.log(response.data)
+                    const userRole = response.data.userResponse.role;
+                    console.log(userRole)
+
+                    if (userRole === 'CLIENT' || userRole === 'PROFESSIONAL') {
+                        navigate("/dashboard");
+                        console.log(userRole)
+                    } else if (userRole === 'SUPPLIER') {
+                        navigate("/supplierDashboard");
+                        console.log(userRole)
+                    } else if (userRole === 'SPECIALIST') {
+                        navigate("/specialistDashboard");
+                        console.log(userRole)
+                    } else {
+                        toast.error('Unrecognized role. Please contact support.', {
+                            position: 'top-right',
+                            autoClose: 3000,
+                        });
+                    }
                 }, 3000);
             } else if (response.data.message === "Invalid username or password") {
-                toast.error('Email does not exists. Please try and sign up.', {
+                toast.error('Email does not exist. Please try and sign up.', {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -68,7 +88,7 @@ const LoginPage = () => {
                     style: {
                         fontSize: '14px',
                     },
-                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
+                    icon: ({ theme, type }) => <HiExclamationCircle style={{ fontSize: '20px' }} />,
                 });
             } else {
                 toast.error('Login failed. Please try again.', {
@@ -82,7 +102,7 @@ const LoginPage = () => {
                     style: {
                         fontSize: '14px',
                     },
-                    icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
+                    icon: ({ theme, type }) => <HiExclamationCircle style={{ fontSize: '20px' }} />,
                 });
             }
         } catch (error) {
@@ -98,9 +118,8 @@ const LoginPage = () => {
                 style: {
                     fontSize: '14px',
                 },
-                icon: ({theme, type}) => <HiExclamationCircle style={{fontSize: '20px'}}/>,
+                icon: ({ theme, type }) => <HiExclamationCircle style={{ fontSize: '20px' }} />,
             });
-
         } finally {
             setIsLoading(false);
         }
@@ -175,8 +194,8 @@ const LoginPage = () => {
                                     }}
                                 >
                                     {isLoading ? 'Logging in...' : 'Login'}
-                                </Button>
 
+                                </Button>
                             </div>
                         </form>
                     </div>

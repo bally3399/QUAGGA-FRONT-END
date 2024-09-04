@@ -8,6 +8,16 @@ const Profile =()=>{
     const navigate = useNavigate();
     const location = useLocation();
     const user = location.state?.user;
+    const handleBackClick = () => {
+        if (user?.role.toUpperCase() === 'Specialist') {
+            navigate('/specialistDashboard');
+        } else if(user?.role.toUpperCase() === 'Supplier'){
+            navigate('/supplierDashBoard');
+        }
+        else{
+            navigate('/dashboard');
+        }
+    };
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
@@ -54,7 +64,7 @@ const Profile =()=>{
                                                className="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Edit
                                                 Profile</a>
                                             <button
-                                                onClick={() => navigate('/dashBoard')}
+                                                onClick={handleBackClick}
                                                 className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
                                             >
                                                 <HiArrowLeft className="mr-2"/> Back
@@ -68,10 +78,6 @@ const Profile =()=>{
                                             className="text-gray-700 uppercase font-bold tracking-wider mb-2">Catagory</span>
                                     <ul>
                                         <li className="mb-2">Electrical</li>
-                                        {/*<li className="mb-2">React</li>*/}
-                                        {/*<li className="mb-2">Node.js</li>*/}
-                                        {/*<li className="mb-2">HTML/CSS</li>*/}
-                                        {/*<li className="mb-2">Tailwind Css</li>*/}
                                     </ul>
                                     <span
                                         className="text-gray-700 uppercase font-bold tracking-wider mb-2">Sub-Category</span>

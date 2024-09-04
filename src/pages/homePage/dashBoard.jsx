@@ -28,6 +28,7 @@ const SearchField = styled(TextField)({
     },
 });
 
+
 const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -158,16 +159,16 @@ const DashBoard = () => {
                     <IoIosNotifications className="hidden md:block text-white"/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                             onClick={() => setMenuOpen(!menuOpen)}/>
-                    <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"
-                            onClick={() => setSidebarOpen(!sidebarOpen)}/>
+                    {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
+                    {/*        onClick={() => setSidebarOpen(!sidebarOpen)}/>*/}
 
                 </div>
                 {menuOpen && (
-                    <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
+                    <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>
                         <div>
                             {['Specialist', 'Professional', 'Supplier'].map((option) => (
                                 <div
-                                    className='hover:text-gray-600 cursor-pointer text-white'
+                                    className='hover:text-gray-600 cursor-pointer text-black'
                                     onClick={() => handleClick(option)}
                                     key={option}
                                 >
@@ -199,7 +200,7 @@ const DashBoard = () => {
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e]`}>
                     <Sidebar/>
                 </div>
-                <div className='flex-1 flex flex-col container mx-auto p-6 ml-[250px]'>
+                <div className="flex-1 flex flex-col container mx-auto p-6 md:ml-[250px]">
                     <section className="flex-1 container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
                         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
                             <ProductCard

@@ -36,7 +36,7 @@ const SupplierDashBoard = () => {
 
     return (
         <div>
-            <section className='fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
+            <section className='fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                     <p className='text-lg font-bold text-white'>Quagga</p>
@@ -52,12 +52,12 @@ const SupplierDashBoard = () => {
                     <IoIosNotifications className="hidden md:block text-white" />
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                             onClick={() => setMenuOpen(!menuOpen)} />
-                    <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"
-                            onClick={() => setSidebarOpen(!sidebarOpen)} />
+                    {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
+                    {/*        onClick={() => setSidebarOpen(!sidebarOpen)} />*/}
                     <ThemeToggle/>
-                </div>
+                 </div>
                 {menuOpen && (
-                    <ul className='md:hidden absolute top-16 left-0 w-full bg-white shadow-md text-lg'>
+                    <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>
                         <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
                         <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
                         <div className='hover:text-gray-600 cursor-pointer'>Client</div>

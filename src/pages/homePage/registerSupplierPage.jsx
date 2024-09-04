@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import {TextField, Checkbox, FormControlLabel, Button, InputAdornment, IconButton} from '@mui/material';
+import {
+    TextField,
+    Checkbox,
+    FormControlLabel,
+    Button,
+    InputAdornment,
+    IconButton,
+    FormControl,
+    InputLabel, Select, MenuItem, FormHelperText
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import {HiArrowLeft, HiExclamationCircle, HiEye, HiEyeOff} from 'react-icons/hi';
 import { toast, ToastContainer } from 'react-toastify';
@@ -234,6 +243,45 @@ const RegisterSupplierPage = () => {
                                 ),
                             }}
                         />
+                    </div>
+                    <div className="mb-4">
+                        <FormControl fullWidth variant="outlined" sx={roundedStyle} error={!!errors.category}>
+                            <InputLabel>Category</InputLabel>
+                            <Select
+                                name="category"
+                                value={form.category || ""}
+                                onChange={handleChange}
+                                label="Category"
+                            >
+                                <MenuItem value=""><em>None</em></MenuItem>
+                                <MenuItem value="STRUCTURAL">STRUCTURAL</MenuItem>
+                                <MenuItem value="MECHANICAL">MECHANICAL</MenuItem>
+                                <MenuItem value="ELECTRICAL">ELECTRICAL</MenuItem>
+                                <MenuItem value="FINISHING">FINISHING</MenuItem>
+                                <MenuItem value="EXTERIOR">EXTERIOR</MenuItem>
+                                <MenuItem value="SITE_WORK">SITE_WORK</MenuItem>
+                                <MenuItem value="SPECIALIZED">SPECIALIZED</MenuItem>
+                                <MenuItem value="INTERIOR">INTERIOR</MenuItem>
+                                <MenuItem value="ENVIRONMENTAL_SYSTEMS">ENVIRONMENTAL_SYSTEMS</MenuItem>
+                                <MenuItem value="RENOVATION">RENOVATION</MenuItem>
+                                <MenuItem value="MARINE">MARINE</MenuItem>
+                                <MenuItem value="HEAVY_CONSTRUCTION">HEAVY_CONSTRUCTION</MenuItem>
+                                <MenuItem value="SPECIALTY_CONTRACTORS">SPECIALTY_CONTRACTORS</MenuItem>
+                                <MenuItem value="LOGISTICS_AND_SUPPORT">LOGISTICS_AND_SUPPORT</MenuItem>
+                                <MenuItem value="FABRICATION">FABRICATION</MenuItem>
+                                <MenuItem value="AGRICULTURAL_CONSTRUCTION">AGRICULTURAL_CONSTRUCTION</MenuItem>
+                                <MenuItem value="ENTERTAINMENT">ENTERTAINMENT</MenuItem>
+                                <MenuItem value="MAINTENANCE">MAINTENANCE</MenuItem>
+                                <MenuItem value="RENEWABLE_ENERGY">RENEWABLE_ENERGY</MenuItem>
+                                <MenuItem value="SPECIALTY_FLOORING">SPECIALTY_FLOORING</MenuItem>
+                                <MenuItem value="SECURITY_AND_SAFETY">SECURITY_AND_SAFETY</MenuItem>
+                                <MenuItem value="FINISHES_AND_DECORATIONS">FINISHES_AND_DECORATIONS</MenuItem>
+                                <MenuItem value="LOW_VOLTAGE_SYSTEMS">LOW_VOLTAGE_SYSTEMS</MenuItem>
+                                <MenuItem value="LIGHTING">LIGHTING</MenuItem>
+                                <MenuItem value="MISCELLANEOUS">MISCELLANEOUS</MenuItem>
+                            </Select>
+                            {errors.category && <FormHelperText>{errors.category}</FormHelperText>}
+                        </FormControl>
                     </div>
                     <div className="mb-4">
                         <FormControlLabel

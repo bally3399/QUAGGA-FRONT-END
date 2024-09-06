@@ -67,7 +67,7 @@ export const ROUTE =[
     },
 
     {
-        path: "/supplierDashBoard",
+        path: "/supplierDashboard",
         element: <SupplierDashBoard/>
     },
 

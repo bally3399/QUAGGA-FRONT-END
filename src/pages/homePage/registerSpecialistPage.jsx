@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import {TextField, Checkbox, FormControlLabel, Button, InputAdornment, IconButton} from '@mui/material';
+import {
+    TextField,
+    Checkbox,
+    FormControlLabel,
+    Button,
+    InputAdornment,
+    IconButton,
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import {HiArrowLeft, HiExclamationCircle, HiEye, HiEyeOff} from 'react-icons/hi';
 import { toast, ToastContainer } from 'react-toastify';
@@ -14,6 +21,7 @@ const RegisterSpecialistPage = () => {
         password: '',
         confirmPassword: '',
         role: localStorage.getItem("role"),
+        category: '',
         agree: false,
     });
     const [showPassword, setShowPassword] = useState(false);
@@ -249,6 +257,7 @@ const RegisterSpecialistPage = () => {
                         />
                         {errors.agree && <p className="text-red-500 text-sm mt-1">{errors.agree}</p>}
                     </div>
+
                     <div className="mt-6">
                         <Button
                             type="submit"

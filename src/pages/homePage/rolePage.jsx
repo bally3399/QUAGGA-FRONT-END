@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiUser, HiBriefcase, HiArrowLeft } from 'react-icons/hi';
 
-const RoleCard = ({ role, icon, selectedRole, handleRoleSelect, label }) => {
+const RoleCard = ({ role,icon, selectedRole, handleRoleSelect, label }) => {
     return (
         <div
             className={`border rounded-lg p-6 cursor-pointer flex flex-col items-center justify-center ${selectedRole === role ? 'border-[#093c5e]' : 'border-[#093c5e]'}`}
@@ -22,11 +22,15 @@ const RoleCard = ({ role, icon, selectedRole, handleRoleSelect, label }) => {
 
 const RolePage = () => {
     const [selectedRole, setSelectedRole] = useState(null);
+    const [selectCategory, setCategory] = useState(null);
     const navigate = useNavigate();
 
     const handleRoleSelect = (role) => {
         setSelectedRole(role);
     };
+    // const handleCategorySelect = (category) =>{
+    //     setCategory(category);
+    // }
 
     const handleCreateAccount = () => {
         if (selectedRole) {

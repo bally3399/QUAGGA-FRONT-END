@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,8 +12,7 @@ const KeywordsSection = () => {
     const [error, setError] = useState(null);
     const [productPage, setProductPage] = useState(1);
     const [supplierPage, setSupplierPage] = useState(1);
-    const [currentKeyword, setCurrentKeyword] = useState("");
-
+    const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING"); // Default keyword
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
@@ -38,13 +37,17 @@ const KeywordsSection = () => {
 
     const displayedKeywords = showAll ? keywords : keywords.slice(0, 40);
 
+    useEffect(() => {
+        fetchProductsAndSuppliers(currentKeyword);
+    }, [currentKeyword]);
+
     const fetchProductsAndSuppliers = async (keyword, page = 1) => {
         setLoading(true);
         setError(null);
 
         try {
-            const productsResponse = await axios.get(`https://your-api-endpoint/products?keyword=${keyword}&page=${page}`);
-            const suppliersResponse = await axios.get(`https://your-api-endpoint/suppliers?keyword=${keyword}&page=${page}`);
+            const productsResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
+            const suppliersResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
 
             setData((prevData) => ({
                 products: page === 1 ? productsResponse.data : [...prevData.products, ...productsResponse.data],

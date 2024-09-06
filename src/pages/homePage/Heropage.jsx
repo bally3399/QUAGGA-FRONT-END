@@ -3,13 +3,14 @@ import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import ServicesSection from "./pages";
 import HeroSlider from "../../component/heroslider/HeroSlider";
-import SmallProductCard from "../../component/carousel/smallProductCard";
 import Img1 from '../../asset/Downloader-La-383338.jpg';
 import Img2 from '../../asset/Downloader-La-720311.jpg';
 import Img3 from '../../asset/Downloader-La-816134.jpg';
 import Img4 from '../../asset/Downloader-La-731933.jpg';
 import KeywordsSection from '../../component/Keywords/KeywordsSection'
 import ClientCarousel from "../../component/carousel/clientCarousel";
+import Features from "../../component/heroslider/Features";
+import SalesBanner from "../../component/heroslider/SalesBanner";
 
 
 const HeroPage = () => {
@@ -19,11 +20,13 @@ const HeroPage = () => {
             <Navbar />
             <div className="pt-16">
                 <HeroSlider/>
-                <SmallProductCard/>
+                <Features/>
+                <SalesBanner/>
                 <KeywordsSection/>
 
+
                 <div className="h-40 bg-gray-800 text-white text-center py-10">
-                    <h1 className="text-4xl font-bold">RENOWNED SPECIALISTS FOR YOU!</h1>
+                    <h1 className="text-4xl font-bold">Elite Specialists at Your Fingertips</h1>
                 </div>
 
                 <div

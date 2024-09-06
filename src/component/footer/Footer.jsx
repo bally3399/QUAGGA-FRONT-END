@@ -20,7 +20,7 @@ const Footer = () => {
                             About us
                         </div>
                         <p className="text-gray-400">
-                            Quagga developers building great software.
+                            Quagga software developer.
                         </p>
                     </div>
 
@@ -48,7 +48,7 @@ const Footer = () => {
 
 
                 <div className="text-center text-gray-400 mt-8">
-                    &copy; 2024 Your Company. All rights reserved.
+                    Copyright &copy; 2024 All rights reserved.
                 </div>
             </div>
         </footer>

@@ -12,8 +12,7 @@ root.render(
     <React.StrictMode>
         <BrowserRouter>
             <DevSupport ComponentPreviews={ComponentPreviews}
-                        useInitialHook={useInitial}
-            >
+                        useInitialHook={useInitial}>
                 <App/>
             </DevSupport>
         </BrowserRouter>

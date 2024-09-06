@@ -5,6 +5,11 @@ import {HiArrowLeft} from "react-icons/hi";
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const user = {
+        firstName: localStorage.getItem("firstName"),
+        lastName: localStorage.getItem("lastName"),
+        role: localStorage.getItem("role"),
+    };
 
     const handleDashBoardClick = () => {
         navigate('/dashBoard');
@@ -29,13 +34,12 @@ const Sidebar = () => {
         navigate('/login')
     }
     return (
-        <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >
-            {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
+        <div className="pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10">
 
             <div className="flex flex-col items-center mb-8">
                 <div className="relative hidden overflow-hidden rounded-full lg:block">
 
-                    <div className="relative mt-6 hidden overflow-hidden rounded-full lg:block">
+                    <div className="relative hidden overflow-hidden rounded-full lg:block">
                         <img
                             className="relative h-40 w-40 rounded-full"
                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
@@ -55,8 +59,8 @@ const Sidebar = () => {
                         </label>
                     </div>
                 </div>
-                <h1 className="text-xl font-bold">John Doe</h1>
-                <p className="text-gray-700">Software Developer</p>
+                <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
+                <p className="text-gray-700">{user?.role}</p>
                 <div className="mt-6 flex flex-wrap gap-4 justify-center">
                     <a onClick={handleProfileFormClick}
                        className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Contact</a>
@@ -66,11 +70,11 @@ const Sidebar = () => {
             </div>
 
 
-            <nav className="flex flex-col space-y-4">
-                <a onClick={handleDashBoardClick}
-                   className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
-                    <FaTachometerAlt/> <span>Dashboard</span>
-                </a>
+            <nav className="flex flex-col">
+                {/*<a onClick={handleDashBoardClick}*/}
+                {/*   className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">*/}
+                {/*    <FaTachometerAlt/> <span>Dashboard</span>*/}
+                {/*</a>*/}
                 <a onClick={handleProfileClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUser/> <span>Profile</span>

@@ -6,15 +6,9 @@ import { HiMenu } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import { IoIosNotifications } from "react-icons/io";
-// import ThemeToggle from "../../component/toggle/ThemeToggle";
-// import ProjectChart from "../../component/ChartsAndTables/ProjectChart";
-// import ResourceUsage from "../../component/ChartsAndTables/ResourceUsage";
-// import SupplierPerformance from "../../component/ChartsAndTables/SupplierPerformance";
-// import MaterialInventory from "../../component/ChartsAndTables/MaterialInventory";
 import ProductCard from "../../component/productCard/productCard";
 import axios from 'axios';
 import DashboardOverview from "../../component/specialistDashboardComponents/DashboardOverview";
-
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -36,24 +30,38 @@ const SearchField = styled(TextField)({
 const SpecialistDashboard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [realTimeData, setRealTimeData] = useState(null);
+    const [supplierData, setSupplierData] = useState(null);
+    const [supplierId, setSupplierId] = useState(null);
+    const [supplierName, setSupplierName] = useState("");
 
     useEffect(() => {
-        const fetchData = async () => {
+        const createSupplier = async () => {
             try {
-                const response = await axios.get('http://your-java-server-endpoint/api/data');
-                setRealTimeData(response.data);
+                const response = await axios.post('http://your-java-server-endpoint/api/supplier');
+                setSupplierId(response.data.id); // Assuming the response returns the supplier ID
+                setSupplierName(response.data.name); // Assuming the response returns the supplier name
             } catch (error) {
-                console.error('Error fetching real-time data', error);
+                console.error('Error creating supplier', error);
             }
         };
 
-        fetchData();
-
-        const intervalId = setInterval(fetchData, 10000); // Polling every 10 seconds
-
-        return () => clearInterval(intervalId);
+        createSupplier();
     }, []);
+
+    useEffect(() => {
+        if (supplierId) {
+            const fetchSupplierData = async () => {
+                try {
+                    const response = await axios.get(`http://your-java-server-endpoint/api/supplier/${supplierId}/jobs`);
+                    setSupplierData(response.data);
+                } catch (error) {
+                    console.error('Error fetching supplier data', error);
+                }
+            };
+
+            fetchSupplierData();
+        }
+    }, [supplierId]);
 
     return (
         <div className="dark:bg-primary dark:text-white min-h-screen">
@@ -89,11 +97,10 @@ const SpecialistDashboard = () => {
                 </div>
                 <div className='flex-1 container mx-auto p-6 ml-[250px]'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <DashboardOverview />
-                        {/*<ProjectChart data={realTimeData} />*/}
-                        {/*<ResourceUsage data={realTimeData} />*/}
-                        {/*<SupplierPerformance data={realTimeData} />*/}
-                        {/*<MaterialInventory data={realTimeData} />*/}
+                        <DashboardOverview
+                            supplierName={supplierName}
+                            supplierData={supplierData}
+                        />
                     </div>
                     <section className="container mx-auto p-10 md:py-12 md:px-0">
                         <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">

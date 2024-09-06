@@ -60,7 +60,7 @@ const SpecialistDashboard = () => {
             };
 
             fetchSupplierData();
-git        }
+     }
     }, [supplierId]);
 
     return (

@@ -36,9 +36,11 @@ const LoginPage = () => {
 
         try {
             const response = await axios.post('https://quagga.onrender.com/api/v1/quagga/client/login', form, config);
-            console.log(response)
+            console.log(response);
             if (response.data.successful) {
-                toast.success(`Welcome ${form.email}, you have logged in successfully!`, {
+                const userResponse = response.data.userResponse;
+
+                toast.success(`Welcome ${userResponse.firstName}, you have logged in successfully!`, {
                     position: 'top-right',
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -48,27 +50,24 @@ const LoginPage = () => {
                     progress: undefined,
                 });
 
-                 // localStorage.setItem("role", response.data.userResponse.role);
-
                 setForm({
                     email: '',
                     password: '',
                 });
 
-                setTimeout(() =>{
-                    console.log(response.data)
-                    const userRole = response.data.userResponse.role;
-                    console.log(userRole)
+                localStorage.setItem("role", userResponse.role);
+                localStorage.setItem("firstName", userResponse.firstName);
+                localStorage.setItem("lastName", userResponse.lastName);
+
+                setTimeout(() => {
+                    const userRole = userResponse.role;
 
                     if (userRole === 'CLIENT' || userRole === 'PROFESSIONAL') {
-                        navigate("/dashboard");
-                        console.log(userRole)
+                        navigate("/dashboard", { state: { user: userResponse } });
                     } else if (userRole === 'SUPPLIER') {
-                        navigate("/supplierDashboard");
-                        console.log(userRole)
+                        navigate("/supplierDashboard", { state: { user: userResponse } });
                     } else if (userRole === 'SPECIALIST') {
-                        navigate("/specialistDashboard");
-                        console.log(userRole)
+                        navigate("/specialistDashboard", { state: { user: userResponse } });
                     } else {
                         toast.error('Unrecognized role. Please contact support.', {
                             position: 'top-right',
@@ -124,6 +123,7 @@ const LoginPage = () => {
             setIsLoading(false);
         }
     };
+
 
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {

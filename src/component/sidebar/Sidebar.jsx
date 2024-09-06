@@ -6,8 +6,8 @@ import {HiArrowLeft} from "react-icons/hi";
 const Sidebar = () => {
     const navigate = useNavigate();
     const user = {
-        firstName: '',
-        lastName: '',
+        firstName: localStorage.getItem("firstName"),
+        lastName: localStorage.getItem("lastName"),
         role: localStorage.getItem("role"),
     };
 
@@ -34,13 +34,12 @@ const Sidebar = () => {
         navigate('/login')
     }
     return (
-        <div className=" pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10" >
-            {/*<h2 className="text-xl font-bold mb-8">Quagga</h2>*/}
+        <div className="pt-16 bg-white w-64 min-h-screen p-4 shadow-md md:10">
 
             <div className="flex flex-col items-center mb-8">
                 <div className="relative hidden overflow-hidden rounded-full lg:block">
 
-                    <div className="relative mt-6 hidden overflow-hidden rounded-full lg:block">
+                    <div className="relative hidden overflow-hidden rounded-full lg:block">
                         <img
                             className="relative h-40 w-40 rounded-full"
                             src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=320&h=320&q=80"
@@ -71,11 +70,11 @@ const Sidebar = () => {
             </div>
 
 
-            <nav className="flex flex-col space-y-4">
-                <a onClick={handleDashBoardClick}
-                   className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
-                    <FaTachometerAlt/> <span>Dashboard</span>
-                </a>
+            <nav className="flex flex-col">
+                {/*<a onClick={handleDashBoardClick}*/}
+                {/*   className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">*/}
+                {/*    <FaTachometerAlt/> <span>Dashboard</span>*/}
+                {/*</a>*/}
                 <a onClick={handleProfileClick}
                    className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg">
                     <FaUser/> <span>Profile</span>

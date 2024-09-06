@@ -2,12 +2,13 @@
 import Navbar from "../../component/navbar/Navbar";
 import {useLocation, useNavigate} from "react-router-dom";
 import {HiArrowLeft} from "react-icons/hi";
-import React from "react";
+import React, {useState} from "react";
 
 const Profile =()=>{
     const navigate = useNavigate();
     const location = useLocation();
     const user = location.state?.user;
+    console.log(user);
     const handleBackClick = () => {
         if (user?.role.toUpperCase() === 'Specialist') {
             navigate('/specialistDashboard');
@@ -54,7 +55,8 @@ const Profile =()=>{
                                                 </label>
                                             </div>
                                         </div>
-                                        <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
+
+                                        <h1 className="text-xl font-bold">{user?.firstName || "First Name"} {user?.lastName || "Last Name"}</h1>
                                         <p className="text-gray-700">{user?.role}</p>
 
                                         <div className="mt-6 flex flex-wrap gap-4 justify-center">

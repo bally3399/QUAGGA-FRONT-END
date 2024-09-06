@@ -105,7 +105,7 @@ const DashBoard = () => {
 
     return (
         <div>
-            <section className='fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
+            <section className='fixed top-0 left-0 right-0 z-40 mb-16 flex justify-between items-center p-4 shadow-md bg-[#093c5e]'>
                 <div className='flex items-center mb-4'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                     <p className='text-lg font-bold text-white'>Quagga</p>

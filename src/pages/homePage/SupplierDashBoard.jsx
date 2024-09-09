@@ -10,10 +10,11 @@ import ThemeToggle from "../../component/toggle/ThemeToggle";
 import Charts from "../../component/ChartsAndTables/Charts";
 import OrderTable from "../../component/ChartsAndTables/OrderTable";
 import InventoryManagement from "../../component/ChartsAndTables/InventoryManagement";
-import { Analytics } from "@mui/icons-material";
 import ProductCard from "../../component/productCard/productCard";
-import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import Card from "../../component/productCard/Card";
+import Analytics from "../../component/ChartsAndTables/Analytics";
+import {useNavigate} from "react-router-dom";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -205,15 +206,31 @@ const SupplierDashBoard = () => {
                 </div>
 
 
-                <div className='flex-1 container mx-auto p-6 ml-[250px]'>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Charts />
-                        <OrderTable />
-                        <InventoryManagement />
-                        <Analytics />
-                    </div>
-                    <section className="container mx-auto p-10 md:py-12 md:px-0">
-                        <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
+                <div className='flex-1 container mx-auto p-6 ml-[250px] '>
+                    <div className="grid mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-green-400">
+                        <div className="flex items-center h-10 intro-y">
+                        <h2 className="mr-5 text-lg font-medium truncate">Dashboard</h2>
+                        </div>
+                        <div className="grid grid-cols-12 gap-6 mt-5">
+                        {/** Card Section */}
+                        <Card iconColor="text-blue-400" bgColor="bg-green-500" percentage="30%" count="4,510"
+                              label="Item Sales"/>
+                        <Card iconColor="text-yellow-400" bgColor="bg-red-500" percentage="30%" count="4,510"
+                              label="Item Sales"/>
+                        <Card iconColor="text-pink-600" bgColor="bg-yellow-500" percentage="30%" count="4,510"
+                              label="Item Sales"/>
+                        <Card iconColor="text-green-400" bgColor="bg-blue-500" percentage="30%" count="4,510"
+                              label="Item Sales"/>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Charts/>
+                        <OrderTable/>
+                        </div>
+                        <InventoryManagement/>
+                        <Analytics/>
+                        <section className="container mx-auto p-10 md:py-12 md:px-0">
+                        <section
+                            className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
                             <ProductCard
                                 bgColor="bg-purple-50"
                                 imgSrc="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1"
@@ -248,7 +265,8 @@ const SupplierDashBoard = () => {
                             />
 
                         </section>
-                    </section>
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>

@@ -122,7 +122,7 @@ const DashBoard = () => {
                         {['Specialist', 'Professional', 'Supplier'].map((option) => (
                             <div className='relative' key={option}>
                                 <div
-                                    className='hover:text-gray-600 cursor-pointer text-white'
+                                    className='hover:text-blue-300 cursor-pointer text-white'
                                     onClick={() => handleClick(option)}
                                 >
                                     {option}
@@ -159,9 +159,6 @@ const DashBoard = () => {
                     <IoIosNotifications className="hidden md:block text-white"/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                             onClick={() => setMenuOpen(!menuOpen)}/>
-                    {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
-                    {/*        onClick={() => setSidebarOpen(!sidebarOpen)}/>*/}
-
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>

@@ -104,34 +104,6 @@ const SpecialistDashboard = () => {
         };
     }, []);
 
-    // useEffect(() => {
-    //     const createSupplier = async () => {
-    //         try {
-    //             const response = await axios.post('http://your-java-server-endpoint/api/supplier');
-    //             setSupplierId(response.data.id); // Assuming the response returns the supplier ID
-    //             setSupplierName(response.data.name); // Assuming the response returns the supplier name
-    //         } catch (error) {
-    //             console.error('Error creating supplier', error);
-    //         }
-    //     };
-    //
-    //     createSupplier();
-    // }, []);
-    //
-    // useEffect(() => {
-    //     if (supplierId) {
-    //         const fetchSupplierData = async () => {
-    //             try {
-    //                 const response = await axios.get(`http://your-java-server-endpoint/api/supplier/${supplierId}/jobs`);
-    //                 setSupplierData(response.data);
-    //             } catch (error) {
-    //                 console.error('Error fetching supplier data', error);
-    //             }
-    //         };
-    //
-    //         fetchSupplierData();
-    //     }
-    // }, [supplierId]);
 
     return (
         <div className="dark:bg-primary dark:text-white min-h-screen">
@@ -183,8 +155,7 @@ const SpecialistDashboard = () => {
                     <IoIosNotifications className="hidden md:block text-white"/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
                             onClick={() => setMenuOpen(!menuOpen)}/>
-                    {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
-                    {/*        onClick={() => setSidebarOpen(!sidebarOpen)} />*/}
+
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>
@@ -207,7 +178,7 @@ const SpecialistDashboard = () => {
                                                             className='p-2 hover:bg-gray-100 cursor-pointer'
                                                             onClick={() => navigate('/profile', {state: {user: item.user}})}
                                                         >
-                                                        {item.user.firstName} {item.user.lastName}
+                                                            {item.user.firstName} {item.user.lastName}
                                                         </li>
                                                     ))}
                                                 </ul>

@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
 import { HiMenu } from "react-icons/hi";
 import { FaUser } from "react-icons/fa";
@@ -12,6 +12,8 @@ import OrderTable from "../../component/ChartsAndTables/OrderTable";
 import InventoryManagement from "../../component/ChartsAndTables/InventoryManagement";
 import { Analytics } from "@mui/icons-material";
 import ProductCard from "../../component/productCard/productCard";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -33,6 +35,77 @@ const SearchField = styled(TextField)({
 const SupplierDashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('');
+    const [data, setData] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [noDataStatus, setNoDataStatus] = useState({
+        Specialist: false,
+        Professional: false,
+        Supplier: false,
+    });
+    const noDataTimeoutRef = useRef(null);
+    const navigate = useNavigate();
+
+    const handleClick = async (option) => {
+        setSelectedOption(option);
+        setShowDropdown(false);
+
+        setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+
+        let endpoint = '';
+
+        switch (option) {
+            case 'Specialist':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/specialist/findAll';
+                break;
+            case 'Professional':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/professional/findAll';
+                break;
+            case 'Supplier':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/supplier/findAll';
+                break;
+            default:
+                return;
+        }
+
+        try {
+            const response = await axios.get(endpoint);
+            const data = response.data.userResponse || [];
+            setData(data);
+
+            if (data.length === 0) {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+                if (noDataTimeoutRef.current) {
+                    clearTimeout(noDataTimeoutRef.current);
+                }
+                noDataTimeoutRef.current = setTimeout(() => {
+                    setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+                }, 3000);
+            }
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setData([]);
+            setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
+            }
+            noDataTimeoutRef.current = setTimeout(() => {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+            }, 3000);
+        } finally {
+            setShowDropdown(true);
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
+            }
+        };
+    }, []);
+
 
     return (
         <div>
@@ -41,26 +114,87 @@ const SupplierDashBoard = () => {
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />
                     <p className='text-lg font-bold text-white'>Quagga</p>
                 </div>
-                <div className='hidden md:flex space-x-6 text-lg'>
-                    <SearchField variant="outlined" placeholder="Search" size="medium" />
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
-
+                    <div className='hidden md:flex space-x-6 text-lg'>
+                        <div>
+                            <SearchField
+                                variant="outlined"
+                                placeholder="Search"
+                                size="small"
+                            />
+                        </div>
+                        <div className="hidden md:flex space-x-6 text-lg">
+                            {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                                <div className='relative' key={option}>
+                                    <div
+                                        className='hover:text-gray-600 cursor-pointer text-white'
+                                        onClick={() => handleClick(option)}
+                                    >
+                                        {option}
+                                    </div>
+                                    {showDropdown && selectedOption === option && (
+                                        <div className='absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10'>
+                                            {data.length > 0 ? (
+                                                <ul>
+                                                    {data.map((item, index) => (
+                                                        <li
+                                                            key={index}
+                                                            className='p-2 hover:bg-gray-100 cursor-pointer'
+                                                            onClick={() => navigate('/profile', { state: { user: item.user } })}
+                                                        >
+                                                            {item.user.firstName} {item.user.lastName}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                noDataStatus[option] && (
+                                                    <div className='p-2 text-center'>
+                                                        <p>No data available</p>
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                 </div>
                 <div className="flex items-center space-x-4">
                     <FaUser className="hidden md:block text-white" />
                     <IoIosNotifications className="hidden md:block text-white" />
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                            onClick={() => setMenuOpen(!menuOpen)} />
-                    {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
-                    {/*        onClick={() => setSidebarOpen(!sidebarOpen)} />*/}
+                            onClick={() => setMenuOpen(!menuOpen)}/>
                     <ThemeToggle/>
                  </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>
-                        <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Client</div>
+                        <div>
+                            {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                                <div
+                                    className='hover:text-gray-600 cursor-pointer text-black'
+                                    onClick={() => handleClick(option)}
+                                    key={option}
+                                >
+                                    {option}
+                                </div>
+                            ))}
+                            {showDropdown && (
+                                <div className='dropdown'>
+                                    {data.length > 0 ? (
+                                        <ul>
+                                            {data.map((item, index) => (
+                                                <li key={index}>{item.name}</li>
+                                            ))}
+                                        </ul>
+                                    ) : (
+                                        noDataStatus[selectedOption] && (
+                                            <div className='empty-state'>
+                                                <p>No data available</p>
+                                            </div>
+                                        )
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </ul>
                 )}
             </section>

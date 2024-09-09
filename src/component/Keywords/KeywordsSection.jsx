@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SupplierCard from "../supplierCard/supplierCard";
-import ProductCard from "../productCard/productCard";
+import ProductCard from "../productCard/ProductCard";
 
 const KeywordsSection = () => {
     const [showAll, setShowAll] = useState(false);

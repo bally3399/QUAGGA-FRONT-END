@@ -45,8 +45,8 @@ const Navbar = () => {
                 <p className='text-lg font-bold text-white'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
-                <div className='hover:text-gray-600 cursor-pointer text-white'>Home</div>
-                <div className='hover:text-gray-600 cursor-pointer text-white'>Features</div>
+                <div className='hover:text-blue-300 cursor-pointer text-white'>Home</div>
+                <div className='hover:text-blue-300 cursor-pointer text-white'>Features</div>
                 <div>
                     <SearchField
                         variant="outlined"
@@ -54,9 +54,9 @@ const Navbar = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-gray-600 cursor-pointer text-white'>Blog</div>
-                <div className='hover:text-gray-600 cursor-pointer text-white'>About us</div>
-                <div className='hover:text-gray-600 cursor-pointer text-white'
+                <div className='hover:text-blue-300 cursor-pointer text-white'>Blog</div>
+                <div className='hover:text-blue-300 cursor-pointer text-white'>About us</div>
+                <div className='hover:text-blue-300 cursor-pointer text-white'
                      onClick={handleContactUsClick}
                 >Contact us</div>
             </div>

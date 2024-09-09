@@ -14,6 +14,7 @@ import SupplierCard from "../component/supplierCard/supplierCard";
 import LogoutPage from "../pages/homePage/LogoutPage";
 import HeroPage from "../pages/homePage/Heropage";
 import SpecialistDashboard from "../pages/homePage/specialistDashBoard";
+import PaymentPage from "../pages/homePage/PaymentPage";
 
 
 export const ROUTE =[
@@ -90,5 +91,9 @@ export const ROUTE =[
     {
         path: "/specialistDashboard",
         element: <SpecialistDashboard />
+    },
+    {
+        path: "/payment",
+        element: <PaymentPage />
     }
 ]

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import myLogo from "../../asset/MyLogoRefactored.png";
@@ -9,6 +9,7 @@ import { IoIosNotifications } from "react-icons/io";
 import ProductCard from "../../component/productCard/productCard";
 import axios from 'axios';
 import DashboardOverview from "../../component/specialistDashboardComponents/DashboardOverview";
+import {useNavigate} from "react-router-dom";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -33,35 +34,104 @@ const SpecialistDashboard = () => {
     const [supplierData, setSupplierData] = useState(null);
     const [supplierId, setSupplierId] = useState(null);
     const [supplierName, setSupplierName] = useState("");
+    const [selectedOption, setSelectedOption] = useState('');
+    const [data, setData] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [noDataStatus, setNoDataStatus] = useState({
+        Specialist: false,
+        Professional: false,
+        Supplier: false,
+    });
+
+    const noDataTimeoutRef = useRef(null);
+    const navigate = useNavigate();
+    const handleClick = async (option) => {
+        setSelectedOption(option);
+        setShowDropdown(false);
+
+        setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+
+        let endpoint = '';
+
+        switch (option) {
+            case 'Specialist':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/specialist/findAll';
+                break;
+            case 'Professional':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/professional/findAll';
+                break;
+            case 'Supplier':
+                endpoint = 'https://quagga.onrender.com/api/v1/quagga/supplier/findAll';
+                break;
+            default:
+                return;
+        }
+        try {
+            const response = await axios.get(endpoint);
+            const data = response.data.userResponse || [];
+            setData(data);
+
+            if (data.length === 0) {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+                if (noDataTimeoutRef.current) {
+                    clearTimeout(noDataTimeoutRef.current);
+                }
+                noDataTimeoutRef.current = setTimeout(() => {
+                    setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+                }, 3000);
+            }
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setData([]);
+            setNoDataStatus((prevState) => ({ ...prevState, [option]: true }));
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
+            }
+            noDataTimeoutRef.current = setTimeout(() => {
+                setNoDataStatus((prevState) => ({ ...prevState, [option]: false }));
+            }, 3000);
+        } finally {
+            setShowDropdown(true);
+        }
+    };
 
     useEffect(() => {
-        const createSupplier = async () => {
-            try {
-                const response = await axios.post('http://your-java-server-endpoint/api/supplier');
-                setSupplierId(response.data.id); // Assuming the response returns the supplier ID
-                setSupplierName(response.data.name); // Assuming the response returns the supplier name
-            } catch (error) {
-                console.error('Error creating supplier', error);
+        return () => {
+            if (noDataTimeoutRef.current) {
+                clearTimeout(noDataTimeoutRef.current);
             }
         };
-
-        createSupplier();
     }, []);
 
-    useEffect(() => {
-        if (supplierId) {
-            const fetchSupplierData = async () => {
-                try {
-                    const response = await axios.get(`http://your-java-server-endpoint/api/supplier/${supplierId}/jobs`);
-                    setSupplierData(response.data);
-                } catch (error) {
-                    console.error('Error fetching supplier data', error);
-                }
-            };
-
-            fetchSupplierData();
-     }
-    }, [supplierId]);
+    // useEffect(() => {
+    //     const createSupplier = async () => {
+    //         try {
+    //             const response = await axios.post('http://your-java-server-endpoint/api/supplier');
+    //             setSupplierId(response.data.id); // Assuming the response returns the supplier ID
+    //             setSupplierName(response.data.name); // Assuming the response returns the supplier name
+    //         } catch (error) {
+    //             console.error('Error creating supplier', error);
+    //         }
+    //     };
+    //
+    //     createSupplier();
+    // }, []);
+    //
+    // useEffect(() => {
+    //     if (supplierId) {
+    //         const fetchSupplierData = async () => {
+    //             try {
+    //                 const response = await axios.get(`http://your-java-server-endpoint/api/supplier/${supplierId}/jobs`);
+    //                 setSupplierData(response.data);
+    //             } catch (error) {
+    //                 console.error('Error fetching supplier data', error);
+    //             }
+    //         };
+    //
+    //         fetchSupplierData();
+    //     }
+    // }, [supplierId]);
 
     return (
         <div className="dark:bg-primary dark:text-white min-h-screen">
@@ -71,29 +141,95 @@ const SpecialistDashboard = () => {
                     <p className='text-lg font-bold text-white'>Quagga</p>
                 </div>
                 <div className='hidden md:flex space-x-6 text-lg'>
-                    <SearchField variant="outlined" placeholder="Search" size="medium" />
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Specialist</div>
-                    <div className='hover:text-gray-600 cursor-pointer text-white'>Professional</div>
+                    <SearchField variant="outlined" placeholder="Search" size="medium"/>
+                    <div className="hidden md:flex space-x-6 text-lg">
+                        {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                            <div className='relative' key={option}>
+                                <div
+                                    className='hover:text-gray-600 cursor-pointer text-white'
+                                    onClick={() => handleClick(option)}
+                                >
+                                    {option}
+                                </div>
+                                {showDropdown && selectedOption === option && (
+                                    <div className='absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10'>
+                                        {data.length > 0 ? (
+                                            <ul>
+                                                {data.map((item, index) => (
+                                                    <li
+                                                        key={index}
+                                                        className='p-2 hover:bg-gray-100 cursor-pointer'
+                                                        onClick={() => navigate('/profile', {state: {user: item.user}})}
+                                                    >
+                                                        {item.user.firstName} {item.user.lastName}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            noDataStatus[option] && (
+                                                <div className='p-2 text-center'>
+                                                    <p>No data available</p>
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <FaUser className="hidden md:block text-white" />
-                    <IoIosNotifications className="hidden md:block text-white" />
+                    <FaUser className="hidden md:block text-white"/>
+                    <IoIosNotifications className="hidden md:block text-white"/>
                     <HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600"
-                            onClick={() => setMenuOpen(!menuOpen)} />
+                            onClick={() => setMenuOpen(!menuOpen)}/>
                     {/*<HiMenu className="text-2xl md:hidden cursor-pointer hover:text-gray-600 ml-2"*/}
                     {/*        onClick={() => setSidebarOpen(!sidebarOpen)} />*/}
                 </div>
                 {menuOpen && (
                     <ul className='md:hidden absolute top-16 left-0 w-full text-black bg-blue-100 shadow-md text-lg'>
-                        <div className='hover:text-gray-600 cursor-pointer'>Specialist</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Professional</div>
-                        <div className='hover:text-gray-600 cursor-pointer'>Client</div>
+                        <div className="hidden md:flex space-x-6 text-lg">
+                            {['Specialist', 'Professional', 'Supplier'].map((option) => (
+                                <div className='relative' key={option}>
+                                    <div
+                                        className='hover:text-gray-600 cursor-pointer text-white'
+                                        onClick={() => handleClick(option)}
+                                    >
+                                        {option}
+                                    </div>
+                                    {showDropdown && selectedOption === option && (
+                                        <div className='absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-10'>
+                                            {data.length > 0 ? (
+                                                <ul>
+                                                    {data.map((item, index) => (
+                                                        <li
+                                                            key={index}
+                                                            className='p-2 hover:bg-gray-100 cursor-pointer'
+                                                            onClick={() => navigate('/profile', {state: {user: item.user}})}
+                                                        >
+                                                        {item.user.firstName} {item.user.lastName}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                noDataStatus[option] && (
+                                                    <div className='p-2 text-center'>
+                                                        <p>No data available</p>
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                     </ul>
                 )}
             </section>
             <div className='flex pt-16'>
-                <div className={`fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e] dark:bg-[#1a202c] ${sidebarOpen ? 'block' : 'hidden'} md:block`}>
-                    <Sidebar />
+                <div
+                    className={`fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e] dark:bg-[#1a202c] ${sidebarOpen ? 'block' : 'hidden'} md:block`}>
+                    <Sidebar/>
                 </div>
                 <div className='flex-1 container mx-auto p-6 ml-[250px]'>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -103,7 +239,8 @@ const SpecialistDashboard = () => {
                         />
                     </div>
                     <section className="container mx-auto p-10 md:py-12 md:px-0">
-                        <section className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
+                        <section
+                            className="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
                             <ProductCard
                                 bgColor="bg-purple-50"
                                 imgSrc="https://www.dropbox.com/s/mlor33hzk73rh0c/x14423.png?dl=1"

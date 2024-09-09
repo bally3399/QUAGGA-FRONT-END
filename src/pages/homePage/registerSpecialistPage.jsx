@@ -21,7 +21,6 @@ const RegisterSpecialistPage = () => {
         password: '',
         confirmPassword: '',
         role: localStorage.getItem("role"),
-        category: '',
         agree: false,
     });
     const [showPassword, setShowPassword] = useState(false);

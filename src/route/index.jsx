@@ -15,6 +15,7 @@ import LogoutPage from "../pages/homePage/LogoutPage";
 import HeroPage from "../pages/homePage/Heropage";
 import SpecialistDashboard from "../pages/homePage/specialistDashBoard";
 import PaymentPage from "../pages/homePage/PaymentPage";
+import ProductPage from "../pages/homePage/ProductPage";
 
 
 export const ROUTE =[
@@ -95,5 +96,9 @@ export const ROUTE =[
     {
         path: "/payment",
         element: <PaymentPage />
+    },
+    {
+        path: "/product-page",
+        element: <ProductPage />
     }
 ]

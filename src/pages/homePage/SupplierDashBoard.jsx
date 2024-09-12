@@ -10,7 +10,7 @@ import ThemeToggle from "../../component/toggle/ThemeToggle";
 import Charts from "../../component/ChartsAndTables/Charts";
 import OrderTable from "../../component/ChartsAndTables/OrderTable";
 import InventoryManagement from "../../component/ChartsAndTables/InventoryManagement";
-import ProductCard from "../../component/productCard/productCard";
+import ProductCard from "../../component/productCard/ProductCard";
 import axios from "axios";
 import Card from "../../component/productCard/Card";
 import Analytics from "../../component/ChartsAndTables/Analytics";
@@ -204,7 +204,6 @@ const SupplierDashBoard = () => {
                 <div className={`md:block ${sidebarOpen ? 'block' : 'hidden'} fixed top-16 left-0 h-[calc(100vh-4rem)] w-[250px] bg-[#093c5e]`}>
                     <Sidebar />
                 </div>
-
 
                 <div className='flex-1 container mx-auto p-6 ml-[250px] '>
                     <div className="grid mb-4 pb-10 px-8 mx-4 rounded-3xl bg-gray-100 border-4 border-green-400">

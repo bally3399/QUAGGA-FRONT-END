@@ -6,7 +6,7 @@ import {HiArrowLeft, HiMenu} from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
-import ProductCard from "../../component/productCard/productCard";
+import ProductCard from "../../component/productCard/ProductCard";
 import { IoIosNotifications } from "react-icons/io";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";

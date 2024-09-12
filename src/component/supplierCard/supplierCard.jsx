@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { css } from "@emotion/react";
 import { PulseLoader } from "react-spinners";
 
 const axiosInstance = axios.create({

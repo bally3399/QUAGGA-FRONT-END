@@ -1,4 +1,4 @@
-import ProductCard from "./productCard";
+
 
 const Card = ({ iconColor, bgColor, percentage, count, label }) => (
     <a className="transform hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white" href="#">

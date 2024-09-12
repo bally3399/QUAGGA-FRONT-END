@@ -37,7 +37,15 @@ const Navbar = () => {
     const handleSignupClick = () => {
         navigate('/signUp');
     };
-
+    const handleHomeClick = () => {
+        navigate('/');
+    };
+    const handleFeaturesClick = () => {
+        navigate('/');
+    };
+    const handleBlogClick = () => {
+        navigate('/');
+    };
     return (
         <div className='fixed top-0 left-0 right-0 z-50 mb-16 flex justify-between items-center p-4 shadow-md bg-[#06324e]'>
             <div className='flex items-center mb-4'>
@@ -45,8 +53,8 @@ const Navbar = () => {
                 <p className='text-lg font-bold text-white'>Quagga</p>
             </div>
             <div className='hidden md:flex space-x-6 text-lg'>
-                <div className='hover:text-blue-300 cursor-pointer text-white'>Home</div>
-                <div className='hover:text-blue-300 cursor-pointer text-white'>Features</div>
+                <div onClick={handleHomeClick} className='hover:text-blue-300 cursor-pointer text-white'>Home</div>
+                <div onClick={handleFeaturesClick} className='hover:text-blue-300 cursor-pointer text-white'>Features</div>
                 <div>
                     <SearchField
                         variant="outlined"
@@ -54,7 +62,7 @@ const Navbar = () => {
                         size="small"
                     />
                 </div>
-                <div className='hover:text-blue-300 cursor-pointer text-white'>Blog</div>
+                <div onClick={handleBlogClick} className='hover:text-blue-300 cursor-pointer text-white'>Blog</div>
                 <div className='hover:text-blue-300 cursor-pointer text-white'>About us</div>
                 <div className='hover:text-blue-300 cursor-pointer text-white'
                      onClick={handleContactUsClick}

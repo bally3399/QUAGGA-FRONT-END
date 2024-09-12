@@ -2,7 +2,7 @@ import React from "react";
 
 const ContactUs = () => {
     return (
-        <div className=" mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white  px-4 ">
+        <div className=" mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white px-4 ">
             <div className="max-w-2xl w-full bg-white rounded-lg shadow-2xl p-8">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Contact Us</h2>
                 <form className="space-y-6">
@@ -41,7 +41,7 @@ const ContactUs = () => {
                 </form>
                 <div className="mt-8 text-center">
                     <p className="text-gray-600">Or reach us at:</p>
-                    <p className="text-gray-800 font-medium mt-2">support@example.com</p>
+                    <p className="text-gray-800 font-medium mt-2">quagga@gmail.com</p>
                     <p className="text-gray-800 font-medium mt-1">+123 456 7890</p>
                 </div>
             </div>

@@ -8,6 +8,20 @@ const Footer = () => {
     const handleAboutClick = () => {
         navigate('/about');
     };
+    const handleHomePageClick = () => {
+        navigate('/');
+    };
+    const handleFeaturesClick = () => {
+        navigate('/');
+    };
+    const handlePricingClick = () => {
+        navigate('/');
+    };
+    const handleContactClick = () => {
+        navigate('/contact');
+    };
+
+
 
     return (
         <footer className="bg-[#06324e] text-white py-8">
@@ -16,10 +30,10 @@ const Footer = () => {
 
                     <div>
                         <h2 className="text-lg font-semibold mb-2">About Us</h2>
-                        <div onClick={handleAboutClick} className='text-gray-400 hover:text-white cursor-pointer mb-2'>
+                        <div onClick={handleAboutClick} className='text-white hover:text-blue-300 cursor-pointer mb-2'>
                             About us
                         </div>
-                        <p className="text-gray-400">
+                        <p className="text-white">
                             Quagga software developer.
                         </p>
                     </div>
@@ -28,10 +42,10 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-semibold mb-2">Quick Links</h2>
                         <ul>
-                            <li className="mb-1"><a href="#" className="text-gray-400 hover:text-white">Home</a></li>
-                            <li className="mb-1"><a href="#" className="text-gray-400 hover:text-white">Features</a></li>
-                            <li className="mb-1"><a href="#" className="text-gray-400 hover:text-white">Pricing</a></li>
-                            <li className="mb-1"><a href="#" className="text-gray-400 hover:text-white">Contact</a></li>
+                            <li className="mb-1"><a onClick={handleHomePageClick} className="text-white hover:text-blue-300">Home</a></li>
+                            <li className="mb-1"><a onClick={handleFeaturesClick} className="text-white hover:text-blue-300">Features</a></li>
+                            <li className="mb-1"><a onClick={handlePricingClick} className="text-white hover:text-blue-300">Pricing</a></li>
+                            <li className="mb-1"><a onClick={handleContactClick} className="text-white hover:text-blue-300">Contact</a></li>
                         </ul>
                     </div>
 
@@ -39,15 +53,15 @@ const Footer = () => {
                     <div>
                         <h2 className="text-lg font-semibold mb-2">Follow Us</h2>
                         <div className="flex space-x-4">
-                            <a href="#" className="text-gray-400 hover:text-white"><FaFacebook size="1.5em" /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><FaTwitter size="1.5em" /></a>
-                            <a href="#" className="text-gray-400 hover:text-white"><FaInstagram size="1.5em" /></a>
+                            <a href="#" className="text-white hover:text-blue-300"><FaFacebook size="1.5em" /></a>
+                            <a href="#" className="text-white hover:text-blue-300"><FaTwitter size="1.5em" /></a>
+                            <a href="#" className="text-white hover:text-blue-300"><FaInstagram size="1.5em" /></a>
                         </div>
                     </div>
                 </div>
 
 
-                <div className="text-center text-gray-400 mt-8">
+                <div className="text-center text-white mt-8">
                     Copyright &copy; 2024 All rights reserved.
                 </div>
             </div>

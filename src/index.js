@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import {DevSupport} from "@react-buddy/ide-toolbox";
-import {ComponentPreviews, useInitial} from "./dev";
+import {ComponentPreviews, useInitial} from "../../../DEVOPS/shield-bank(frontend)/src/dev";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

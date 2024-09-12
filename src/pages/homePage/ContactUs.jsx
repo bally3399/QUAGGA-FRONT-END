@@ -1,8 +1,19 @@
 import React from "react";
+import {HiArrowLeft} from "react-icons/hi";
+import {useNavigate} from "react-router-dom";
 
 const ContactUs = () => {
+    const navigate = useNavigate();
     return (
         <div className=" mx-auto flex min-h-screen w-full items-center justify-center bg-gray-900 text-white px-4 ">
+            <div className="absolute top-4 left-4">
+                <button
+                    onClick={() => navigate('/')}
+                    className="flex items-center text-white hover:text-blue-300"
+                >
+                    <HiArrowLeft className="mr-2 text-white"/> Back
+                </button>
+            </div>
             <div className="max-w-2xl w-full bg-white rounded-lg shadow-2xl p-8">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Contact Us</h2>
                 <form className="space-y-6">
@@ -45,6 +56,7 @@ const ContactUs = () => {
                     <p className="text-gray-800 font-medium mt-1">+123 456 7890</p>
                 </div>
             </div>
+
         </div>
     );
 };

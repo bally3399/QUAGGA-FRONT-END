@@ -16,6 +16,8 @@ import HeroPage from "../pages/homePage/Heropage";
 import SpecialistDashboard from "../pages/homePage/specialistDashBoard";
 import PaymentPage from "../pages/homePage/PaymentPage";
 import ProductPage from "../pages/homePage/ProductPage";
+import PasswordPage from "../pages/homePage/PasswordPage";
+import NotificationPage from "../pages/homePage/NotificationPage";
 
 
 export const ROUTE =[
@@ -59,10 +61,17 @@ export const ROUTE =[
     },
 
     {
+        path: "/editPassword",
+        element: <PasswordPage/>
+    }  ,
+    {
         path: "/profile-form",
         element: <ProfileForm/>,
     },
-
+    {
+      path: "/checkNotifications",
+      element: <NotificationPage/>
+    },
     {
         path: "/contact",
         element: <ContactUs/>,
@@ -95,7 +104,7 @@ export const ROUTE =[
     },
     {
         path: "/payment",
-        element: <PaymentPage />
+        element: <PaymentPage/>
     },
     {
         path: "/product-page",

@@ -6,7 +6,7 @@ import {
     Palette,
 } from "@react-buddy/ide-toolbox"
 import MUIPalette from "@react-buddy/palette-mui";
-
+// hhhhhh
 export const PaletteTree = () => (
     <Palette>
         <Category name="App">

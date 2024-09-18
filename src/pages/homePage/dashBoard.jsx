@@ -45,15 +45,39 @@ const DashBoard = () => {
     const navigate = useNavigate();
 
     const handleSpecialistClick = () => {
-        navigate('/specialistDashboard');
+        navigate('/specialistDashboard',{
+            state: {
+                user: {
+                    firstName: localStorage.getItem("firstName"),
+                    lastName: localStorage.getItem("lastName"),
+                    role: localStorage.getItem("role"),
+                }
+            }
+        });
     };
 
     const handleSupplierClick = () => {
-        navigate('/supplierDashboard');
+        navigate('/supplierDashboard', {
+            state: {
+                user: {
+                    firstName: localStorage.getItem("firstName"),
+                    lastName: localStorage.getItem("lastName"),
+                    role: localStorage.getItem("role"),
+                }
+            }
+        });
     };
 
     const handleProfessionalClick = () => {
-        navigate('/professionalDashboard');
+        navigate('/professionalDashboard', {
+            state: {
+                user: {
+                    firstName: localStorage.getItem("firstName"),
+                    lastName: localStorage.getItem("lastName"),
+                    role: localStorage.getItem("role"),
+                }
+            }
+        });
     };
 
     const handleClick = async (option) => {
@@ -149,12 +173,13 @@ const DashBoard = () => {
                                                         key={index}
                                                         className='p-2 hover:bg-gray-100 cursor-pointer'
                                                         onClick={() => {
-                                                            if (option === 'Specialist') handleSpecialistClick();
-                                                            else if (option === 'Supplier') handleSupplierClick();
-                                                            else if (option === 'Professional') handleProfessionalClick();
+                                                            if (selectedOption === 'Specialist') handleSpecialistClick(item);
+                                                            else if (selectedOption === 'Supplier') handleSupplierClick(item);
+                                                            else if (selectedOption === 'Professional') handleProfessionalClick(item);
                                                         }}
                                                     >
                                                         {item.user.firstName} {item.user.lastName}
+                                                        {item.user?.role}
                                                     </li>
                                                 ))}
                                             </ul>

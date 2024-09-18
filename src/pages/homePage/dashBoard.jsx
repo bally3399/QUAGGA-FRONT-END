@@ -2,14 +2,14 @@ import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import React, { useEffect, useRef, useState } from "react";
 import myLogo from "../../asset/MyLogoRefactored.png";
-import {HiArrowLeft, HiMenu} from "react-icons/hi";
+import { HiArrowLeft, HiMenu } from "react-icons/hi";
 import Footer from "../../component/footer/Footer";
 import { FaUser } from "react-icons/fa";
 import Sidebar from "../../component/sidebar/Sidebar";
 import ProductCard from "../../component/productCard/ProductCard";
 import { IoIosNotifications } from "react-icons/io";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const SearchField = styled(TextField)({
     backgroundColor: 'white',
@@ -28,13 +28,14 @@ const SearchField = styled(TextField)({
     },
 });
 
-
 const DashBoard = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState('');
     const [data, setData] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
+    const location = useLocation();
+    const user = location.state?.user;
     const [noDataStatus, setNoDataStatus] = useState({
         Specialist: false,
         Professional: false,
@@ -42,6 +43,18 @@ const DashBoard = () => {
     });
     const noDataTimeoutRef = useRef(null);
     const navigate = useNavigate();
+
+    const handleSpecialistClick = () => {
+        navigate('/specialistDashboard');
+    };
+
+    const handleSupplierClick = () => {
+        navigate('/supplierDashboard');
+    };
+
+    const handleProfessionalClick = () => {
+        navigate('/professionalDashboard');
+    };
 
     const handleClick = async (option) => {
         setSelectedOption(option);
@@ -135,7 +148,11 @@ const DashBoard = () => {
                                                     <li
                                                         key={index}
                                                         className='p-2 hover:bg-gray-100 cursor-pointer'
-                                                        onClick={() => navigate('/profile', { state: { user: item.user } })}
+                                                        onClick={() => {
+                                                            if (option === 'Specialist') handleSpecialistClick();
+                                                            else if (option === 'Supplier') handleSupplierClick();
+                                                            else if (option === 'Professional') handleProfessionalClick();
+                                                        }}
                                                     >
                                                         {item.user.firstName} {item.user.lastName}
                                                     </li>
@@ -177,7 +194,17 @@ const DashBoard = () => {
                                     {data.length > 0 ? (
                                         <ul>
                                             {data.map((item, index) => (
-                                                <li key={index}>{item.name}</li>
+                                                <li
+                                                    key={index}
+                                                    className='p-2 hover:bg-gray-100 cursor-pointer'
+                                                    onClick={() => {
+                                                        if (selectedOption === 'Specialist') handleSpecialistClick();
+                                                        else if (selectedOption === 'Supplier') handleSupplierClick();
+                                                        else if (selectedOption === 'Professional') handleProfessionalClick();
+                                                    }}
+                                                >
+                                                    {user.firstName} {user.lastName}
+                                                </li>
                                             ))}
                                         </ul>
                                     ) : (

@@ -18,6 +18,7 @@ import PaymentPage from "../pages/homePage/PaymentPage";
 import ProductPage from "../pages/homePage/ProductPage";
 import PasswordPage from "../pages/homePage/PasswordPage";
 import NotificationPage from "../pages/homePage/NotificationPage";
+import ForgotPassword from "../pages/homePage/forgotPassword";
 
 
 export const ROUTE =[
@@ -109,5 +110,9 @@ export const ROUTE =[
     {
         path: "/product-page",
         element: <ProductPage />
+    },
+    {
+        path: "/forgotPassword",
+        element: <ForgotPassword />
     }
 ]

@@ -8,7 +8,6 @@ const Profile =()=>{
     const navigate = useNavigate();
     const location = useLocation();
     const user = location.state?.user;
-    console.log(user);
     const handleBackClick = () => {
         if (user?.role.toUpperCase() === 'Specialist') {
             navigate('/specialistDashboard');

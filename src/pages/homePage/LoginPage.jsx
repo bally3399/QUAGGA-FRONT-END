@@ -177,6 +177,20 @@ const LoginPage = () => {
                                     sx={roundedStyle}
                                 />
                             </div>
+                            <div className="mt-4 flex justify-end">
+                                <Button
+                                    onClick={() => navigate('/forgotPassword')}
+                                    sx={{
+                                        color: '#093c5e',
+                                        textTransform: 'none',
+                                        fontSize: '14px',
+                                        alignItem: 'right'
+                                    }}
+                                >
+                                    Forgot your password?
+                                </Button>
+                            </div>
+
                             <div className="mt-6">
                                 <Button
                                     type="submit"

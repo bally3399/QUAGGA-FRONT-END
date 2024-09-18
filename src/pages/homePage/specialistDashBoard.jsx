@@ -106,7 +106,7 @@ const SpecialistDashboard = () => {
 
 
     return (
-        <div className="dark:bg-primary dark:text-white min-h-screen">
+        <div className=" min-h-screen">
             <section className='fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 shadow-md bg-[#093c5e] dark:bg-[#1a202c]'>
                 <div className='flex items-center'>
                     <img src={myLogo} alt="Shopper Logo" className='h-8 w-8 mr-2' />

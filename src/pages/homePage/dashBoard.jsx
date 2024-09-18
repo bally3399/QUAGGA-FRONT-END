@@ -179,7 +179,6 @@ const DashBoard = () => {
                                                         }}
                                                     >
                                                         {item.user.firstName} {item.user.lastName}
-                                                        {item.user?.role}
                                                     </li>
                                                 ))}
                                             </ul>

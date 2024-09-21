@@ -19,6 +19,7 @@ import ProductPage from "../pages/homePage/ProductPage";
 import PasswordPage from "../pages/homePage/PasswordPage";
 import NotificationPage from "../pages/homePage/NotificationPage";
 import ForgotPassword from "../pages/homePage/forgotPassword";
+import SendingOtpPage from "../pages/homePage/SendingOtpPage";
 
 
 export const ROUTE =[
@@ -114,5 +115,9 @@ export const ROUTE =[
     {
         path: "/forgotPassword",
         element: <ForgotPassword />
+    },
+    {
+        path: "/sendingOtp",
+        element: <SendingOtpPage />
     }
 ]

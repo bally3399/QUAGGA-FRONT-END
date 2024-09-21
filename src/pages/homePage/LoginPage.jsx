@@ -179,7 +179,7 @@ const LoginPage = () => {
                             </div>
                             <div className="mt-4 flex justify-end">
                                 <Button
-                                    onClick={() => navigate('/forgotPassword')}
+                                    onClick={() => navigate('/sendingOtp')}
                                     sx={{
                                         color: '#093c5e',
                                         textTransform: 'none',

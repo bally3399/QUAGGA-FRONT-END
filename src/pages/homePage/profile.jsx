@@ -111,7 +111,7 @@ const Profile =()=>{
                                             </div>
                                         </div>
 
-                                        <h1 className="text-xl font-bold">{user?.firstName || "First Name"} {user?.lastName || "Last Name"}</h1>
+                                        <h1 className="text-xl font-bold">{user?.firstName} {user?.lastName}</h1>
                                         <p className="text-gray-700">{user?.role}</p>
 
                                         <div className="mt-6 flex flex-wrap gap-4 justify-center">

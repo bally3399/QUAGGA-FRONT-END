@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,10 +9,10 @@ const KeywordsSection = () => {
     const [showAll, setShowAll] = useState(false);
     const [data, setData] = useState({ products: [], suppliers: [] });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null); // Corrected Error state
     const [productPage, setProductPage] = useState(1);
     const [supplierPage, setSupplierPage] = useState(1);
-    const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING"); // Default keyword
+    const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING");
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
@@ -35,26 +35,29 @@ const KeywordsSection = () => {
         "GRANITE_WORK", "STONE_MASONRY", "BRICK_MASONRY", "CONCRETE_REPAIR", "EPOXY_FLOORING"
     ];
 
-    const displayedKeywords = showAll ? keywords : keywords.slice(0, 40);
+    const displayedKeywords = useMemo(() => showAll ? keywords : keywords.slice(0, 40), [showAll]);
 
     useEffect(() => {
         fetchProductsAndSuppliers(currentKeyword);
-    }, [currentKeyword]);
+    }, [currentKeyword, productPage, supplierPage]);
 
     const fetchProductsAndSuppliers = async (keyword, page = 1) => {
         setLoading(true);
         setError(null);
 
         try {
-            const productsResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
-            const suppliersResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
+            const [supplierResponse, specialistResponse] = await Promise.all([
+                axios.get(`https://quagga.onrender.com/api/v1/quagga/supplier/findByCategory/${keyword}`),
+                axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}`)
+            ]);
 
-            setData((prevData) => ({
-                products: page === 1 ? productsResponse.data : [...prevData.products, ...productsResponse.data],
-                suppliers: page === 1 ? suppliersResponse.data : [...prevData.suppliers, ...suppliersResponse.data],
+            setData(prevData => ({
+                products: page === 1 ? specialistResponse.data : [...prevData.products, ...specialistResponse.data],
+                suppliers: page === 1 ? supplierResponse.data : [...prevData.suppliers, ...supplierResponse.data],
             }));
+
+            toast.success('Data fetched successfully!');
         } catch (error) {
-            console.error('Error fetching data:', error);
             toast.error('An error occurred while fetching data. Please try again.');
             setError('An error occurred while fetching data. Please try again.');
         } finally {
@@ -66,19 +69,11 @@ const KeywordsSection = () => {
         setCurrentKeyword(keyword);
         setProductPage(1);
         setSupplierPage(1);
-        fetchProductsAndSuppliers(keyword);
     };
 
-    const handleShowMoreProducts = () => {
-        const nextPage = productPage + 1;
-        setProductPage(nextPage);
-        fetchProductsAndSuppliers(currentKeyword, nextPage);
-    };
-
-    const handleShowMoreSuppliers = () => {
-        const nextPage = supplierPage + 1;
-        setSupplierPage(nextPage);
-        fetchProductsAndSuppliers(currentKeyword, nextPage);
+    const handleShowMore = (type) => {
+        if (type === 'products') setProductPage(prev => prev + 1);
+        else if (type === 'suppliers') setSupplierPage(prev => prev + 1);
     };
 
     return (
@@ -89,23 +84,15 @@ const KeywordsSection = () => {
                     {displayedKeywords.map((keyword, index) => (
                         <li key={index}>
                             <button
-                                className="text-white hover:text-gray-700 hover:bg-sky-200  text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900 dark:border-sky-500/15 dark:bg-sky-500/10 ..."
+                                className="text-white hover:text-gray-700 hover:bg-sky-200 text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900"
                                 onClick={() => handleKeywordClick(keyword)}
+                                aria-label={`Filter by ${keyword}`}
                             >
                                 {keyword}
                             </button>
                         </li>
                     ))}
                 </ul>
-                {!showAll && (
-                    <div className="mt-4">
-                        <button
-                            className="text-white hover:text-gray-700 hover:bg-sky-200  text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900 dark:border-sky-500/15 dark:bg-sky-500/10 ..."                            onClick={() => setShowAll(true)}
-                        >
-                            See all
-                        </button>
-                    </div>
-                )}
 
                 {showAll && loading && <p>Loading...</p>}
 
@@ -115,13 +102,14 @@ const KeywordsSection = () => {
                             <h3 className="text-lg font-semibold mb-4">Top Rated Products</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {data.products.map((product, index) => (
-                                    <ProductCard key={index} product={product}/>
+                                    <ProductCard key={index} product={product} />
                                 ))}
                             </div>
                             <div className="mt-4">
                                 <button
-                                    className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm"
-                                    onClick={handleShowMoreProducts}
+                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${loading && 'cursor-not-allowed opacity-50'}`}
+                                    onClick={() => handleShowMore('products')}
+                                    disabled={loading}
                                 >
                                     Show More Products
                                 </button>
@@ -134,13 +122,14 @@ const KeywordsSection = () => {
                             <h3 className="text-lg font-semibold mt-8 mb-4">Top Rated Suppliers</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {data.suppliers.map((supplier, index) => (
-                                    <SupplierCard key={index} supplier={supplier}/>
+                                    <SupplierCard key={index} supplier={supplier} />
                                 ))}
                             </div>
                             <div className="mt-4">
                                 <button
-                                    className="text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm"
-                                    onClick={handleShowMoreSuppliers}
+                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${loading && 'cursor-not-allowed opacity-50'}`}
+                                    onClick={() => handleShowMore('suppliers')}
+                                    disabled={loading}
                                 >
                                     Show More Suppliers
                                 </button>
@@ -156,3 +145,4 @@ const KeywordsSection = () => {
 };
 
 export default KeywordsSection;
+

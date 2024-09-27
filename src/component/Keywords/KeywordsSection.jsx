@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useNavigate } from "react-router-dom";
 import SupplierCard from "../supplierCard/supplierCard";
 import ProductCard from "../productCard/ProductCard";
 
@@ -13,6 +14,8 @@ const KeywordsSection = () => {
     const [productPage, setProductPage] = useState(1);
     const [supplierPage, setSupplierPage] = useState(1);
     const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING"); // Default keyword
+
+    const navigate = useNavigate(); // To programmatically navigate
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
@@ -46,8 +49,8 @@ const KeywordsSection = () => {
         setError(null);
 
         try {
-            const productsResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
-            const suppliersResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}&page=${page}`);
+            const productsResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/supplier/findByCategory/{category}`);
+            const suppliersResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findByCategory/{category}`);
 
             setData((prevData) => ({
                 products: page === 1 ? productsResponse.data : [...prevData.products, ...productsResponse.data],
@@ -67,6 +70,7 @@ const KeywordsSection = () => {
         setProductPage(1);
         setSupplierPage(1);
         fetchProductsAndSuppliers(keyword);
+        navigate(`/keyword/${keyword}`); // Navigate to the keyword page
     };
 
     const handleShowMoreProducts = () => {
@@ -100,7 +104,8 @@ const KeywordsSection = () => {
                 {!showAll && (
                     <div className="mt-4">
                         <button
-                            className="text-white hover:text-gray-700 hover:bg-sky-200  text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900 dark:border-sky-500/15 dark:bg-sky-500/10 ..."                            onClick={() => setShowAll(true)}
+                            className="text-white hover:text-gray-700 hover:bg-sky-200  text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900 dark:border-sky-500/15 dark:bg-sky-500/10 ..."
+                            onClick={() => setShowAll(true)}
                         >
                             See all
                         </button>
@@ -115,7 +120,7 @@ const KeywordsSection = () => {
                             <h3 className="text-lg font-semibold mb-4">Top Rated Products</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {data.products.map((product, index) => (
-                                    <ProductCard key={index} product={product}/>
+                                    <ProductCard key={index} product={product} />
                                 ))}
                             </div>
                             <div className="mt-4">
@@ -134,7 +139,7 @@ const KeywordsSection = () => {
                             <h3 className="text-lg font-semibold mt-8 mb-4">Top Rated Suppliers</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {data.suppliers.map((supplier, index) => (
-                                    <SupplierCard key={index} supplier={supplier}/>
+                                    <SupplierCard key={index} supplier={supplier} />
                                 ))}
                             </div>
                             <div className="mt-4">

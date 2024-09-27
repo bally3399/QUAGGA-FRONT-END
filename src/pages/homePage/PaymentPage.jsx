@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
-import { HiOutlineCreditCard, HiOutlineOfficeBuilding, HiOutlineCash } from "react-icons/hi";
-import { FaPaypal } from 'react-icons/fa';
+import React, {useContext} from 'react';
+import { HiOutlineCreditCard } from "react-icons/hi";
+import {CartContext} from "../../component/cartContext/CartContext";
+import axios from "axios";
+import {toast} from "react-toastify";
 
 const PaymentPage = () => {
-    const [paymentMethod, setPaymentMethod] = useState('credit-card');
-    const handlePaymentMethodChange = (method) => {
-        setPaymentMethod(method);
+    const { cart, totalPrice, userEmail } = useContext(CartContext);
+
+    const handlePayment = async () => {
+        try {
+            const response = await axios.post('https://quagga.onrender.com/api/payments/initialize', {
+                totalPrice,
+                email: userEmail,
+            });
+            const { authorization_url } = response.data;
+            window.location.href = authorization_url;
+            if (response.data.success) {
+                toast.success('Payment successful!');
+                localStorage.removeItem('cart');
+            }
+        } catch (error) {
+            toast.error("Payment initialization failed.");
+        }
     };
 
     return (
@@ -18,19 +34,23 @@ const PaymentPage = () => {
                 {/* Order Summary */}
                 <div className="col-span-2 bg-white p-6 shadow-lg rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+
                     <div className="border-b mb-4">
-                        <div className="flex justify-between py-2">
-                            <span>Product 1</span>
-                            <span>₦100,000</span>
-                        </div>
-                        <div className="flex justify-between py-2">
-                            <span>Product 2</span>
-                            <span>₦200,000</span>
-                        </div>
+                        {cart.length > 0 ? (
+                            cart.map((item, index) => (
+                                <div key={index} className="flex justify-between py-2">
+                                    <span>{item.name}</span>
+                                    <span>₦{item.price}</span>
+                                </div>
+                            ))
+                        ) : (
+                            <p>Your cart is empty</p>
+                        )}
                     </div>
+
                     <div className="flex justify-between py-2 font-bold">
                         <span>Total</span>
-                        <span>₦300,000</span>
+                        <span>₦{totalPrice}</span>
                     </div>
                 </div>
 
@@ -38,40 +58,12 @@ const PaymentPage = () => {
                 <div className="bg-white p-6 shadow-lg rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
                     <div className="space-y-4">
-                        {/* Credit Card */}
                         <div
-                            className={`flex items-center p-4 border rounded-lg cursor-pointer ${paymentMethod === 'credit-card' ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-                            onClick={() => handlePaymentMethodChange('credit-card')}
+                            className="flex items-center p-4 border rounded-lg cursor-pointer border-gray-300"
+                            onClick={() => handlePayment()}
                         >
                             <HiOutlineCreditCard className="text-2xl text-blue-600 mr-4" />
-                            <span>Credit Card</span>
-                        </div>
-
-                        {/* PayPal */}
-                        <div
-                            className={`flex items-center p-4 border rounded-lg cursor-pointer ${paymentMethod === 'paypal' ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-                            onClick={() => handlePaymentMethodChange('paypal')}
-                        >
-                            <FaPaypal className="text-2xl text-blue-600 mr-4" />
-                            <span>PayPal</span>
-                        </div>
-
-                        {/* Bank Transfer */}
-                        <div
-                            className={`flex items-center p-4 border rounded-lg cursor-pointer ${paymentMethod === 'bank' ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-                            onClick={() => handlePaymentMethodChange('bank')}
-                        >
-                            <HiOutlineOfficeBuilding className="text-2xl text-blue-600 mr-4" />
-                            <span>Bank Transfer</span>
-                        </div>
-
-                        {/* Cash on Delivery */}
-                        <div
-                            className={`flex items-center p-4 border rounded-lg cursor-pointer ${paymentMethod === 'cash' ? 'border-blue-500 bg-blue-50' : 'border-gray-300'}`}
-                            onClick={() => handlePaymentMethodChange('cash')}
-                        >
-                            <HiOutlineCash className="text-2xl text-blue-600 mr-4" />
-                            <span>Cash on Delivery</span>
+                            <span>Paystack</span>
                         </div>
                     </div>
                 </div>
@@ -131,23 +123,10 @@ const PaymentPage = () => {
                     <h2 className="text-xl font-semibold mb-4">Payment Summary</h2>
                     <div className="flex justify-between py-2">
                         <span>Subtotal</span>
-                        <span>₦300,000</span>
+                        <span>₦{totalPrice}</span>
                     </div>
-                    <div className="flex justify-between py-2">
-                        <span>Shipping</span>
-                        <span>₦10,000</span>
-                    </div>
-                    <div className="flex justify-between py-2">
-                        <span>Taxes</span>
-                        <span>₦5,000</span>
-                    </div>
-                    <div className="flex justify-between py-2 font-bold border-t mt-4 pt-4">
-                        <span>Total</span>
-                        <span>₦315,000</span>
-                    </div>
-
                     {/* Confirmation Button */}
-                    <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300">
+                    <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300" onClick={handlePayment}>
                         Confirm Payment
                     </button>
                 </div>

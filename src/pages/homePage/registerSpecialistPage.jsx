@@ -139,7 +139,7 @@ const RegisterSpecialistPage = () => {
 
     const roundedStyle = {
         '& .MuiOutlinedInput-root': {
-            borderRadius: '9999px',
+            // borderRadius: '9999px',
         },
     };
 
@@ -147,7 +147,7 @@ const RegisterSpecialistPage = () => {
         <div className="flex justify-center items-center min-h-screen  bg-[#eeffff] relative">
             <div className="absolute top-4 left-4">
                 <button
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/signUp')}
                     className="flex items-center text-[#093c5e] hover:text-[#093c5e]"
                 >
                     <HiArrowLeft className="mr-2" /> Back
@@ -267,7 +267,7 @@ const RegisterSpecialistPage = () => {
                                 backgroundColor: '#093c5e',
                                 color: 'white',
                                 paddingY: 2,
-                                borderRadius: '9999px',
+                                // borderRadius: '9999px',
                                 '&:hover': {
                                     backgroundColor: '#093c5e',
                                 },

@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi";
+import ProfileItem from "../../component/profileItem/ProfileItem";
+import {toast} from "react-toastify";
+import axios from "axios";
+import {Button} from "@mui/material";
 
 const ProfileForm = () => {
+    const user = {
+        firstName: localStorage.getItem("firstName"),
+        lastName: localStorage.getItem("lastName"),
+        role: localStorage.getItem("role"),
+        email: localStorage.getItem("email")
+    };
+    const [form, setForm] = useState("")
     const [isAvailableToHire, setIsAvailableToHire] = useState(true);
     const [isAccountPrivate, setIsAccountPrivate] = useState(false);
     const navigate = useNavigate();
@@ -15,6 +26,64 @@ const ProfileForm = () => {
     const handleClickNotifications = () => {
         navigate('/checkNotifications');
     };
+    const [errors, setErrors] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm({
+            ...form,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        try {
+            const response = await axios.put(`/api/v1/user/update/{id}`, form);
+            if (response.data.successful) {
+                toast.success("Profile updated successfully!", {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setTimeout(() => {
+                    navigate("/profile");
+                }, 3000);
+            } else {
+                toast.error(response.data.message || "Failed to update profile. Please try again.", {
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error("An error occurred. Please try again later.", {
+                position: 'top-right',
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
@@ -25,46 +94,34 @@ const ProfileForm = () => {
                     <HiArrowLeft className="mr-2"/> Back
                 </button>
             </div>
-
-
             <main className="py-10">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
                         <aside className="py-6 px-2 sm:px-6 lg:py-0 lg:px-0 lg:col-span-3">
                             <nav className="space-y-1">
-                                <a href="#" className="group flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-gray-200 rounded-md">
-                                    <svg className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 19a1.5 1.5 0 01-2.121-2.121l1.414-1.414A2 2 0 004.93 14.07l-1.414 1.414a1.5 1.5 0 01-2.121-2.121l1.414-1.414A2 2 0 004.93 8.07L3.515 6.657a1.5 1.5 0 112.121-2.121l1.415 1.414a2 2 0 002.83 0l1.414-1.414a1.5 1.5 0 112.121 2.121L14.071 6.93a2 2 0 000 2.828l1.414 1.414a1.5 1.5 0 11-2.121 2.121l-1.415-1.414a2 2 0 00-2.828 0l-1.414 1.414a1.5 1.5 0 01-2.121 2.121L5.121 19z" />
-                                    </svg>
-                                    Profile
-                                </a>
-                                <a href="#" className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md">
-                                    <svg className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 14h6m2 0a9 9 0 10-18 0 9 9 0 0018 0zm0 0H9" />
-                                    </svg>
-                                    <li className="mb-1"><a onClick={handleClickAccount}>
-                                        Account</a></li>
-                                </a>
-                                <a href="#" className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md">
-                                    <svg className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                                    </svg>
-                                    <li className="mb-1"><a onClick={handleClickPassword}
-                                    >Password</a></li>
-                                </a>
-                                <a href="#"
-                                   className="group flex items-center px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md">
-                                    <svg
-                                        className="flex-shrink-0 -ml-1 mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke="currentColor" aria-hidden="true">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                              d="M4 4v16c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V4M4 4h16v16H4z"/>
-                                    </svg>
-                                    <li className="mb-1"><a onClick={handleClickNotifications}
-                                    >Notifications</a>
-                                    </li>
-                                </a>
+                                <ProfileItem
+                                    href="#"
+                                    iconPath="M5.121 19a1.5 1.5 0 01-2.121-2.121l1.414-1.414A2 2 0 004.93 14.07l-1.414 1.414a1.5 1.5 0 01-2.121-2.121l1.414-1.414A2 2 0 004.93 8.07L3.515 6.657a1.5 1.5 0 112.121-2.121l1.415 1.414a2 2 0 002.83 0l1.414-1.414a1.5 1.5 0 112.121 2.121L14.071 6.93a2 2 0 000 2.828l1.414 1.414a1.5 1.5 0 11-2.121 2.121l-1.415-1.414a2 2 0 00-2.828 0l-1.414 1.414a1.5 1.5 0 01-2.121 2.121L5.121 19z"
+                                    label="Profile"
+                                />
+                                <ProfileItem
+                                    href="#"
+                                    iconPath="M9 14h6m2 0a9 9 0 10-18 0 9 9 0 0018 0zm0 0H9"
+                                    label="Account"
+                                    onClick={handleClickAccount}
+                                />
+                                <ProfileItem
+                                    href="#"
+                                    iconPath="M4 6h16M4 10h16M4 14h16M4 18h16"
+                                    label="Password"
+                                    onClick={handleClickPassword}
+                                />
+                                <ProfileItem
+                                    href="#"
+                                    iconPath="M4 4v16c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V4M4 4h16v16H4z"
+                                    label="Notifications"
+                                    onClick={handleClickNotifications}
+                                />
                             </nav>
                         </aside>
 
@@ -78,32 +135,31 @@ const ProfileForm = () => {
 
                     <div className="mt-6 flex flex-col lg:flex-row">
                         <div className="flex-grow space-y-6">
-                            <div>
                                 <label htmlFor="username"
                                        className="block text-sm font-medium text-gray-700">Username</label>
                                 <div className="mt-1 mr-10 flex rounded-md shadow-sm">
                                     <span
-                                        className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm">quagga.com/</span>
+                                        className="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-gray-500 sm:text-sm"></span>
                                     <input
                                         type="text"
                                         name="username"
                                         id="username"
                                         autoComplete="username"
+                                        style={{width: '450px', height: '45px'}}
                                         className="block w-full min-w-0 flex-grow rounded-none rounded-r-md border-gray-300 focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                                        defaultValue="user name"
+                                        defaultValue={user.firstName.toUpperCase()}
                                     />
-                                </div>
                             </div>
 
                             <div>
                                 <label htmlFor="about" className="block text-sm font-medium text-gray-700">About</label>
                                 <div className="mt-1 mr-10">
-                                                <textarea
-                                                    id="about"
-                                                    name="about"
-                                                    rows="3"
-                                                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
-                                                </textarea>
+                                   <textarea
+                                       id="about"
+                                       name="about"
+                                       rows="3"
+                                       className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                   </textarea>
                                 </div>
                                 <p className="mt-2 text-sm text-gray-500">Brief description for your profile. URLs are
                                     hyperlinked.</p>
@@ -134,117 +190,132 @@ const ProfileForm = () => {
                         </div>
                     </div>
 
-                    <div className="mt-6 grid grid-cols-12 gap-6">
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">First
-                                name</label>
-                            <input
-                                type="text"
-                                name="first-name"
-                                id="first-name"
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                <div className="mt-6 grid grid-cols-12 gap-6">
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="first-name"
+                                               className="block text-sm font-medium text-gray-700">First
+                                            name</label>
+                                        <input
+                                            type="text"
+                                            name="firstName"
+                                            id="first-name"
+                                            autoComplete="given-name"
+                                            style={{width: '420px', height: '45px'}}
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                            defaultValue={user.firstName}
+                                        />
+                                    </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">Last name</label>
+                                        <input
+                                            type="text"
+                                            name="lastName"
+                                            id="last-name"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="given-name"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                            defaultValue={user.lastName}
+                                        />
+                                    </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                            <label htmlFor="email-address"
+                                                   className="block text-sm font-medium text-gray-700">Email
+                                                address</label>
+                                            <input
+                                                type="text"
+                                                name="email"
+                                                id="email"
+                                                style={{width: '420px', height: '45px'}}
+                                                autoComplete="email"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                                defaultValue={user.email}
+                                        />
+                                    </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">Last
-                                name</label>
-                            <input
-                                type="text"
-                                name="last-name"
-                                id="last-name"
-                                autoComplete="family-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="phone-number"
+                                               className="block text-sm font-medium text-gray-700">Phone
+                                            Number</label>
+                                        <input
+                                            type="text"
+                                            name="phone-number"
+                                            id="phone-number"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="tel"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        />
+                                    </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">Email
-                                address</label>
-                            <input
-                                type="text"
-                                name="email-address"
-                                id="email-address"
-                                autoComplete="email"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="street-address"
+                                               className="block text-sm font-medium text-gray-700">Street
+                                            address</label>
+                                        <input
+                                            type="text"
+                                            name="street-address"
+                                            id="street-address"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="street-address"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        />
+                                    </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">Phone
-                                Number</label>
-                            <input
-                                type="text"
-                                name="phone-number"
-                                id="phone-number"
-                                autoComplete="tel"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="city"
+                                               className="block text-sm font-medium text-gray-700">City</label>
+                                        <input
+                                            type="text"
+                                            name="city"
+                                            id="city"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="address-level2"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        />
+                                    </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">Street
-                                address</label>
-                            <input
-                                type="text"
-                                name="street-address"
-                                id="street-address"
-                                autoComplete="street-address"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="region" className="block text-sm font-medium text-gray-700">State
+                                            /
+                                            Province</label>
+                                        <input
+                                            type="text"
+                                            name="region"
+                                            id="region"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="address-level1"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        />
+                                    </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
-                            <input
-                                type="text"
-                                name="city"
-                                id="city"
-                                autoComplete="address-level2"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
+                                    <div className="col-span-12 sm:col-span-6">
+                                        <label htmlFor="postal-code"
+                                               className="block text-sm font-medium text-gray-700">ZIP /
+                                            Postal code</label>
+                                        <input
+                                            type="text"
+                                            name="postal-code"
+                                            id="postal-code"
+                                            style={{width: '420px', height: '45px'}}
+                                            autoComplete="postal-code"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                        />
+                                    </div>
+                                </div>
 
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="region" className="block text-sm font-medium text-gray-700">State /
-                                Province</label>
-                            <input
-                                type="text"
-                                name="region"
-                                id="region"
-                                autoComplete="address-level1"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
-
-                        <div className="col-span-12 sm:col-span-6">
-                            <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">ZIP /
-                                Postal code</label>
-                            <input
-                                type="text"
-                                name="postal-code"
-                                id="postal-code"
-                                autoComplete="postal-code"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                            />
-                        </div>
-                    </div>
-
-                    <div className="pt-6 divide-y divide-gray-200">
-                        <div className="mt-6">
-                            <label htmlFor="about" className="block text-sm font-medium text-gray-700">Bio</label>
-                            <textarea
-                                id="about"
-                                name="about"
-                                rows="3"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
+                                <div className="pt-6 divide-y divide-gray-200">
+                                    <div className="mt-6">
+                                        <label htmlFor="about" className="block text-sm font-medium text-gray-700">Bio</label>
+                                        <textarea
+                                            id="about"
+                                            name="about"
+                                            rows="3"
+                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm">
                                         </textarea>
-                        </div>
-                    </div>
+                                    </div>
+                                </div>
 
-                    <div className="pt-6 divide-y divide-gray-200">
-                        <div className="flex items-center justify-between">
+                                <div className="pt-6 divide-y divide-gray-200">
+                                    <div className="flex items-center justify-between">
                             <h2 className="text-lg font-medium text-gray-900">Settings</h2>
                             <p className="text-sm text-gray-500">Manage your public profile and account settings</p>
                         </div>
@@ -302,22 +373,42 @@ const ProfileForm = () => {
             </div>
 
             <div className="pt-5">
-                <div className="flex justify-end">
-                    <button
-                        type="button"
-                        className="rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
-                        Cancel
-                    </button>
-                    <button
+                <div className="flex justify-end gap-4">
+                    <Button
                         type="submit"
-                        className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-sky-500 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2">
-                        Save
-                    </button>
+                        variant="contained"
+                        disabled={isLoading}
+                        sx={{
+                            backgroundColor: '#093c5e',
+                            color: 'white',
+                            borderRadius: '9999px',
+                            '&:hover': {
+                                backgroundColor: '#093c5e',
+                            },
+                        }}
+                    >
+                        {isLoading ? 'Canceling...' : 'Cancel'}
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        disabled={isLoading}
+                        sx={{
+                            backgroundColor: '#093c5e',
+                            color: 'white',
+                            borderRadius: '9999px',
+                            '&:hover': {
+                                backgroundColor: '#093c5e',
+                            },
+                        }}
+                    >
+                        {isLoading ? 'Saving...' : 'Save'}
+                    </Button>
                 </div>
                 </div>
             </div>
             </main>
-             </div>
+        </div>
     )
 }
 

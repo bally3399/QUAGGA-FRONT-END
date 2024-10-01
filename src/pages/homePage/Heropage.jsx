@@ -14,7 +14,6 @@ import SalesBanner from "../../component/heroslider/SalesBanner";
 
 
 const HeroPage = () => {
-
     return (
         <div className="overflow-x-hidden">
             <Navbar />
@@ -95,7 +94,7 @@ const HeroPage = () => {
                     </div>
                 </div>
                 <ClientCarousel/>
-                <ServicesSection/>
+                {/*<ServicesSection/>*/}
                 <Footer/>
             </div>
         </div>

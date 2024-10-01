@@ -10,32 +10,32 @@ const KeywordsSection = () => {
     const [showAll, setShowAll] = useState(false);
     const [data, setData] = useState({ products: [], suppliers: [] });
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null); // Corrected Error state
+    const [error, setError] = useState(null);
     const [productPage, setProductPage] = useState(1);
     const [supplierPage, setSupplierPage] = useState(1);
     const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING");
 
-    const navigate = useNavigate(); // To programmatically navigate
+    const navigate = useNavigate();
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
         "CONCRETE", "PAVING", "PLUMBING", "HVAC", "ROOFING",
-        "CARPENTRY", "MASONRY", "WATER_PROOFING", "INSULATION", "TILING",
-        "ELECTRICAL_INSTALLATION", "STEELWORK", "FIRE_PROTECTION", "SECURITY_SYSTEMS", "INTERIOR_FINISHING",
-        "EXTERIOR_FINISHING", "WINDOWS_AND_DOORS", "SIGNAGE", "COMMUNICATION_SYSTEMS", "POWER_GENERATION",
-        "ELEVATORS_AND_ESCALATORS", "FABRICATION", "CLEANING", "PEST_CONTROL", "WASTE_MANAGEMENT",
-        "SOLAR_INSTALLATION", "EV_CHARGING_STATIONS", "ENERGY_EFFICIENT_LIGHTING", "RAINWATER_HARVESTING", "ECO_FRIENDLY_MATERIALS",
-        "GREEN_ROOFING", "LANDSCAPE_DESIGN", "HARDSCAPING", "IRRIGATION_SYSTEMS", "DRAINAGE_SOLUTIONS",
-        "LAND_CLEARING", "TREE_CARE", "FENCING", "WALL_CONSTRUCTION", "EARTHWORK",
-        "FLOORING", "CEILING_WORK", "PARTITIONING", "CABINETRY", "INTERIOR_DECORATION",
-        "EXTERIOR_DECORATION", "LIGHTING_INSTALLATION", "CURTAIN_WALLING", "EXTERIOR_CLADDING", "INSULATION",
-        "FOUNDATION_WORK", "FRAMING", "DRYWALL", "PAINT_PREPARATION", "SHEETROCK_INSTALLATION",
-        "VENTILATION_SYSTEMS", "AIR_CONDITIONING", "HEATING_SYSTEMS", "ELECTRICAL_WIRING", "LIGHT_FIXTURES",
-        "WINDOW_INSTALLATION", "DOOR_INSTALLATION", "SIDING", "GUTTERS", "DRAINAGE_SYSTEMS",
-        "ROOF_REPAIR", "TILE_INSTALLATION", "COUNTERTOPS", "CABINET_INSTALLATION", "FAUCETS_AND_FIXTURES",
-        "BATHROOM_REMODELING", "KITCHEN_REMODELING", "BASEMENT_REMODELING", "ATTIC_REMODELING", "EXTERIOR_PAINTING",
-        "INTERIOR_PAINTING", "DECORATIVE_PAINTING", "FLOOR_REFINISHING", "TERRAZZO", "MARBLE_WORK",
-        "GRANITE_WORK", "STONE_MASONRY", "BRICK_MASONRY", "CONCRETE_REPAIR", "EPOXY_FLOORING"
+        "CARPENTRY", "MASONRY", "WATER PROOFING", "INSULATION", "TILING",
+        "ELECTRICAL INSTALLATION", "STEELWORK", "FIRE PROTECTION", "SECURITY SYSTEMS", "INTERIOR FINISHING",
+        "EXTERIOR FINISHING", "WINDOWS AND DOORS", "SIGNAGE", "COMMUNICATION SYSTEMS", "POWER GENERATION",
+        "ELEVATORS AND ESCALATORS", "FABRICATION", "CLEANING", "PEST CONTROL", "WASTE MANAGEMENT",
+        "SOLAR INSTALLATION", "EV CHARGING STATIONS", "ENERGY EFFICIENT LIGHTING", "RAINWATER HARVESTING", "ECO FRIENDLY MATERIALS",
+        "GREEN ROOFING", "LANDSCAPE DESIGN", "HARDSCAPING", "IRRIGATION SYSTEMS", "DRAINAGE SOLUTIONS",
+        "LAND CLEARING", "TREE CARE", "FENCING", "WALL CONSTRUCTION", "EARTHWORK",
+        "FLOORING", "CEILING WORK", "PARTITIONING", "CABINETRY", "INTERIOR DECORATION",
+        "EXTERIOR DECORATION", "LIGHTING INSTALLATION", "CURTAIN WALLING", "EXTERIOR CLADDING", "INSULATION",
+        "FOUNDATION WORK", "FRAMING", "DRYWALL", "PAINT PREPARATION", "SHEETROCK INSTALLATION",
+        "VENTILATION SYSTEMS", "AIR CONDITIONING", "HEATING SYSTEMS", "ELECTRICAL WIRING", "LIGHT FIXTURES",
+        "WINDOW INSTALLATION", "DOOR INSTALLATION", "SIDING", "GUTTERS", "DRAINAGE SYSTEMS",
+        "ROOF REPAIR", "TILE INSTALLATION", "COUNTERTOPS", "CABINET INSTALLATION", "FAUCETS AND FIXTURES",
+        "BATHROOM REMODELING", "KITCHEN REMODELING", "BASEMENT REMODELING", "ATTIC REMODELING", "EXTERIOR PAINTING",
+        "INTERIOR PAINTING", "DECORATIVE PAINTING", "FLOOR REFINISHING", "TERRAZZO", "MARBLE WORK",
+        "GRANITE WORK", "STONE MASONRY", "BRICK MASONRY", "CONCRETE REPAIR", "EPOXY FLOORING"
     ];
 
     const displayedKeywords = useMemo(() => showAll ? keywords : keywords.slice(0, 40), [showAll]);
@@ -49,15 +49,10 @@ const KeywordsSection = () => {
         setError(null);
 
         try {
-<<<<<<< HEAD
-            const productsResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/supplier/findByCategory/{category}`);
-            const suppliersResponse = await axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findByCategory/{category}`);
-=======
             const [supplierResponse, specialistResponse] = await Promise.all([
                 axios.get(`https://quagga.onrender.com/api/v1/quagga/supplier/findByCategory/${keyword}`),
-                axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}`)
+                axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findByCategory=${keyword}`)
             ]);
->>>>>>> 0ffc281e845c479d12a7e6b468297f1aa267a275
 
             setData(prevData => ({
                 products: page === 1 ? specialistResponse.data : [...prevData.products, ...specialistResponse.data],
@@ -77,11 +72,8 @@ const KeywordsSection = () => {
         setCurrentKeyword(keyword);
         setProductPage(1);
         setSupplierPage(1);
-<<<<<<< HEAD
         fetchProductsAndSuppliers(keyword);
         navigate(`/keyword/${keyword}`); // Navigate to the keyword page
-=======
->>>>>>> 0ffc281e845c479d12a7e6b468297f1aa267a275
     };
 
     const handleShowMore = (type) => {
@@ -106,7 +98,6 @@ const KeywordsSection = () => {
                         </li>
                     ))}
                 </ul>
-<<<<<<< HEAD
                 {!showAll && (
                     <div className="mt-4">
                         <button
@@ -117,8 +108,6 @@ const KeywordsSection = () => {
                         </button>
                     </div>
                 )}
-=======
->>>>>>> 0ffc281e845c479d12a7e6b468297f1aa267a275
 
                 {showAll && loading && <p>Loading...</p>}
 

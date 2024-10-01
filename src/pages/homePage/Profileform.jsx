@@ -43,7 +43,7 @@ const ProfileForm = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.put(`/api/v1/user/update/${id}`, form);
+            const response = await axios.put(`/api/v1/user/update/{id}`, form);
             if (response.data.successful) {
                 toast.success("Profile updated successfully!", {
                     position: 'top-right',
@@ -84,12 +84,6 @@ const ProfileForm = () => {
         }
     };
 
-    const roundedStyle = {
-        '& .MuiOutlinedInput-root': {
-            borderRadius: '9999px',
-        },
-    };
-
     return (
         <div className="min-h-screen bg-gray-100">
             <div className='p-4'>
@@ -100,8 +94,6 @@ const ProfileForm = () => {
                     <HiArrowLeft className="mr-2"/> Back
                 </button>
             </div>
-
-
             <main className="py-10">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="lg:grid lg:grid-cols-12 lg:gap-x-5">
@@ -143,7 +135,6 @@ const ProfileForm = () => {
 
                     <div className="mt-6 flex flex-col lg:flex-row">
                         <div className="flex-grow space-y-6">
-                            <div>
                                 <label htmlFor="username"
                                        className="block text-sm font-medium text-gray-700">Username</label>
                                 <div className="mt-1 mr-10 flex rounded-md shadow-sm">
@@ -154,10 +145,10 @@ const ProfileForm = () => {
                                         name="username"
                                         id="username"
                                         autoComplete="username"
+                                        style={{width: '450px', height: '45px'}}
                                         className="block w-full min-w-0 flex-grow rounded-none rounded-r-md border-gray-300 focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         defaultValue={user.firstName.toUpperCase()}
                                     />
-                                </div>
                             </div>
 
                             <div>
@@ -209,32 +200,35 @@ const ProfileForm = () => {
                                             name="firstName"
                                             id="first-name"
                                             autoComplete="given-name"
+                                            style={{width: '420px', height: '45px'}}
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                             defaultValue={user.firstName}
                                         />
                                     </div>
                                     <div className="col-span-12 sm:col-span-6">
-                                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">Last name</label>
+                                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">Last name</label>
                                         <input
                                             type="text"
                                             name="lastName"
                                             id="last-name"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="given-name"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                             defaultValue={user.lastName}
                                         />
                                     </div>
                                     <div className="col-span-12 sm:col-span-6">
-                                        <label htmlFor="email-address"
-                                               className="block text-sm font-medium text-gray-700">Email
-                                            address</label>
-                                        <input
-                                            type="text"
-                                            name="email"
-                                            id="email"
-                                            autoComplete="email"
-                                            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
-                                            defaultValue={user.email}
+                                            <label htmlFor="email-address"
+                                                   className="block text-sm font-medium text-gray-700">Email
+                                                address</label>
+                                            <input
+                                                type="text"
+                                                name="email"
+                                                id="email"
+                                                style={{width: '420px', height: '45px'}}
+                                                autoComplete="email"
+                                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
+                                                defaultValue={user.email}
                                         />
                                     </div>
 
@@ -246,6 +240,7 @@ const ProfileForm = () => {
                                             type="text"
                                             name="phone-number"
                                             id="phone-number"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="tel"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         />
@@ -259,6 +254,7 @@ const ProfileForm = () => {
                                             type="text"
                                             name="street-address"
                                             id="street-address"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="street-address"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         />
@@ -271,6 +267,7 @@ const ProfileForm = () => {
                                             type="text"
                                             name="city"
                                             id="city"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="address-level2"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         />
@@ -284,6 +281,7 @@ const ProfileForm = () => {
                                             type="text"
                                             name="region"
                                             id="region"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="address-level1"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         />
@@ -297,6 +295,7 @@ const ProfileForm = () => {
                                             type="text"
                                             name="postal-code"
                                             id="postal-code"
+                                            style={{width: '420px', height: '45px'}}
                                             autoComplete="postal-code"
                                             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-sky-500 focus:ring-sky-500 sm:text-sm"
                                         />

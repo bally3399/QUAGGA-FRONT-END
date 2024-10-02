@@ -1,27 +1,29 @@
-
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SupplierCard from "../supplierCard/supplierCard";
 import ProductCard from "../productCard/ProductCard";
+import { useEffect, useState } from "react";
 
 const KeywordsSection = () => {
     const [showAll] = useState(false);
     const [data, setData] = useState({ products: [], suppliers: [] });
     const [loading, setLoading] = useState(false);
-    const [ setError] = useState(null);
-    const [productPage, setProductPage] = useState(1);
-    const [supplierPage, setSupplierPage] = useState(1);
-    const [currentKeyword, setCurrentKeyword] = useState("WOODWORKING");
+    const [error, setError] = useState(null);
+    const [currentKeyword, setCurrentKeyword] = useState(null);
+
+
+    const [currentProductPage, setCurrentProductPage] = useState(1);
+    const productsPerPage = 8;
 
     const keywords = [
         "WOODWORKING", "PAINTING", "DEMOLITION", "GLASSWORK", "LANDSCAPING",
         "CONCRETE", "PAVING", "PLUMBING", "HVAC", "ROOFING",
-        "CARPENTRY", "MASONRY", "WATER_PROOFING", "INSULATION", "TILING",
-        "ELECTRICAL INSTALLATION", "STEELWORK", "FIRE PROTECTION", "SECURITY_SYSTEMS", "INTERIOR FINISHING",
-        "EXTERIOR FINISHING", "WINDOWS AND DOORS", "SIGNAGE", "COMMUNICATION_SYSTEMS", "POWER GENERATION",
+        "CARPENTRY", "MASONRY", "WATER PROOFING", "INSULATION", "TILING",
+        "ELECTRICAL INSTALLATION", "STEELWORK", "FIRE PROTECTION", "SECURITY SYSTEMS", "INTERIOR FINISHING",
+        "EXTERIOR FINISHING", "WINDOWS AND DOORS", "SIGNAGE", "COMMUNICATION SYSTEMS", "POWER GENERATION",
         "ELEVATORS AND ESCALATORS", "FABRICATION", "CLEANING", "PEST CONTROL", "WASTE MANAGEMENT",
-        "SOLAR_INSTALLATION", "EV CHARGING STATIONS", "ENERGY_EFFICIENT LIGHTING", "RAINWATER HARVESTING", "ECO FRIENDLY MATERIALS",
+        "SOLAR_INSTALLATION", "EV CHARGING STATIONS", "ENERGY EFFICIENT LIGHTING", "RAINWATER HARVESTING", "ECO FRIENDLY MATERIALS",
         "GREEN ROOFING", "LANDSCAPE DESIGN", "HARDSCAPING", "IRRIGATION SYSTEMS", "DRAINAGE SOLUTIONS",
         "LAND_CLEARING", "TREE CARE", "FENCING", "WALL CONSTRUCTION", "EARTHWORK",
         "FLOORING", "CEILING WORK", "PARTITIONING", "CABINETRY", "INTERIOR DECORATION",
@@ -38,23 +40,25 @@ const KeywordsSection = () => {
     const displayedKeywords = showAll ? keywords : keywords.slice(0, 40);
 
     useEffect(() => {
-        fetchProductsAndSuppliers(currentKeyword);
-    }, [currentKeyword, productPage, supplierPage]);
+        if (currentKeyword) {
+            fetchProductsAndSuppliers(currentKeyword);
+        }
+    }, [currentKeyword]);
 
-    const fetchProductsAndSuppliers = async (keyword, page = 1) => {
+    const fetchProductsAndSuppliers = async (keyword) => {
         setLoading(true);
         setError(null);
 
         try {
-            const [supplierResponse, specialistResponse] = await Promise.all([
+            const [supplierResponse, productResponse] = await Promise.all([
                 axios.get(`https://quagga.onrender.com/api/v1/quagga/supplier/findByCategory/${keyword}`),
                 axios.get(`https://quagga.onrender.com/api/v1/quagga/specialist/findAll?keyword=${keyword}`)
             ]);
 
-            setData(prevData => ({
-                products: page === 1 ? specialistResponse.data : [...prevData.products, ...specialistResponse.data],
-                suppliers: page === 1 ? supplierResponse.data : [...prevData.suppliers, ...supplierResponse.data],
-            }));
+            setData({
+                products: productResponse.data,
+                suppliers: supplierResponse.data,
+            });
 
             toast.success('Data fetched successfully!');
         } catch (error) {
@@ -67,13 +71,28 @@ const KeywordsSection = () => {
 
     const handleKeywordClick = (keyword) => {
         setCurrentKeyword(keyword);
-        setProductPage(1);
-        setSupplierPage(1);
+        setCurrentProductPage(1);
+        setData({ products: [], suppliers: [] });
     };
 
-    const handleShowMore = (type) => {
-        if (type === 'products') setProductPage(prev => prev + 1);
-        else if (type === 'suppliers') setSupplierPage(prev => prev + 1);
+
+    const indexOfLastProduct = currentProductPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = data.products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+
+    const totalProductPages = Math.ceil(data.products.length / productsPerPage);
+
+    const handleNextPage = () => {
+        if (currentProductPage < totalProductPages) {
+            setCurrentProductPage(prev => prev + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (currentProductPage > 1) {
+            setCurrentProductPage(prev => prev - 1);
+        }
     };
 
     return (
@@ -84,8 +103,9 @@ const KeywordsSection = () => {
                     {displayedKeywords.map((keyword, index) => (
                         <li key={index}>
                             <button
-                                className="text-white hover:text-gray-700 hover:bg-sky-200 text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900"
+                                className={`text-white hover:text-gray-700 hover:bg-sky-200 text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900 ${loading && currentKeyword === keyword ? 'cursor-not-allowed opacity-50' : ''}`}
                                 onClick={() => handleKeywordClick(keyword)}
+                                disabled={loading && currentKeyword === keyword}
                                 aria-label={`Filter by ${keyword}`}
                             >
                                 {keyword}
@@ -94,24 +114,35 @@ const KeywordsSection = () => {
                     ))}
                 </ul>
 
-                {showAll && loading && <p>Loading...</p>}
+                {loading && <p>Loading...</p>}
+                {error && <p className="text-red-500">{error}</p>}
 
                 <div className="mt-8">
-                    {data.products.length > 0 && (
+                    {currentProducts.length > 0 && (
                         <>
                             <h3 className="text-lg font-semibold mb-4">Top Rated Products</h3>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                                {data.products.map((product, index) => (
+                                {currentProducts.map((product, index) => (
                                     <ProductCard key={index} product={product} />
                                 ))}
                             </div>
-                            <div className="mt-4">
+
+                            {/* Pagination Controls */}
+                            <div className="mt-4 flex justify-center items-center space-x-4">
                                 <button
-                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${loading && 'cursor-not-allowed opacity-50'}`}
-                                    onClick={() => handleShowMore('products')}
-                                    disabled={loading}
+                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${currentProductPage === 1 && 'cursor-not-allowed opacity-50'}`}
+                                    onClick={handlePrevPage}
+                                    disabled={currentProductPage === 1}
                                 >
-                                    Show More Products
+                                    Previous
+                                </button>
+                                <span>Page {currentProductPage} of {totalProductPages}</span>
+                                <button
+                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${currentProductPage === totalProductPages && 'cursor-not-allowed opacity-50'}`}
+                                    onClick={handleNextPage}
+                                    disabled={currentProductPage === totalProductPages}
+                                >
+                                    Next
                                 </button>
                             </div>
                         </>
@@ -125,27 +156,13 @@ const KeywordsSection = () => {
                                     <SupplierCard key={index} supplier={supplier} />
                                 ))}
                             </div>
-                            <div className="mt-4">
-                                <button
-                                    className={`text-gray-500 hover:text-gray-700 border border-gray-300 rounded px-3 py-1 text-sm ${loading && 'cursor-not-allowed opacity-50'}`}
-                                    onClick={() => handleShowMore('suppliers')}
-                                    disabled={loading}
-                                >
-                                    Show More Suppliers
-                                </button>
-                            </div>
                         </>
                     )}
                 </div>
             </div>
-
             <ToastContainer />
         </section>
     );
 };
 
 export default KeywordsSection;
-
-
-
-

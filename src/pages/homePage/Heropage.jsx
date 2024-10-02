@@ -23,7 +23,6 @@ const HeroPage = () => {
                 <SalesBanner/>
                 <KeywordsSection/>
 
-
                 <div className="h-40 bg-gray-800 text-white text-center py-10">
                     <h1 className="text-4xl font-bold">Elite Specialists at Your Fingertips</h1>
                 </div>

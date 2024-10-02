@@ -6,12 +6,11 @@ import ProductCard from "../productCard/ProductCard";
 import { useEffect, useState } from "react";
 
 const KeywordsSection = () => {
-    const [showAll] = useState(false);
+    const [showAll, setShowAll] = useState(false); // Toggle state for showing all keywords
     const [data, setData] = useState({ products: [], suppliers: [] });
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [currentKeyword, setCurrentKeyword] = useState(null);
-
 
     const [currentProductPage, setCurrentProductPage] = useState(1);
     const productsPerPage = 8;
@@ -37,7 +36,7 @@ const KeywordsSection = () => {
         "GRANITE WORK", "STONE MASONRY", "BRICK MASONRY", "CONCRETE REPAIR", "EPOXY FLOORING"
     ];
 
-    const displayedKeywords = showAll ? keywords : keywords.slice(0, 40);
+    const displayedKeywords = showAll ? keywords : keywords.slice(0, 40); // Show all or limit to 40
 
     useEffect(() => {
         if (currentKeyword) {
@@ -75,11 +74,9 @@ const KeywordsSection = () => {
         setData({ products: [], suppliers: [] });
     };
 
-
     const indexOfLastProduct = currentProductPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentProducts = data.products.slice(indexOfFirstProduct, indexOfLastProduct);
-
 
     const totalProductPages = Math.ceil(data.products.length / productsPerPage);
 
@@ -113,6 +110,16 @@ const KeywordsSection = () => {
                         </li>
                     ))}
                 </ul>
+
+                {/* "See All" button */}
+                <div className="mt-4">
+                    <button
+                        className={`text-white hover:text-gray-700 hover:bg-sky-200 text-sm rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 dark:text-sky-900  'cursor-not-allowed opacity-50' : ''}`}
+                        onClick={() => setShowAll(!showAll)}
+                    >
+                        {showAll ? 'Show Less' : 'See All'}
+                    </button>
+                </div>
 
                 {loading && <p>Loading...</p>}
                 {error && <p className="text-red-500">{error}</p>}

@@ -2,8 +2,8 @@ import React from 'react';
 
 const SalesChannels = () => {
     return (
-        <div className="bg-gray-800 text-white min-h-[500px] py-16"> {/* Increased height and padding */}
-            <div className="max-w-7xl mx-auto px-6"> {/* Container to restrict the content width */}
+        <div className="bg-gray-800 text-white min-h-[500px] py-16">
+            <div className="max-w-7xl mx-auto px-6">
 
                 <div className="grid grid-cols-12 items-center">
 

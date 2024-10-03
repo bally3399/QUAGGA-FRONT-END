@@ -54,7 +54,7 @@ const PaymentPage = () => {
                     </div>
                 </div>
 
-                {/* Payment Methods */}
+
                 <div className="bg-white p-6 shadow-lg rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Payment Method</h2>
                     <div className="space-y-4">
@@ -68,7 +68,7 @@ const PaymentPage = () => {
                     </div>
                 </div>
 
-                {/* Billing Information */}
+
                 <div className="col-span-2 bg-white p-6 shadow-lg rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Billing Information</h2>
                     <form>
@@ -118,14 +118,14 @@ const PaymentPage = () => {
                     </form>
                 </div>
 
-                {/* Payment Summary */}
+
                 <div className="bg-white p-6 shadow-lg rounded-lg">
                     <h2 className="text-xl font-semibold mb-4">Payment Summary</h2>
                     <div className="flex justify-between py-2">
                         <span>Subtotal</span>
                         <span>₦{totalPrice}</span>
                     </div>
-                    {/* Confirmation Button */}
+
                     <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition duration-300" onClick={handlePayment}>
                         Confirm Payment
                     </button>
